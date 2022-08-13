@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -27,5 +28,12 @@ class ProductController extends Controller
           return view('product.show', [
               'product' => $product
           ]);
+      }
+
+
+
+      public function showCategory()
+      {
+
       }
 }

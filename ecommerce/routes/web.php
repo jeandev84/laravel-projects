@@ -11,10 +11,27 @@
 |
 */
 
+/*
+
+Каждый товар хранится в какой-то категории (путь к продукту)
+Route::get('/{category_id}/{product_id}', 'ProductController@show')->where('id', '\d+');
+*/
+
+
+
+// Маршрут для вывода главной страницы
 Route::get('/', 'HomeController@index', 'home');
 
-// Каждый товар хранится в какой-то категории (путь к продукту)
-//  Route::get('/{category_id}/{product_id}', 'ProductController@show')->where('id', '\d+');
 
+// Маршрут для просмотра категории
+Route::get('/{category}', 'ProductController@showCategory')->name('show.category');
+
+
+// Маршрут для просмотра одного продукта
 Route::get('/{category}/{product_id}', 'ProductController@show')->name('show.product');
+
+
+
+
+
 

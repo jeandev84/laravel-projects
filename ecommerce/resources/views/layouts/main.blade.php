@@ -47,11 +47,11 @@
                                     <li class="hassubs">
                                         <a href="categories.html">Categories</a>
                                         <ul>
-                                            <li><a href="categories.html">Category</a></li>
-                                            <li><a href="categories.html">Category</a></li>
-                                            <li><a href="categories.html">Category</a></li>
-                                            <li><a href="categories.html">Category</a></li>
-                                            <li><a href="categories.html">Category</a></li>
+                                            @foreach($categories as $category)
+                                                <li>
+                                                    <a href="{{ route('show.category', [$category->alias]) }}">{{ $category->title }}</a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </li>
                                     <li><a href="#">Accessories</a></li>

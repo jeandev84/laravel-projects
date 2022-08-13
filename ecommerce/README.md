@@ -18,6 +18,25 @@ DB_PASSWORD=123456
 
 ...
 
+"./config/database.php"
+
+ 'pgsql' => [
+            'driver' => 'pgsql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '5fsd98g6sfd6gs9df7g_',
+            'prefix_indexes' => true,
+            'strict' => false,
+            'schema' => 'public',
+            'sslmode' => 'prefer',
+],
+
+
 ```
 
 3. Lunch server
@@ -294,6 +313,154 @@ class CreateProductImagesTable extends Migration
 Запускаем миграцию
 $ php artisan migrate
 
+================================================================
+
+Создание категории ( Category )
+
+$ php artisan make:model Category -m
+
+
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateCategoriesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('categories', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('title');
+            $table->text('desc');
+            $table->string('img');
+            $table->string('alias'); // or slug
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('categories');
+    }
+}
+
+
+$ php artisan migrate
+
 ```
 
-11.
+
+11. Define Global variable for application 
+
+```php 
+
+<?php
+
+namespace App\Providers;
+
+use App\Category;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+
+
+
+/**
+ *
+*/
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        // Schema::defaultStringLength(191);
+
+        // определяем глобальную переменную, которую используем на каждом контроллере
+
+        $categories = Category::orderBy('id')->get();
+
+        View::share([
+            'categories' => $categories
+        ]);
+    }
+}
+
+
+Добавление нового поля category_id для продукта products
+
+$ php artisan make:migration add_category_id_to_products_table --table=products
+
+
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class AddCategoryIdToProductsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('products', function (Blueprint $table) {
+
+            $table->bigInteger('category_id')->unsigned(); // число без знака
+
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('cascade')
+            ;
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('products', function (Blueprint $table) {
+            //
+        });
+    }
+}
+
+
+$ php artisan migrate
+
+
+```
+
+
