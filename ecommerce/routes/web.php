@@ -13,3 +13,6 @@
 
 Route::get('/', 'HomeController@index');
 
+// Каждый товар хранится в какой-то категории
+// Route::get('/category/product/{id}', 'ProductController@show')->where('id', '\d+');
+

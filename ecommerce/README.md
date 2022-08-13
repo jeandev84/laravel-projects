@@ -295,3 +295,5 @@ class CreateProductImagesTable extends Migration
 $ php artisan migrate
 
 ```
+
+11.
