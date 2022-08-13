@@ -197,3 +197,14 @@ $ php artisan db:seed ( запуск все Seeders )
 $ php artisan db:seed --class=ProductsTableSeeder ( запуск конкретный Seeder ) 
 
 ```
+
+
+9. Make Model
+```php 
+
+$ php artisan make:model Models/Product (app/Models/Product)
+
+$ php artisan make:model Product
+$ php artisan make:model Product --migration or -m
+
+```
