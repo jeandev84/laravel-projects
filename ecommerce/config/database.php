@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'pgsql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -74,6 +74,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '5fsd98g6sfd6gs9df7g_',
             'prefix_indexes' => true,
+            'strict' => false,
             'schema' => 'public',
             'sslmode' => 'prefer',
         ],
