@@ -16,5 +16,5 @@ Route::get('/', 'HomeController@index', 'home');
 // Каждый товар хранится в какой-то категории (путь к продукту)
 //  Route::get('/{category_id}/{product_id}', 'ProductController@show')->where('id', '\d+');
 
-Route::get('/{category}/{product_id}', 'ProductController@show');
+Route::get('/{category}/{product_id}', 'ProductController@show')->name('show.product');
 

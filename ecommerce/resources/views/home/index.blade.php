@@ -167,9 +167,16 @@
                         </div>
                         <div class="product_content">
                             <div class="product_title">
-                                <a href="product.html">{{ $product->title }}</a>
+                                <a href="{{ route('show.product', ['category', $product->id]) }}">{{ $product->title }}</a>
                             </div>
-                            <div class="product_price">${{ $product->price }}</div>
+
+                            @if($product->new_price != null)
+                                <div style="text-decoration: line-through">${{ $product->price }}</div>
+                                <div class="product_price">${{ $product->new_price }}</div>
+                            @else
+                                <div class="product_price">${{ $product->price }}</div>
+                            @endif
+
                         </div>
                     </div>
                     @endforeach

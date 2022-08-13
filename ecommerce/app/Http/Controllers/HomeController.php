@@ -18,7 +18,8 @@ class HomeController extends Controller
        public function index()
        {
            // Выводим 8 последне добавлены продуктов и их сортировать по дату созданию
-           $products = Product::orderBy('created_at')->take(8)->get();
+           // $products = Product::orderBy('created_at')->take(8)->get();
+           $products = Product::orderBy('id')->take(8)->get();
 
            return view('home.index', [
                'products' => $products

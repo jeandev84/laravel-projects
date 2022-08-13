@@ -59,9 +59,19 @@
                 <!-- Product Content -->
                 <div class="col-lg-6">
                     <div class="details_content">
-                        <div class="details_name">Product 1</div>
+                        <div class="details_name">{{ $product->title }}</div>
+
+                        @if($product->new_price != null)
+                            <div style="text-decoration: line-through" class="details_discount">${{ $product->price }}</div>
+                            <div class="details_price">${{ $product->new_price }}</div>
+                        @else
+                            <div class="details_price">${{ $product->price }}</div>
+                        @endif
+
+                        <!--
                         <div class="details_discount">$890</div>
                         <div class="details_price">$670</div>
+                        -->
 
                         <!-- In Stock -->
                         <div class="in_stock_container">
