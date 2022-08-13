@@ -207,4 +207,91 @@ $ php artisan make:model Models/Product (app/Models/Product)
 $ php artisan make:model Product
 $ php artisan make:model Product --migration or -m
 
+
+<?php
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+
+/**
+ *
+*/
+class Product extends Model
+{
+      /* protected $table = 'products'; */
+
+      
+}
+
+
+```
+
+10. RelationShip (Связь)
+```php 
+
+Один продукт имеет набор множественных картинок
+
+OneToMany (One Product HasMany ProductImage)
+       
+        - ProductImage
+Product - ProductImage
+        - ProductImage
+        ......
+
+Создание Модель ProductImage и файл миграции.
+
+$ php artisan make:model ProductImage -m
+
+
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateProductImagesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+    */
+    public function up()
+    {
+        Schema::create('product_images', function (Blueprint $table) {
+
+            $table->bigIncrements('id');
+            $table->string('img');
+
+            $table->bigInteger('product_id')->unsigned(); // число без знака
+
+            $table->foreign('product_id')
+                  ->references('id')
+                  ->on('products')
+                  ->onDelete('cascade')
+            ;
+
+            $table->timestamps();
+        });
+    }
+
+
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('product_images');
+    }
+}
+
+....
+
+Запускаем миграцию
+$ php artisan migrate
+
 ```
