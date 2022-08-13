@@ -138,7 +138,6 @@
                     <!-- Products -->
                     @foreach($products as $product):
 
-                       <!-- debug -->
                        @php
                           // вызываем название метод $product->images() как свойство
                           // dd($product->images);
