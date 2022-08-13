@@ -162,7 +162,9 @@
                             <img src="images/{{ $image }}" alt="{{ $product->title }}">
                         </div>
                         <div class="product_extra product_new">
-                            <a href="categories.html">New</a>
+                            <a href="{{ route('show.category', $product->category['alias']) }}">
+                                {{ $product->category['title'] }}
+                            </a>
                         </div>
                         <div class="product_content">
                             <div class="product_title">
