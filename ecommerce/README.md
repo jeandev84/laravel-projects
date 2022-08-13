@@ -20,3 +20,8 @@ DB_PASSWORD=123456
 ```php
 $ php artisan serve
 ```
+
+4. Make Controller
+```php 
+$ php artisan make:controller HomeController
+```
