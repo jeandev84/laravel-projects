@@ -71,9 +71,9 @@
                         <div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
 
                             @if($image == 'no_image.png')
-                                <div class="details_image_thumbnail active" data-image="/images/{{ $image }}">
-                                    <img src="/images/{{ $image }}" alt="{{ $product->title }}">
-                                </div>
+{{--                                <div class="details_image_thumbnail active" data-image="/images/{{ $image }}">--}}
+{{--                                    <img src="/images/{{ $image }}" alt="{{ $product->title }}">--}}
+{{--                                </div>--}}
                             @else
                                 @foreach($product->images as $img)
 
