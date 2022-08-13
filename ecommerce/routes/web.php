@@ -11,8 +11,10 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index', 'home');
 
-// Каждый товар хранится в какой-то категории
-// Route::get('/category/product/{id}', 'ProductController@show')->where('id', '\d+');
+// Каждый товар хранится в какой-то категории (путь к продукту)
+//  Route::get('/{category_id}/{product_id}', 'ProductController@show')->where('id', '\d+');
+
+Route::get('/{category}/{product_id}', 'ProductController@show');
 
