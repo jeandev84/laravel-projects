@@ -24,7 +24,7 @@ Route::get('/', 'HomeController@index', 'home');
 
 
 // Маршрут для просмотра категории
-Route::get('/{category}', 'ProductController@showCategory')->name('show.category');
+Route::get('/{category_alias}', 'ProductController@showCategory')->name('show.category');
 
 
 // Маршрут для просмотра одного продукта

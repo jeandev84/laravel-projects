@@ -2,7 +2,7 @@
 @extends('layouts.main')
 
 <!-- set title -->
-@section('title', 'Home')
+@section('title', 'Product')
 
 <!-- add own custom css -->
 @section('custom_css')
