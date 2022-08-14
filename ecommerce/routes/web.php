@@ -20,18 +20,22 @@ Route::get('/{category_id}/{product_id}', 'ProductController@show')->where('id',
 
 
 // Маршрут для вывода главной страницы
-Route::get('/', 'HomeController@index', 'home');
+Route::get('/', 'HomeController@index')->name('home');
 
 
 // Маршрут для просмотра категории
-Route::get('/{category_alias}', 'ProductController@showCategory')->name('show.category');
+Route::get('/category/{cat}', 'ProductController@showCategory')->name('show.category');
 
 
 // Маршрут для просмотра одного продукта
-Route::get('/{category}/{product_id}', 'ProductController@show')->name('show.product');
+Route::get('/category/{cat}/{product_id}', 'ProductController@show')->name('show.product');
 
 
 
+// Маршрут для корзины
+Route::get('/cart', 'CartController@index')->name('cart.index');
 
 
 
+// Маршрут для добавления товаров в корзину
+Route::post('/add-to-cart', 'CartController@addToCart')->name('add.to.cart');

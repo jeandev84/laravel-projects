@@ -217,6 +217,7 @@
     <script>
 
         $(document).ready(function () {
+
              $('.product_sorting_btn').click(function () {
 
                   // console.log('hello')

@@ -464,3 +464,23 @@ $ php artisan migrate
 ```
 
 
+12. Installation Laravel Cart
+ - https://github.com/darryldecode/laravelshoppingcart
+```php 
+
+$ composer require "darryldecode/cart:~2.0"
+$ composer require "darryldecode/cart" (for Laravel 6)
+
+1. Open config/app.php and add this line to your Service Providers Array.
+Darryldecode\Cart\CartServiceProvider::class
+
+2. Open config/app.php and add this line to your Aliases
+'Cart' => Darryldecode\Cart\Facades\CartFacade::class
+ 
+3. Optional configuration file (useful if you plan to have full control)
+php artisan vendor:publish --provider="Darryldecode\Cart\CartServiceProvider" --tag="config"
+
+Copied File [/vendor/darryldecode/cart/src/Darryldecode/Cart/config/config.php] To [/config/shopping_cart.php]
+Publishing complete.
+
+```

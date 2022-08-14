@@ -168,7 +168,7 @@
                         </div>
                         <div class="product_content">
                             <div class="product_title">
-                                <a href="{{ route('show.product', ['category', $product->id]) }}">{{ $product->title }}</a>
+                                <a href="{{ route('show.product', [$product->category['alias'], $product->id]) }}">{{ $product->title }}</a>
                             </div>
 
                             @if($product->new_price != null)

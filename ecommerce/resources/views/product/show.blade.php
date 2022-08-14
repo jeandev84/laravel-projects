@@ -13,6 +13,38 @@
 <!-- add own custom js -->
 @section('custom_js')
     <script src="/js/product.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('.cart_button').click(function () {
+                addToCart()
+            })
+
+        })
+
+
+        function addToCart() {
+
+            // send request by method GET
+            $.ajax({
+                url: "{{ route('add.to.cart') }}",
+                type: "POST",
+                data: {
+                    id: 'Поставь лайк и напиши комментарий к видео) Не забудь про подписку!'
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token').attr('content')
+                },
+                success: (data) => {
+                    console.log(data)
+                }
+            });
+        }
+
+    </script>
+
 @endsection
 
 @section('content')
