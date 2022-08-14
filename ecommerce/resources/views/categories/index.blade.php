@@ -125,9 +125,22 @@
                             </div>
                         </div>
                         @endforeach
-
-
                 </div>
+
+                <!-- Pagination -->
+
+                {{-- {{ $products->links() }} --}}
+                <!--  all queries : http://localhost:8000/phones?orderBy=name-a-z&page=2 -->
+                {{ $products->appends(request()->query())->links() }}
+
+                <div class="product_pagination">
+                    <ul>
+                        <li class="active"><a href="#">01.</a></li>
+                        <li><a href="#">02.</a></li>
+                        <li><a href="#">03.</a></li>
+                    </ul>
+                </div>
+                <!--/ end Pagination -->
             </div>
         </div>
     </div>
@@ -252,7 +265,7 @@
                             $('.product_grid').imagesLoaded(function () {
 
                                 var grid = $('.product_grid').isotope({
-                                    itemSelector: '.product',
+                                     itemSelector: '.product',
                                     layoutMode: 'fitRows',
                                     fitRows: {
                                         gutter: 30

@@ -39,7 +39,15 @@ class ProductController extends Controller
 
 
           // Выбираем все продукты, где категория равняется id данной категории
-          $products = Product::where('category_id', $category->id)->get();
+          // $products = Product::where('category_id', $category->id)->get();
+
+
+          $paginate = 2;
+
+
+          // Выбираем все продукты, где категория равняется id данной категории с пагинацией
+          // Pagination
+          $products = Product::where('category_id', $category->id)->paginate($paginate);
 
 
           // Если у нас есть сортировка
@@ -49,15 +57,15 @@ class ProductController extends Controller
                if ($request->orderBy === 'price-low-high') {
                    $products = Product::where('category_id', $category->id)
                                ->orderBy('price')
-                               ->get();
+                               ->paginate($paginate);
                }
 
 
                // сортировка с высокой цены до низкого
                if ($request->orderBy === 'price-high-low') {
                   $products = Product::where('category_id', $category->id)
-                      ->orderBy('price', 'desc')
-                      ->get();
+                              ->orderBy('price', 'desc')
+                              ->paginate($paginate);
                }
 
 
@@ -65,7 +73,7 @@ class ProductController extends Controller
                if ($request->orderBy === 'name-a-z') {
                   $products = Product::where('category_id', $category->id)
                       ->orderBy('title')
-                      ->get();
+                      ->paginate($paginate);
                }
 
 
