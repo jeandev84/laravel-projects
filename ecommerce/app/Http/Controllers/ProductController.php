@@ -72,16 +72,16 @@ class ProductController extends Controller
                // сортировка по алфавита (a-z)
                if ($request->orderBy === 'name-a-z') {
                   $products = Product::where('category_id', $category->id)
-                      ->orderBy('title')
-                      ->paginate($paginate);
+                              ->orderBy('title')
+                              ->paginate($paginate);
                }
 
 
               // сортировка по алфавита (z-a)
               if ($request->orderBy === 'name-z-a') {
                   $products = Product::where('category_id', $category->id)
-                      ->orderBy('title', 'desc')
-                      ->get();
+                              ->orderBy('title', 'desc')
+                              ->get();
               }
           }
 

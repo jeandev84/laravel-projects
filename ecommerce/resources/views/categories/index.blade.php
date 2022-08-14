@@ -128,18 +128,13 @@
                 </div>
 
                 <!-- Pagination -->
+                <!-- https://mattstauffer.com/blog/customizing-pagination-templates-in-laravel-5.3 -->
 
                 {{-- {{ $products->links() }} --}}
                 <!--  all queries : http://localhost:8000/phones?orderBy=name-a-z&page=2 -->
-                {{ $products->appends(request()->query())->links() }}
+                {{--  {{ $products->appends(request()->query())->links() }} --}}
+                {{ $products->appends(request()->query())->links('pagination.index') }}
 
-                <div class="product_pagination">
-                    <ul>
-                        <li class="active"><a href="#">01.</a></li>
-                        <li><a href="#">02.</a></li>
-                        <li><a href="#">03.</a></li>
-                    </ul>
-                </div>
                 <!--/ end Pagination -->
             </div>
         </div>
@@ -239,7 +234,8 @@
                       url: "{{ route('show.category', $category->alias) }}",
                       type: "GET",
                       data: {
-                          orderBy: orderBy
+                          orderBy: orderBy,
+                          page: {{ isset($_GET['page']) ? $_GET['page'] : 1  }}
                       },
                       headers: {
                           'X-CSRF-TOKEN': $('meta[name="csrf-token').attr('content')
@@ -253,7 +249,7 @@
                             let positionParameters = location.pathname.indexOf('?')
                             let url = location.pathname.substring(positionParameters, location.pathname.length)
                             let newURL = url + '?' // http://localhost:8000/phones?
-                            newURL += 'orderBy=' + orderBy // http://localhost:8000/phones?orderBy=name-z-a
+                            newURL += 'orderBy=' + orderBy  + "&page={{ isset($_GET['page']) ? $_GET['page'] : 1  }}"   // http://localhost:8000/phones?orderBy=name-z-a
                             history.pushState({}, '', newURL)
 
 
