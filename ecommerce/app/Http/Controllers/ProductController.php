@@ -38,14 +38,54 @@ class ProductController extends Controller
           $category = Category::where('alias', $category_alias)->first();
 
 
-          // Выбираем все продукты где категория равняется id данной категории
+          // Выбираем все продукты, где категория равняется id данной категории
           $products = Product::where('category_id', $category->id)->get();
 
 
-          // если запрос отправлен ajax запрос
-          // мы возвращаем
+          // Если у нас есть сортировка
+          if (isset($request->orderBy)) {
+
+               // сортировка с низкого цены до высокого
+               if ($request->orderBy === 'price-low-high') {
+                   $products = Product::where('category_id', $category->id)
+                               ->orderBy('price')
+                               ->get();
+               }
+
+
+               // сортировка с высокой цены до низкого
+               if ($request->orderBy === 'price-high-low') {
+                  $products = Product::where('category_id', $category->id)
+                      ->orderBy('price', 'desc')
+                      ->get();
+               }
+
+
+               // сортировка по алфавита (a-z)
+               if ($request->orderBy === 'name-a-z') {
+                  $products = Product::where('category_id', $category->id)
+                      ->orderBy('title')
+                      ->get();
+               }
+
+
+              // сортировка по алфавита (z-a)
+              if ($request->orderBy === 'name-z-a') {
+                  $products = Product::where('category_id', $category->id)
+                      ->orderBy('title', 'desc')
+                      ->get();
+              }
+          }
+
+
+          // Если запрос отправлен ajax запрос, мы возвращаем ajax/order-by.blade.php
           if ($request->ajax()) {
-              return $request->orderBy;
+
+              /* return $request->orderBy; */
+              return view('ajax.order-by', [
+                  'products' => $products
+              ])->render();
+
           }
 
 

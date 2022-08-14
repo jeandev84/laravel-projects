@@ -227,6 +227,8 @@
 <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
 <script src="plugins/easing/easing.js"></script>
 <script src="plugins/parallax-js-master/parallax.min.js"></script>
+{{--<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>--}}
+<script src="js/imagesloaded.pkgd.min.js"></script>
 <script src="js/custom.js"></script>
 
 <!-- add custom js -->

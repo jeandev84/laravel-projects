@@ -79,7 +79,8 @@
 
 
                         <!-- Products Category -->
-                        @foreach($category->products as $product):
+{{--                    @foreach($category->products as $product)--}}
+                        @foreach($products as $product)
 
                         @php
                             // вызываем название метод $product->images() как свойство
@@ -224,7 +225,23 @@
                           'X-CSRF-TOKEN': $('meta[name="csrf-token').attr('content')
                       },
                       success: (data) => {
-                            console.log(data)
+                            // console.log(data)
+                            $('.product_grid').html(data)
+
+                            // plugin isotope
+                            $('.product_grid').isotope('destroy')
+                            $('.product_grid').imagesLoaded(function () {
+
+                                var grid = $('.product_grid').isotope({
+                                    itemSelector: '.product',
+                                    layoutMode: 'fitRows',
+                                    fitRows: {
+                                        gutter: 30
+                                    }
+                                })
+
+                            })
+
                       }
                   })
              })
