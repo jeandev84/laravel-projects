@@ -236,17 +236,18 @@
                             // console.log(data)
 
 
-                            // example: category_id?orderBy=name-a-z
+                            // example: category_alias?orderBy=name-a-z
                             let positionParameters = location.pathname.indexOf('?')
                             let url = location.pathname.substring(positionParameters, location.pathname.length)
-                            let newURL = url + '?'
-                            newURL += 'orderBy=' + orderBy
+                            let newURL = url + '?' // http://localhost:8000/phones?
+                            newURL += 'orderBy=' + orderBy // http://localhost:8000/phones?orderBy=name-z-a
                             history.pushState({}, '', newURL)
 
-                            // insert result data to html template
+
+                            // insert result "data" to html template
                             $('.product_grid').html(data)
 
-                            // plugin isotope
+                            // plugin isotope for filter
                             $('.product_grid').isotope('destroy')
                             $('.product_grid').imagesLoaded(function () {
 
