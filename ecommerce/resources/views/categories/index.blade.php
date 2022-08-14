@@ -210,11 +210,18 @@
 
         $(document).ready(function () {
              $('.product_sorting_btn').click(function () {
+
                   // console.log('hello')
 
-                  let orderBy = $(this).data('order') // получаем "data-order"
-                  // console.log(orderBy)
+                  // получаем "data-order"
+                  let orderBy = $(this).data('order')
 
+
+                  // console.log(orderBy)
+                  $('.sorting_text').text($(this).find('span').text())
+
+
+                  // send request by method GET
                   $.ajax({
                       url: "{{ route('show.category', $category->alias) }}",
                       type: "GET",
