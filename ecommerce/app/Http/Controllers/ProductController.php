@@ -32,6 +32,12 @@ class ProductController extends Controller
 
 
 
+      /**
+       * @param Request $request
+       * @param $category_alias
+       * @return array|Application|Factory|View|string
+       * @throws \Throwable
+      */
       public function showCategory(Request $request, $category_alias)
       {
           // Получаем категорию по alias
