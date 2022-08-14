@@ -232,7 +232,18 @@
                           'X-CSRF-TOKEN': $('meta[name="csrf-token').attr('content')
                       },
                       success: (data) => {
+
                             // console.log(data)
+
+
+                            // example: category_id?orderBy=name-a-z
+                            let positionParameters = location.pathname.indexOf('?')
+                            let url = location.pathname.substring(positionParameters, location.pathname.length)
+                            let newURL = url + '?'
+                            newURL += 'orderBy=' + orderBy
+                            history.pushState({}, '', newURL)
+
+                            // insert result data to html template
                             $('.product_grid').html(data)
 
                             // plugin isotope
