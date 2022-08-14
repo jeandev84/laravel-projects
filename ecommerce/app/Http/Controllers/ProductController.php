@@ -32,12 +32,26 @@ class ProductController extends Controller
 
 
 
-      public function showCategory($category_alias)
+      public function showCategory(Request $request, $category_alias)
       {
+          // Получаем категорию по alias
           $category = Category::where('alias', $category_alias)->first();
 
+
+          // Выбираем все продукты где категория равняется id данной категории
+          $products = Product::where('category_id', $category->id)->get();
+
+
+          // если запрос отправлен ajax запрос
+          // мы возвращаем
+          if ($request->ajax()) {
+              return $request->orderBy;
+          }
+
+
           return view('categories.index', [
-              'category' => $category
+              'category' => $category,
+              'products' => $products
           ]);
       }
 }

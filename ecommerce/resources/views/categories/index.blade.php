@@ -52,9 +52,18 @@
                                         <span class="sorting_text">Sort by</span>
                                         <i class="fa fa-chevron-down" aria-hidden="true"></i>
                                         <ul>
+                                            <!--
                                             <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Default</span></li>
                                             <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Price</span></li>
                                             <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "stars" }'><span>Name</span></li>
+                                            -->
+
+                                            <li class="product_sorting_btn" data-order="default"><span>Default</span></li>
+                                            <li class="product_sorting_btn" data-order="price-low-high"><span>Price: Low-High</span></li>
+                                            <li class="product_sorting_btn" data-order="price-high-low"><span>Price: High-Low</span></li>
+                                            <li class="product_sorting_btn" data-order="name-a-z"><span>Name: A-Z</span></li>
+                                            <li class="product_sorting_btn" data-order="name-z-a"><span>Name: Z-A</span></li>
+
                                         </ul>
                                     </li>
                                 </ul>
@@ -196,5 +205,31 @@
 
 <!-- add own custom css -->
 @section('custom_js')
-    <script src="js/categories.js"></script>
+    <script>
+
+        $(document).ready(function () {
+             $('.product_sorting_btn').click(function () {
+                  // console.log('hello')
+
+                  let orderBy = $(this).data('order') // получаем "data-order"
+                  // console.log(orderBy)
+
+                  $.ajax({
+                      url: "{{ route('show.category', $category->alias) }}",
+                      type: "GET",
+                      data: {
+                          orderBy: orderBy
+                      },
+                      headers: {
+                          'X-CSRF-TOKEN': $('meta[name="csrf-token').attr('content')
+                      },
+                      success: (data) => {
+                            console.log(data)
+                      }
+                  })
+             })
+        })
+
+
+    </script>
 @endsection
