@@ -20,3 +20,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+// Должен иметь доступ к этой странице только пользователь с ролью 'admin'
+Route::group(['middleware' => ['role:admin']], function () {
+    Route::get('/test', function () {
+        return view('test');
+    });
+});
