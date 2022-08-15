@@ -13,8 +13,9 @@ $ composer create-project laravel/laravel:^8.0 adminpanel
 ```
 
 
-3. Alternatives php version
+3. Usage
 ```php 
+sudo -u postgres psql -c 'create database lp_ecommerce;'
 sudo update-alternatives --set php /usr/bin/php7.2  (Linux)
 sudo update-alternatives --set php /usr/bin/php8.0  (Linux)
 ```
