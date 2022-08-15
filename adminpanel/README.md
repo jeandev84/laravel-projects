@@ -28,7 +28,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
-class dbcreate extends Command
+class DatabaseCreateCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -200,6 +200,7 @@ $ npm run production
 5. Install Laravel permission 
 
 - https://spatie.be/docs/laravel-permission/v3/introduction
+- https://github.com/spatie/laravel-permission/blob/master/config/permission.php
 
 ```php 
 
@@ -209,5 +210,11 @@ $ composer require spatie/laravel-permission
     // ...
     Spatie\Permission\PermissionServiceProvider::class,
 ];
+
+$ php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+
+$ php artisan optimize:clear || php artisan config:clear
+ 
+$ php artisan migrate
 
 ```
