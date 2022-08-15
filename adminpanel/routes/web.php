@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,5 +39,15 @@ Route::group(['middleware' => ['role:admin'], 'prefix' => '/admin_panel'], funct
 */
 
 Route::middleware(['role:admin'])->prefix('/admin_panel')->group(function () {
-    Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index']); // admin/
+
+    Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
+           ->name('admin.dashboard.index'); // admin_panel/
+
+    Route::resource('/category', CategoryController::class); // admin_panel/category
+
+    /*
+    Route::resources([
+        'category' => \App\Http\Controllers\Admin\CategoryController::class
+    ]);
+    */
 });

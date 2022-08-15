@@ -394,5 +394,6 @@ protected $routeMiddleware = [
 8. Create Resource Controller for admin 
 ```php 
 $ php artisan make:controller Admin/HomeController 
+$ php artisan make:controller Admin/CategoryController --resource --model=Category
 
 ```
