@@ -10,6 +10,7 @@ $ laravel new Blog (create a project Blog in laravel)
 ```php 
 $ composer create-project --prefer-dist laravel/laravel blog "6.*"
 $ composer create-project laravel/laravel:^8.0 adminpanel
+$ composer create-project laravel/laravel:^8.0 restfulapi
 ```
 
 
