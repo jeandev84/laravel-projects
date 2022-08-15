@@ -19,7 +19,7 @@ class PostController extends Controller
      */
     public function index()
     {
-         $posts = [];
+         $posts = Post::orderBy('created_at', 'DESC')->get();
 
          return view('admin.post.index', compact('posts'));
     }
@@ -51,7 +51,7 @@ class PostController extends Controller
     {
         $post = new Post();
         $post->title = $request->title;
-        $post->img   =  '/' . $request->img;
+        $post->img   =  $request->img;
         $post->text  = $request->text;
         $post->category_id = $request->category_id;
         $post->save();
@@ -82,8 +82,12 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+         $categories = Category::orderBy('created_at', 'desc')->get();
+
+         return view('admin.post.edit', compact('post', 'categories'));
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -94,8 +98,17 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $post->title = $request->title;
+        $post->img   =  $request->img;
+        $post->text  = $request->text;
+        $post->category_id = $request->category_id;
+        $post->save();
+
+        return redirect()->back()->withSuccess('Статья была успешно обновлена!');
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -105,6 +118,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->back()->withSuccess('Статья была успешно удалена!');
     }
 }

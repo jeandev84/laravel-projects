@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+
+
+    // ManyToOne
+    public function category()
+    {
+         return $this->belongsTo('App\\Models\\Category');
+    }
 }

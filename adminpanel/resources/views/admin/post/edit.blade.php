@@ -1,4 +1,4 @@
-@extends('layouts.admin_layout')
+@extends('layouts.admin')
 
 @section('title', 'Редактировать статью')
 
@@ -43,7 +43,7 @@
                                         <label>Выберите категорию</label>
                                         <select name="cat_id" class="form-control" required>
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category['id'] }}" @if ($category['id'] == $post['cat_id']) selected
+                                                <option value="{{ $category['id'] }}" @if ($category['id'] == $post['category_id']) selected
                                                     @endif>{{ $category['title'] }}
                                                 </option>
                                             @endforeach

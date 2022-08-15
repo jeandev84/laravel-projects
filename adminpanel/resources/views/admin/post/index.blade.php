@@ -55,7 +55,7 @@
                                     {{ $post['title'] }}
                                 </td>
                                 <td>
-                                    {{ $post->category['title'] }}
+                                   {{ $post->category['title'] }}
                                 </td>
                                 <td>
                                     {{ $post['created_at'] }}
