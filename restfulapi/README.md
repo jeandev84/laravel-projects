@@ -16,3 +16,10 @@ $php artisan migrate
 ```php 
 $ php artisan make:controller Api/DeskController --resource
 ```
+
+
+3. Make Resource 
+```php 
+$ php artisan make:resource DeskResource
+$ php artisan make:resource DeskListResource
+```
