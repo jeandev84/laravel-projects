@@ -29,7 +29,11 @@
 
         function addToCart() {
 
-            let id = $('.details_name').data('id');
+            // Получаем id продукта
+            let id  = $('.details_name').data('id')
+
+            // Получаем количество продукта
+            let qty = $('#quantity_input').val()
 
 
             // send request by method GET
@@ -37,7 +41,8 @@
                 url: "{{ route('add.to.cart') }}",
                 type: "POST",
                 data: {
-                    id: id
+                    id: id,
+                    qty: qty
                 },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token').attr('content')

@@ -465,7 +465,11 @@ $ php artisan migrate
 
 
 12. Installation Laravel Cart
+
+Package for working with Cart.
+
  - https://github.com/darryldecode/laravelshoppingcart
+
 ```php 
 
 $ composer require "darryldecode/cart:~2.0"
