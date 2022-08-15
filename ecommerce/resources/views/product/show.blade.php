@@ -33,7 +33,15 @@
             let id  = $('.details_name').data('id')
 
             // Получаем количество продукта
-            let qty = $('#quantity_input').val()
+            let qty = parseInt($('#quantity_input').val())
+
+
+            // Получаем количество продукта и обновляем корзину
+            let total_qty = parseInt($('.cart-qty').text())
+
+            total_qty += qty
+
+            $('.cart-qty').text(total_qty)
 
 
             // send request by method GET

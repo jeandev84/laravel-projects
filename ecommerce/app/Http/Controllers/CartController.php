@@ -40,9 +40,9 @@ class CartController extends Controller
               'id' => $product->id,
               'name' => $product->title,
               'price' => $product->new_price ?? $product->price,
-              'quantity' => $request->qty,
+              'quantity' => (int) $request->qty,
               'attributes' => [
-                  'img' => $product->images[0]->img
+                  'img' => $product->images[0]->img ?? 'no_image.png'
               ]
           ]);
 
