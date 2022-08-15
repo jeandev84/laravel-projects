@@ -397,3 +397,142 @@ $ php artisan make:controller Admin/HomeController
 $ php artisan make:controller Admin/CategoryController --resource --model=Category
 
 ```
+
+9. Laravel elfinder (Браузерный файл для Админ-панель)
+- https://github.com/barryvdh/laravel-elfinder
+```php 
+$ composer require barryvdh/laravel-elfinder:*
+
+Add the ServiceProvider to the providers array in app/config/app.php
+./config/app.php 
+
+'providers' => [
+
+    ....
+    
+    Barryvdh\Elfinder\ElfinderServiceProvider::class
+    
+    ....
+
+];
+
+You need to copy the assets to the public folder, using the following artisan command:
+$ php artisan elfinder:publish
+
+
+$ php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=config
+
+Copied File [/vendor/barryvdh/laravel-elfinder/config/elfinder.php] To [/config/elfinder.php]
+Publishing complete.
+
+
+<script src="https://cdn.tiny.cloud/1/82php8bzgslrf500rugvnisjthndz5uq88crfe757v6b07ee/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script src="admin.js"></script>
+
+<!--
+<script>
+
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+        toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+        toolbar_mode: 'floating',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+    });
+
+</script>
+-->
+
+<textarea class="editor" id="mc_e"></textared>
+
+tinymce.init({
+    selector: '.editor',
+    plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+    toolbar_mode: 'floating',
+    relative_urls : false,
+    file_picker_callback : elFinderBrowser
+});
+
+function elFinderBrowser (callback, value, meta) {
+    tinymce.activeEditor.windowManager.openUrl({
+        title: 'File Manager',
+        url: '/elfinder/tinymce5', // or "{{ route('elfinder.tinymce5') }}"
+        /**
+         * On message will be triggered by the child window
+         *
+         * @param dialogApi
+         * @param details
+         * @see https://www.tiny.cloud/docs/ui-components/urldialog/#configurationoptions
+         */
+        onMessage: function (dialogApi, details) {
+            if (details.mceAction === 'fileSelected') {
+                const file = details.data.file;
+
+                // Make file info
+                const info = file.name;
+
+                // Provide file and text for the link dialog
+                if (meta.filetype === 'file') {
+                    callback(file.url, {text: info, title: info});
+                }
+
+                // Provide image and alt text for the image dialog
+                if (meta.filetype === 'image') {
+                    callback(file.url, {alt: info});
+                }
+
+                // Provide alternative source and posted for the media dialog
+                if (meta.filetype === 'media') {
+                    callback(file.url);
+                }
+
+                dialogApi.close();
+            }
+        }
+    });
+}
+
+
+Create a directory named "files" in ./public because inside ./app/config/elfinder.php
+directory where uploaded files named will be saved  named "files".
+
+/*
+|--------------------------------------------------------------------------
+| Upload dir
+|--------------------------------------------------------------------------
+|
+| The dir where to store the images (relative from public)
+|
+*/
+'dir' => ['files'],
+
+
+http://www.jacklmoore.com/colorbox/
+
+
+$(document).on('click','.popup_selector',function (event) {
+    event.preventDefault();
+    var updateID = $(this).attr('data-inputid'); // Btn id clicked
+    var elfinderUrl = '/elfinder/popup/';
+
+    // trigger the reveal modal with elfinder inside
+    var triggerUrl = elfinderUrl + updateID;
+    $.colorbox({
+        href: triggerUrl,
+        fastIframe: true,
+        iframe: true,
+        width: '70%',
+        height: '80%'
+    });
+
+});
+// function to update the file selected by elfinder
+function processSelectedFile(filePath, requestingField) {
+    $('#' + requestingField).val(filePath).trigger('change');
+    $('.img-uploaded').attr('src', '/' + filePath).trigger('change');
+}
+
+
+```
