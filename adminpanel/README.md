@@ -169,6 +169,7 @@ $ php artisan migrate
 ```
 
 4. Authentification 
+ - https://github.com/laravel/fortify
  - https://laravel.com/docs/8.x/fortify
  - https://github.com/laravel/ui
 ```php 
