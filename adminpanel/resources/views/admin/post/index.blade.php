@@ -1,28 +1,22 @@
 @extends('layouts.admin')
 
-@section('title', 'Все категории')
-
+@section('title', 'Все статьи')
 
 @section('content')
-
-
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Все категории</h1>
+                    <h1 class="m-0">Все статьи</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
-
-            <!-- Flash message -->
             @if (session('success'))
                 <div class="alert alert-success" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                     <h4><i class="icon fa fa-check"></i>{{ session('success') }}</h4>
                 </div>
             @endif
-
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
@@ -41,27 +35,39 @@
                             <th>
                                 Название
                             </th>
+                            <th>
+                                Категория
+                            </th>
+                            <th>
+                                Дата добавления
+                            </th>
                             <th style="width: 30%">
                             </th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($categories as $category)
+                        @foreach ($posts as $post)
                             <tr>
                                 <td>
-                                    {{ $category['id'] }}
+                                    {{ $post['id'] }}
                                 </td>
                                 <td>
-                                    {{ $category['title'] }}
+                                    {{ $post['title'] }}
+                                </td>
+                                <td>
+                                    {{ $post->category['title'] }}
+                                </td>
+                                <td>
+                                    {{ $post['created_at'] }}
                                 </td>
 
                                 <td class="project-actions text-right">
-                                    <a class="btn btn-info btn-sm" href="{{ route('category.edit', $category['id']) }}">
+                                    <a class="btn btn-info btn-sm" href="{{ route('post.edit', $post['id']) }}">
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Редактировать
                                     </a>
-                                    <form action="{{ route('category.destroy', $category['id']) }}" method="POST"
+                                    <form action="{{ route('post.destroy', $post['id']) }}" method="POST"
                                           style="display: inline-block">
                                         @csrf
                                         @method('DELETE')
@@ -84,6 +90,4 @@
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-
-
 @endsection

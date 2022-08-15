@@ -19,8 +19,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+         $posts = [];
+
+         return view('admin.post.index', compact('posts'));
     }
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -44,8 +49,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post();
+        $post->title = $request->title;
+        $post->img   =  '/' . $request->img;
+        $post->text  = $request->text;
+        $post->category_id = $request->category_id;
+        $post->save();
+
+        return redirect()->back()->withSuccess('Статья была успешно добавлена!');
     }
+
+
 
     /**
      * Display the specified resource.
