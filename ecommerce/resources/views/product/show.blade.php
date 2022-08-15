@@ -136,7 +136,7 @@
                 <!-- Product Content -->
                 <div class="col-lg-6">
                     <div class="details_content">
-                        <div class="details_name">{{ $product->title }}</div>
+                        <div class="details_name" data-id="{{ $product->id }}">{{ $product->title }}</div>
 
                         @if($product->new_price != null)
                             <div style="text-decoration: line-through" class="details_discount">${{ $product->price }}</div>
