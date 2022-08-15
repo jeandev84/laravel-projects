@@ -23,3 +23,12 @@ $ php artisan make:controller Api/DeskController --resource
 $ php artisan make:resource DeskResource
 $ php artisan make:resource DeskListResource
 ```
+
+4. Make Request (for Validation field)
+```
+$ php artisan make:request DeskStoreRequest
+
+http://localhost:8000/api/v1/desks
+http://localhost:8000/api/v2/desks
+
+```
