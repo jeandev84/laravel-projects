@@ -24,8 +24,19 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 // Должен иметь доступ к этой странице только пользователь с ролью 'admin'
+/*
 Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('/test', function () {
-        return view('test');
+    Route::get('/demo', function () {
+        return view('access.demo');
     });
+});
+
+Route::group(['middleware' => ['role:admin'], 'prefix' => '/admin_panel'], function () {
+    Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index']); // admin/
+});
+
+*/
+
+Route::middleware(['role:admin'])->prefix('/admin_panel')->group(function () {
+    Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index']); // admin/
 });

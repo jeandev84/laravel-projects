@@ -370,7 +370,7 @@ Routing :
 // Должен иметь доступ к этой странице только пользователь с ролью 'admin'
 Route::group(['middleware' => ['role:admin']], function () {
     Route::get('/test', function () {
-        return view('test');
+        return view('access.demo');
     });
 });
 
@@ -386,5 +386,13 @@ protected $routeMiddleware = [
     'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
     'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
 ];
+
+```
+
+7. Templating Admin LTE : https://adminlte.io/
+
+8. Create Resource Controller for admin 
+```php 
+$ php artisan make:controller Admin/HomeController 
 
 ```
