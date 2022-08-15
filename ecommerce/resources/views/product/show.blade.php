@@ -2,7 +2,7 @@
 @extends('layouts.main')
 
 <!-- set title -->
-@section('title', 'Product')
+@section('title', $product->title)
 
 <!-- add own custom css -->
 @section('custom_css')
@@ -12,13 +12,15 @@
 
 <!-- add own custom js -->
 @section('custom_js')
+
     <script src="/js/product.js"></script>
 
     <script>
 
         $(document).ready(function () {
 
-            $('.cart_button').click(function () {
+            $('.cart_button').click(function (event) {
+                event.preventDefault()
                 addToCart()
             })
 
@@ -27,12 +29,15 @@
 
         function addToCart() {
 
+            let id = $('.details_name').data('id');
+
+
             // send request by method GET
             $.ajax({
                 url: "{{ route('add.to.cart') }}",
                 type: "POST",
                 data: {
-                    id: 'Поставь лайк и напиши комментарий к видео) Не забудь про подписку!'
+                    id: id
                 },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token').attr('content')
