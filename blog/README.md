@@ -77,3 +77,8 @@ $ php artisan make:controller Api/v1/PostController --resource
 $ php artisan route:list
 
 ```
+
+4. Install ```axios```
+```php 
+$ npm i vue-axios
+```
