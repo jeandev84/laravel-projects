@@ -29,6 +29,8 @@ WORK WIWTH VUE JS
 
 $ composer require laravel/ui:*
 $ php artisan ui vue --auth
+$ php artisan ui bootstrap --auth
+$ npm install bootstrap
 $ npm install && npm run dev
 
 $ php artisan serve
