@@ -1,8 +1,20 @@
 <template>
     <div class="container">
+
+        <!-- Input form -->
         <div class="form-group">
-            <input type="text" @blur="saveName" v-model="name" class="form-control">
+
+            <input type="text" @blur="saveName" v-model="name" class="form-control is-invalid" :class="{ 'is-invalid': $v.name.$error }">
+
+            <!-- Message validation ( show next message if name empty ) -->
+            <div class="invalid-feedback" v-if="!$v.name.required">
+                Обязательное поле.
+            </div>
+            <div class="invalid-feedback" v-if="!$v.name.maxLength">
+                Макс. количество символов: {{$v.name.$params.maxLength.max}} .
+            </div>
         </div>
+
 
         <!-- Error message shower -->
         <div class="alert alert-danger" role="alert" v-if="errored">
@@ -17,6 +29,9 @@
 </template>
 
 <script>
+
+import { required, maxLength } from 'vuelidate/lib/validators'
+
 export default {
     props: [
         'deskId'
@@ -31,6 +46,11 @@ export default {
     methods: {
 
         saveName() {
+
+            this.$v.$touch()
+            if(this.$v.$anyError) {
+                return;
+            }
 
             axios.post('/api/v1/desks/' + this.deskId, {
                 _method: 'PUT',
@@ -81,6 +101,12 @@ export default {
                 }, 300)
             })
 
+    },
+    validations: {
+        name: {
+           required,
+           maxLength: maxLength(255)
+        }
     }
 }
 </script>

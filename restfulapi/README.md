@@ -146,6 +146,7 @@ $ npm i vue-router
 
 6. Vuelidate (Using for validation data in frontend)
 - https://vuelidate.js.org/
+- https://vuelidate.js.org/#sub-basic-usage
 ```php 
 
 $ npm install vuelidate --save
