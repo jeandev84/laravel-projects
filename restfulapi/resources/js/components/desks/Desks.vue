@@ -8,6 +8,7 @@
                      <router-link class="card-body" :to="{name: 'showDesk', params: {deskId: desk.id}}">
                          <h4 class="card-title">{{ desk.name }}</h4>
                      </router-link>
+                     <button type="button" class="btn btn-danger mt-3">Удалить</button>
                  </div>
              </div>
 

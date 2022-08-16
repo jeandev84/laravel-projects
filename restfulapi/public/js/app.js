@@ -5571,7 +5571,12 @@ var render = function render() {
       }
     }, [_c("h4", {
       staticClass: "card-title"
-    }, [_vm._v(_vm._s(desk.name))])])], 1)]);
+    }, [_vm._v(_vm._s(desk.name))])]), _vm._v(" "), _c("button", {
+      staticClass: "btn btn-danger mt-3",
+      attrs: {
+        type: "button"
+      }
+    }, [_vm._v("Удалить")])], 1)]);
   }), _vm._v(" "), _vm.errored ? _c("div", {
     staticClass: "alert alert-danger",
     attrs: {
