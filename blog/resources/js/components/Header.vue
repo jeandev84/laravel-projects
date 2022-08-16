@@ -3,18 +3,9 @@
         <div class="uk-navbar-center">
 
             <ul class="uk-navbar-nav">
-                <li class="uk-active"><a href="#">Active</a></li>
-                <li>
-                    <a href="#">Parent</a>
-                    <div class="uk-navbar-dropdown">
-                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                            <li class="uk-active"><a href="#">Active</a></li>
-                            <li><a href="#">Item</a></li>
-                            <li><a href="#">Item</a></li>
-                        </ul>
-                    </div>
+                <li v-for="link in links">
+                    <a :href="link.href">{{ link.title }}</a>
                 </li>
-                <li><a href="#">Item</a></li>
             </ul>
         </div>
      </nav>
@@ -22,7 +13,22 @@
 
 <script>
 export default {
-    name: "Header"
+    // name: "Header"
+
+    data() {
+        return {
+            links: [
+                {
+                    title: "Главная",
+                    href: "/"
+                },
+                {
+                    title: "Блог",
+                    href: "/blog"
+                },
+            ]
+        }
+    }
 }
 </script>
 

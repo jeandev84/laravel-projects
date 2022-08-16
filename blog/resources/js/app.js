@@ -31,7 +31,7 @@ Vue.component('v-header', require('./components/Header.vue').default);
 // import boot from 'bootstrap'
 
 
-
+import router from './router'
 
 
 /**
@@ -42,4 +42,5 @@ Vue.component('v-header', require('./components/Header.vue').default);
 
 const app = new Vue({
     el: '#app',
+    router: router
 });

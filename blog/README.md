@@ -11,4 +11,16 @@ $ php artisan serve
 при помощью следующей команды и лучше не завершить команду :
 
 $ npm run watch       (building components)
+
+
+Install Vuew router ( https://router.vuejs.org/guide/ )
+====================================================
+$ npm install vue-router@4
+$ npm i vue-router
+
+"devDependencies": {
+ ...
+ "vue-router": "^3.2.0"
+}
+
 ```
