@@ -28,9 +28,13 @@ window.Vue = require('vue').default;
  * Import Vue Router and use in Vue.
 */
 
-import VueRouter from "vue-router";
+import VueRouter from "vue-router"; // for routing
+import {Vuelidate} from "vuelidate"; // for validation data
+
 
 Vue.use(VueRouter)
+Vue.use(Vuelidate)
+
 
 
 /**

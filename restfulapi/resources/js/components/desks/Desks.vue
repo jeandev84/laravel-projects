@@ -20,6 +20,7 @@
              <div class="spinner-border" style="width: 4rem; height: 4rem;" role="status" v-if="loading">
                  <span class="sr-only"></span>
              </div>
+
          </div>
     </div>
 </template>
