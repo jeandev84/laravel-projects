@@ -21,6 +21,7 @@ window.Vue = require('vue').default;
 
 // Регистрация компонентов
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('test', require('./components/Test.vue').default);
 
 
 
