@@ -28,7 +28,7 @@ Vue.component('v-header', require('./components/Header.vue').default);
 
 // Styles
 // import "./assets/css/uikit.min.css"
-
+// import boot from 'bootstrap'
 
 
 
