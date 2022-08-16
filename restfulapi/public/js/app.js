@@ -5743,7 +5743,7 @@ var render = function render() {
 
   return _c("div", {
     staticClass: "container"
-  }, [_c("div", {
+  }, [_c("h1", [_vm._v(_vm._s(_vm.name))]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("input", {
     directives: [{
