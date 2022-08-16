@@ -44,12 +44,12 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace(sprintf('%s\\Api\\V1', $this->namespace))
                 ->group(base_path('routes/api.php'));
 
-
+            /*
             Route::prefix('api/v2')
                 ->middleware('api')
                 ->namespace(sprintf('%s\\Api\\V2', $this->namespace))
                 ->group(base_path('routes/api_v2.php'));
-
+            */
 
             Route::middleware('web')
                 ->namespace($this->namespace)

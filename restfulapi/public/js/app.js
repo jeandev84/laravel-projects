@@ -5351,7 +5351,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       desks: [],
-      errored: false
+      errored: false,
+      loading: true
     };
   },
   // call API
@@ -5359,12 +5360,19 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get('/api/v1/desks').then(function (response) {
+      // Get response data
       // console.log(response)
       // console.log(response.data)
       _this.desks = response.data.data;
     })["catch"](function (error) {
+      // Setting when we have error from server
       console.log(error);
       _this.errored = true;
+    })["finally"](function () {
+      // Setting after then (success)
+      setTimeout(function () {
+        _this.loading = false;
+      }, 300);
     });
   }
 });
@@ -5488,7 +5496,18 @@ var render = function render() {
     attrs: {
       role: "alert"
     }
-  }, [_vm._v("\n              Ошибка загрузки данных!\n         ")]) : _vm._e()], 2)]);
+  }, [_vm._v("\n              Ошибка загрузки данных!\n         ")]) : _vm._e(), _vm._v(" "), _vm.loading ? _c("div", {
+    staticClass: "spinner-border",
+    staticStyle: {
+      width: "4rem",
+      height: "4rem"
+    },
+    attrs: {
+      role: "status"
+    }
+  }, [_c("span", {
+    staticClass: "sr-only"
+  })]) : _vm._e()], 2)]);
 };
 
 var staticRenderFns = [];
