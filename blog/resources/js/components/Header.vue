@@ -4,7 +4,8 @@
 
             <ul class="uk-navbar-nav">
                 <li v-for="link in links">
-                    <a :href="link.href">{{ link.title }}</a>
+<!--                    <a :href="link.href">{{ link.title }}</a> -->
+                    <router-link :to="link.href">{{ link.title }}</router-link>
                 </li>
             </ul>
         </div>
