@@ -5394,7 +5394,10 @@ __webpack_require__.r(__webpack_exports__);
   props: ['deskId'],
   data: function data() {
     return {
-      desk: null
+      name: null,
+      // desk name
+      errored: false,
+      loading: true
     };
   },
   mounted: function mounted() {
@@ -5404,7 +5407,7 @@ __webpack_require__.r(__webpack_exports__);
       // Get response data
       // console.log(response)
       // console.log(response.data)
-      _this.desks = response.data.data;
+      _this.name = response.data.data.name;
     })["catch"](function (error) {
       // Setting when we have error from server
       console.log(error);
@@ -5586,21 +5589,20 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.desk.name,
-      expression: "desk.name"
+      value: _vm.name,
+      expression: "name"
     }],
     staticClass: "form-control",
     attrs: {
       type: "text"
     },
     domProps: {
-      value: _vm.desk.name
+      value: _vm.name
     },
     on: {
       input: function input($event) {
         if ($event.target.composing) return;
-
-        _vm.$set(_vm.desk, "name", $event.target.value);
+        _vm.name = $event.target.value;
       }
     }
   })])]);

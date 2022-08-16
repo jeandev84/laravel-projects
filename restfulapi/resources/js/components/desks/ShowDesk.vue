@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="form-group">
-            <input type="text" v-model="desk.name" class="form-control">
+            <input type="text" v-model="name" class="form-control">
         </div>
     </div>
 </template>
@@ -13,7 +13,9 @@ export default {
     ],
     data() {
         return {
-            desk: null
+            name: null, // desk name
+            errored: false,
+            loading: true
         }
     },
     mounted() {
@@ -25,7 +27,7 @@ export default {
                 // console.log(response)
                 // console.log(response.data)
 
-                this.desks = response.data.data
+                this.name = response.data.data.name
             })
             .catch(error => {
 
