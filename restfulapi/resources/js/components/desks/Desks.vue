@@ -136,11 +136,15 @@ export default {
                 return;
             }
 
-
             axios.post('/api/v1/desks/', {
               name: this.name,
             })
             .then(response => {
+
+                // refresh data and stay in the same page
+                this.name = ''
+                this.desks = []
+                this.getAllDesks()
 
             })
             .catch(error => {

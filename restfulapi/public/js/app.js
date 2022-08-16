@@ -5419,7 +5419,13 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/api/v1/desks/', {
         name: this.name
-      }).then(function (response) {})["catch"](function (error) {
+      }).then(function (response) {
+        // refresh data and stay in the same page
+        _this3.name = '';
+        _this3.desks = [];
+
+        _this3.getAllDesks();
+      })["catch"](function (error) {
         console.log(error);
         _this3.errored = true;
       })["finally"](function () {
