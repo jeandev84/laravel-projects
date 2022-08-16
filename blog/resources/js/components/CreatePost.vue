@@ -1,5 +1,9 @@
 <template>
     <div>
+        <div class="uk-alert-danger" uk-alert v-if="error">
+            <a class="uk-alert-close" uk-close></a>
+            <p>Проверьте правильность введенный полей</p>
+        </div>
         <form style="margin-bottom: 20px;">
             <fieldset class="uk-fieldset">
                <legend class="uk-legend">Опубликовать пост</legend>
@@ -33,18 +37,29 @@ export default {
             body: ""
         },
         loading: false,
+        error: false
     }),
     methods: {
         store() {
-           axios.post('/api/posts', this.form, {
+
+            this.loading = true;
+
+            axios.post('/api/posts', this.form, {
                 headers: {
                     "Content-Type": "application/json"
                 }
-           })
-           .then(res => {
+            })
+            .then(res => {
                if (res.data.status) {
                    // redirect to the same page
                    this.$router.push('/post/' + res.data.post.id)
+               } else {
+
+                   setTimeout(() => {
+                       this.loading = false;
+                   }, 300);
+
+                   this.error   = true;
                }
            })
            .catch(err => {
