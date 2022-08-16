@@ -5357,23 +5357,53 @@ __webpack_require__.r(__webpack_exports__);
   },
   // call API
   mounted: function mounted() {
-    var _this = this;
+    this.getAllDesks();
+  },
+  methods: {
+    getAllDesks: function getAllDesks() {
+      var _this = this;
 
-    axios.get('/api/v1/desks').then(function (response) {
-      // Get response data
-      // console.log(response)
-      // console.log(response.data)
-      _this.desks = response.data.data;
-    })["catch"](function (error) {
-      // Setting when we have error from server
-      console.log(error);
-      _this.errored = true;
-    })["finally"](function () {
-      // Setting after then (success)
-      setTimeout(function () {
-        _this.loading = false;
-      }, 300);
-    });
+      axios.get('/api/v1/desks').then(function (response) {
+        // Get response data
+        // console.log(response)
+        // console.log(response.data)
+        _this.desks = response.data.data;
+      })["catch"](function (error) {
+        // Setting when we have error from server
+        console.log(error);
+        _this.errored = true;
+      })["finally"](function () {
+        // Setting after then (success)
+        setTimeout(function () {
+          _this.loading = false;
+        }, 300);
+      });
+    },
+    deleteDesk: function deleteDesk(id) {
+      var _this2 = this;
+
+      if (confirm('Вы действительно хотите удалить доску?')) {
+        axios.post('/api/v1/desks/' + id, {
+          _method: 'DELETE'
+        }).then(function (response) {
+          // Get response data
+          // console.log(response)
+          // console.log(response.data)
+          _this2.desks = [];
+
+          _this2.getAllDesks();
+        })["catch"](function (error) {
+          // Setting when we have error from server
+          console.log(error);
+          _this2.errored = true;
+        })["finally"](function () {
+          // Setting after then (success)
+          setTimeout(function () {
+            _this2.loading = false;
+          }, 300);
+        });
+      }
+    }
   }
 });
 
@@ -5575,6 +5605,11 @@ var render = function render() {
       staticClass: "btn btn-danger mt-3",
       attrs: {
         type: "button"
+      },
+      on: {
+        click: function click($event) {
+          return _vm.deleteDesk(desk.id);
+        }
       }
     }, [_vm._v("Удалить")])], 1)]);
   }), _vm._v(" "), _vm.errored ? _c("div", {

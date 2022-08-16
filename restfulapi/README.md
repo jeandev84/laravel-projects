@@ -153,6 +153,14 @@ $ npm install vuelidate --save
 
 ```
 
+7. Refresh migrate && Lunch seeder
+```php 
+$ php artisan migrate:refresh
+$ php artisan db:seed
+```
+
+
+
 Source: 
 - https://getbootstrap.com/docs/4.4/getting-started/introduction/
 - https://vuelidate.js.org/

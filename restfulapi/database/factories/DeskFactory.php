@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class DeskFactory extends Factory
 {
@@ -14,7 +15,7 @@ class DeskFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name(),
         ];
     }
 }

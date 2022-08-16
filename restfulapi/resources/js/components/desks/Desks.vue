@@ -8,7 +8,7 @@
                      <router-link class="card-body" :to="{name: 'showDesk', params: {deskId: desk.id}}">
                          <h4 class="card-title">{{ desk.name }}</h4>
                      </router-link>
-                     <button type="button" class="btn btn-danger mt-3">Удалить</button>
+                     <button type="button" class="btn btn-danger mt-3" @click="deleteDesk(desk.id)">Удалить</button>
                  </div>
              </div>
 
@@ -38,30 +38,72 @@ export default {
     },
     // call API
     mounted() {
-         axios.get('/api/v1/desks')
-              .then(response => {
 
-                   // Get response data
-                   // console.log(response)
-                   // console.log(response.data)
+        this.getAllDesks();
 
-                   this.desks = response.data.data
-              })
-             .catch(error => {
+    },
+    methods: {
 
-                  // Setting when we have error from server
+        getAllDesks() {
 
-                  console.log(error)
-                  this.errored = true
-             })
-             .finally(() => {
+            axios.get('/api/v1/desks')
+                .then(response => {
 
-                 // Setting after then (success)
+                    // Get response data
+                    // console.log(response)
+                    // console.log(response.data)
 
-                 setTimeout(() => {
-                     this.loading = false
-                 }, 300)
-             })
+                    this.desks = response.data.data
+                })
+                .catch(error => {
+
+                    // Setting when we have error from server
+
+                    console.log(error)
+                    this.errored = true
+                })
+                .finally(() => {
+
+                    // Setting after then (success)
+
+                    setTimeout(() => {
+                        this.loading = false
+                    }, 300)
+                })
+        },
+        deleteDesk(id) {
+
+            if(confirm('Вы действительно хотите удалить доску?')) {
+
+                axios.post('/api/v1/desks/' + id, {
+                    _method: 'DELETE'
+                })
+                .then(response => {
+
+                    // Get response data
+                    // console.log(response)
+                    // console.log(response.data)
+
+                    this.desks = []
+                    this.getAllDesks()
+                })
+                .catch(error => {
+
+                    // Setting when we have error from server
+
+                    console.log(error)
+                    this.errored = true
+                })
+                .finally(() => {
+
+                    // Setting after then (success)
+
+                    setTimeout(() => {
+                        this.loading = false
+                    }, 300)
+                })
+            }
+        }
     }
 }
 </script>
