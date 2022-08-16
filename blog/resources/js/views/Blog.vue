@@ -4,7 +4,6 @@
          <div style="display:flex; flex-wrap: wrap;" v-else>
                 <post
                     v-for="post in posts"
-                    :id="post.id"
                     :title="post.title"
                     :body="post.body"
                     :date="post.created_at"
@@ -23,8 +22,8 @@ import Post  from "../components/Blog/Post";
 
 export default {
     components: {
-        Spin,
-        Post
+        Spin, // <spin />
+        Post // <post />
     },
     data: () => ({
         // Initialize all data we want to use

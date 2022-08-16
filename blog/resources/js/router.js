@@ -16,7 +16,7 @@ const routes = [
     {path: "/", component: Index},
     {path: "/blog", component: Blog},
     {path: "/post/:id", component: Post},
-    {path: "/post/create", component: Post},
+    {path: "/create", component: CreatePost},
 ];
 
 

@@ -27,6 +27,10 @@ export default {
                     title: "Блог",
                     href: "/blog"
                 },
+                {
+                    title: "Создать пост",
+                    href: "/create"
+                },
             ]
         }
     }

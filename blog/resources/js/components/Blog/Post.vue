@@ -27,10 +27,6 @@
 <script>
 export default {
     props: {
-        // id: {
-        //    type: String,
-        //    default: "NULL"
-        // },
         title: {
             type: String,
             default: "NULL"
