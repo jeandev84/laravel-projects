@@ -5346,13 +5346,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   // Initialize data
   data: function data() {
     return {
       desks: [],
       errored: false,
-      loading: true
+      loading: true,
+      name: null
     };
   },
   // call API
@@ -5403,6 +5406,21 @@ __webpack_require__.r(__webpack_exports__);
           }, 300);
         });
       }
+    },
+    addNewDesk: function addNewDesk() {
+      console.log('OK'); // Заверщаем процесс в случае если возникла ошибка
+
+      this.$v.$touch();
+
+      if (this.$v.$anyError) {
+        return;
+      }
+    }
+  },
+  validations: {
+    name: {
+      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__.required,
+      maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__.maxLength)(255)
     }
   }
 });
@@ -5436,6 +5454,7 @@ __webpack_require__.r(__webpack_exports__);
     saveName: function saveName() {
       var _this = this;
 
+      // Заверщаем процесс в случае если возникла ошибка
       this.$v.$touch();
 
       if (this.$v.$anyError) {
@@ -5582,7 +5601,49 @@ var render = function render() {
 
   return _c("div", {
     staticClass: "container"
-  }, [_c("h1", [_vm._v("Доски")]), _vm._v(" "), _c("div", {
+  }, [_c("h1", [_vm._v("Доски")]), _vm._v(" "), _c("form", {
+    on: {
+      submit: function submit($event) {
+        $event.preventDefault();
+        return _vm.addNewDesk.apply(null, arguments);
+      }
+    }
+  }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.name,
+      expression: "name"
+    }],
+    staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.$v.name.$error
+    },
+    attrs: {
+      type: "text",
+      placeholder: "Введите название доски"
+    },
+    domProps: {
+      value: _vm.name
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.name = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), !_vm.$v.name.required ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("\n                Обязательное поле.\n            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.name.maxLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("\n                Макс. количество символов: " + _vm._s(_vm.$v.name.$params.maxLength.max) + " .\n            ")]) : _vm._e()]), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-primary mt-3",
+    attrs: {
+      type: "submit"
+    }
+  }, [_vm._v("Добавить")])]), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_vm._l(_vm.desks, function (desk) {
     return _c("div", {

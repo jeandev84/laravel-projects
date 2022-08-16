@@ -1,8 +1,26 @@
 <template>
     <div class="container">
+
          <h1>Доски</h1>
+
+        <!-- Add desk -->
+        <form @submit.prevent="addNewDesk">
+            <div class="form-group">
+                <input type="text" v-model="name" class="form-control" :class="{ 'is-invalid': $v.name.$error }" placeholder="Введите название доски">
+
+                <div class="invalid-feedback" v-if="!$v.name.required">
+                    Обязательное поле.
+                </div>
+                <div class="invalid-feedback" v-if="!$v.name.maxLength">
+                    Макс. количество символов: {{$v.name.$params.maxLength.max}} .
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Добавить</button>
+        </form>
+
+
+        <!-- Show  Desk List in one row -->
          <div class="row">
-             <!-- Show  Desk List -->
              <div class="col-lg-4" v-for="desk in desks">
                  <div class="card mt-3">
                      <router-link class="card-body" :to="{name: 'showDesk', params: {deskId: desk.id}}">
@@ -27,13 +45,18 @@
 </template>
 
 <script>
+
+import { required, maxLength } from 'vuelidate/lib/validators'
+
+
 export default {
     // Initialize data
     data() {
         return {
             desks: [],
             errored: false,
-            loading: true
+            loading: true,
+            name: null
         }
     },
     // call API
@@ -103,6 +126,26 @@ export default {
                     }, 300)
                 })
             }
+        },
+        addNewDesk() {
+
+            console.log('OK')
+            // Заверщаем процесс в случае если возникла ошибка
+            this.$v.$touch()
+
+            if(this.$v.$anyError) {
+                return;
+            }
+
+
+
+
+        }
+    },
+    validations: {
+        name: {
+            required,
+            maxLength: maxLength(255)
         }
     }
 }

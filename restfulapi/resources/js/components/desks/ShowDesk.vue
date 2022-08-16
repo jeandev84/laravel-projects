@@ -47,6 +47,7 @@ export default {
 
         saveName() {
 
+            // Заверщаем процесс в случае если возникла ошибка
             this.$v.$touch()
             if(this.$v.$anyError) {
                 return;
