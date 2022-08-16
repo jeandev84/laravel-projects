@@ -23,8 +23,23 @@ $ php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"
 $ php artisan migrate
 
 
+
+WORK WIWTH VUE JS
+=========================================
+
+$ composer require laravel/ui:*
+$ php artisan ui vue --auth
+$ npm install && npm run dev
+
+$ php artisan serve
+
+========================================
+
+
 $ composer require laravel/ui:*
 $ php artisan ui bootstrap --auth
+$ php artisan ui vue --auth
+
 
 // Generate basic scaffolding...
 php artisan ui bootstrap
@@ -42,4 +57,63 @@ php artisan ui react --auth
 4. Make Request
 ```php 
 $ php artisan make:request DeskStoreRequest
+```
+
+5. Install Vue
+
+- https://laravel-mix.com/docs/6.0/vue
+- 
+```
+$ npm i vue
+$ npm install
+
+$ npm install boostrap
+
+
+(2 times lunch)
+$ npm run watch
+$ npm run watch
+
+
+Install bootstrap
+
+$ npm run watch
+$ npm run watch
+
+Compile
+
+
+https://laravel-mix.com/docs/6.0/vue
+
+```
+
+```
+1) composer create-project --prefer-dist laravel/laravel:^8.5 laravel-api ( курс по laravel api)
+2) помогла статья Manually Setting up Vue without Using laravel/ui
+3) composer require laravel/ui
+4) php artisan ui vue
+5) npm install && npm run dev
+6) paсkage.json -> "laravel-mix": "^6.0.6", -> npm install
+7) npm update vue-loader
+8) npm i vue-loader
+9) пробовать запустить паралельно в терминалах php artisan serve и npm run watch
+10) создать компонент SpaController -> App.vue ( далее по видео) 
+11) web.php -> Route::get('/{any}',[\App\Http\Controllers\SpaController::class, 'index'])->where('any','.*');
+12) тестировать))
+
+    "devDependencies": {
+        "@popperjs/core": "^2.10.2",
+        "axios": "^0.19",
+        "bootstrap": "^5.1.3",
+        "cross-env": "^7.0",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "resolve-url-loader": "^3.1.2",
+        "sass": "^1.32.11",
+        "sass-loader": "^11.0.1",
+        "vue": "^2.6.12",
+        "vue-loader": "^15.9.8",
+        "vue-template-compiler": "^2.6.12",
+        "webpack-cli": "^4.9.2"
+    }
 ```
