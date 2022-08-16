@@ -19,6 +19,13 @@
         </form>
 
 
+        <!-- Error message shower -->
+        <div class="alert alert-danger mt-3" role="alert" v-if="errored">
+             <div>Ошибка загрузки данных!</div>
+             <div>{{ errors[0] }}</div>
+        </div>
+
+
         <!-- Show  Desk List in one row -->
          <div class="row">
              <div class="col-lg-4" v-for="desk in desks">
@@ -28,11 +35,6 @@
                      </router-link>
                      <button type="button" class="btn btn-danger mt-3" @click="deleteDesk(desk.id)">Удалить</button>
                  </div>
-             </div>
-
-             <!-- Error message shower -->
-             <div class="alert alert-danger" role="alert" v-if="errored">
-                  Ошибка загрузки данных!
              </div>
 
              <!-- Preloader -->
@@ -55,6 +57,7 @@ export default {
         return {
             desks: [],
             errored: false,
+            errors: [],
             loading: true,
             name: null
         }
@@ -149,6 +152,12 @@ export default {
             })
             .catch(error => {
                 console.log(error)
+
+                if(error.response.data.errors.name) {
+                    this.errors = []
+                    this.errors.push(error.response.data.errors.name[0])
+                }
+
                 this.errored = true
             })
             .finally(() => {

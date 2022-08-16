@@ -27,4 +27,14 @@ class DeskStoreRequest extends FormRequest
             'name' => 'required|max:255|unique:desks,name'
         ];
     }
+
+
+    // Имя доски уже занято
+    // translate default error message where field is unique.
+    public function messages()
+    {
+        return [
+            'name.unique' => 'Имя доски должно быть уникальное',
+        ];
+    }
 }

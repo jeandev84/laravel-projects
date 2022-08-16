@@ -5354,6 +5354,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       desks: [],
       errored: false,
+      errors: [],
       loading: true,
       name: null
     };
@@ -5427,6 +5428,13 @@ __webpack_require__.r(__webpack_exports__);
         _this3.getAllDesks();
       })["catch"](function (error) {
         console.log(error);
+
+        if (error.response.data.errors.name) {
+          _this3.errors = [];
+
+          _this3.errors.push(error.response.data.errors.name[0]);
+        }
+
         _this3.errored = true;
       })["finally"](function () {
         // Setting after then (success)
@@ -5662,7 +5670,12 @@ var render = function render() {
     attrs: {
       type: "submit"
     }
-  }, [_vm._v("Добавить")])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Добавить")])]), _vm._v(" "), _vm.errored ? _c("div", {
+    staticClass: "alert alert-danger mt-3",
+    attrs: {
+      role: "alert"
+    }
+  }, [_c("div", [_vm._v("Ошибка загрузки данных!")]), _vm._v(" "), _c("div", [_vm._v(_vm._s(_vm.errors[0]))])]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_vm._l(_vm.desks, function (desk) {
     return _c("div", {
@@ -5692,12 +5705,7 @@ var render = function render() {
         }
       }
     }, [_vm._v("Удалить")])], 1)]);
-  }), _vm._v(" "), _vm.errored ? _c("div", {
-    staticClass: "alert alert-danger",
-    attrs: {
-      role: "alert"
-    }
-  }, [_vm._v("\n              Ошибка загрузки данных!\n         ")]) : _vm._e(), _vm._v(" "), _vm.loading ? _c("div", {
+  }), _vm._v(" "), _vm.loading ? _c("div", {
     staticClass: "spinner-border",
     staticStyle: {
       width: "4rem",
