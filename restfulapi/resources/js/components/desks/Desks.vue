@@ -129,7 +129,6 @@ export default {
         },
         addNewDesk() {
 
-            console.log('OK')
             // Заверщаем процесс в случае если возникла ошибка
             this.$v.$touch()
 
@@ -138,7 +137,24 @@ export default {
             }
 
 
+            axios.post('/api/v1/desks/', {
+              name: this.name,
+            })
+            .then(response => {
 
+            })
+            .catch(error => {
+                console.log(error)
+                this.errored = true
+            })
+            .finally(() => {
+
+                // Setting after then (success)
+
+                setTimeout(() => {
+                    this.loading = false
+                }, 300)
+            })
 
         }
     },

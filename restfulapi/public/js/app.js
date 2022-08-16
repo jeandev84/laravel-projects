@@ -5408,13 +5408,26 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     addNewDesk: function addNewDesk() {
-      console.log('OK'); // Заверщаем процесс в случае если возникла ошибка
+      var _this3 = this;
 
+      // Заверщаем процесс в случае если возникла ошибка
       this.$v.$touch();
 
       if (this.$v.$anyError) {
         return;
       }
+
+      axios.post('/api/v1/desks/', {
+        name: this.name
+      }).then(function (response) {})["catch"](function (error) {
+        console.log(error);
+        _this3.errored = true;
+      })["finally"](function () {
+        // Setting after then (success)
+        setTimeout(function () {
+          _this3.loading = false;
+        }, 300);
+      });
     }
   },
   validations: {
