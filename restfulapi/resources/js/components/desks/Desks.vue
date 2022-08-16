@@ -36,12 +36,11 @@
                      <button type="button" class="btn btn-danger mt-3" @click="deleteDesk(desk.id)">Удалить</button>
                  </div>
              </div>
+         </div>
 
-             <!-- Preloader -->
-             <div class="spinner-border" style="width: 4rem; height: 4rem;" role="status" v-if="loading">
-                 <span class="sr-only"></span>
-             </div>
-
+         <!-- Preloader -->
+         <div class="spinner-border" style="width: 4rem; height: 4rem;" role="status" v-if="loading">
+            <span class="sr-only"></span>
          </div>
     </div>
 </template>
@@ -139,8 +138,8 @@ export default {
                 return;
             }
 
-            axios.post('/api/v1/desks/', {
-              name: this.name,
+            axios.post('/api/v1/desks', {
+                name: this.name,
             })
             .then(response => {
 
@@ -152,7 +151,7 @@ export default {
             })
             .catch(error => {
                 console.log(error)
-
+                return;
                 if(error.response.data.errors.name) {
                     this.errors = []
                     this.errors.push(error.response.data.errors.name[0])

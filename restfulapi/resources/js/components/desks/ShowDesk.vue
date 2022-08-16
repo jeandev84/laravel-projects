@@ -6,7 +6,7 @@
         <!-- Input form -->
         <div class="form-group">
 
-            <input type="text" @blur="saveName" v-model="name" class="form-control is-invalid" :class="{ 'is-invalid': $v.name.$error }">
+            <input type="text" @blur="saveName" v-model="name" class="form-control" :class="{ 'is-invalid': $v.name.$error }">
 
             <!-- Message validation ( show next message if name empty ) -->
             <div class="invalid-feedback" v-if="!$v.name.required">
@@ -17,6 +17,16 @@
             </div>
         </div>
 
+        <!-- Show  DeskList in one row -->
+        <div class="row">
+            <div class="col-lg-4" v-for="desk_list in desk_lists">
+                <div class="card mt-3">
+                    <a href="#" class="card-body">
+                        <h4 class="card-title">{{ desk_list.name }}</h4>
+                    </a>
+                </div>
+            </div>
+        </div>
 
         <!-- Error message shower -->
         <div class="alert alert-danger" role="alert" v-if="errored">
@@ -42,11 +52,36 @@ export default {
         return {
             name: null, // desk name
             errored: false,
-            loading: true
+            loading: true,
+            desk_lists: true
         }
     },
     methods: {
 
+        getDeskLists() {
+
+            axios.get('/api/v1/desk-lists', {
+               params: {
+                   desk_id: this.deskId
+               }
+            })
+            .then(response => {
+
+                this.desk_lists = response.data.data
+            })
+            .catch(error => {
+                console.log(error)
+                this.errored = true
+            })
+            .finally(() => {
+
+                // Setting after then (success)
+
+                setTimeout(() => {
+                    this.loading = false
+                }, 300)
+            })
+        },
         saveName() {
 
             // Заверщаем процесс в случае если возникла ошибка
@@ -73,12 +108,13 @@ export default {
                     setTimeout(() => {
                         this.loading = false
                     }, 300)
-                })
+            })
 
         }
     },
     mounted() {
 
+        // Show Desk
         axios.get('/api/v1/desks/' + this.deskId)
             .then(response => {
 
@@ -104,6 +140,9 @@ export default {
                 }, 300)
             })
 
+
+           // Show desks list
+           this.getDeskLists();
     },
     validations: {
         name: {
