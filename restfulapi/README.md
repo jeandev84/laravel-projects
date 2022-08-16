@@ -61,7 +61,7 @@ php artisan ui react --auth
 $ php artisan make:request DeskStoreRequest
 ```
 
-5. Install Vue
+5. Install Vue 
 
 - https://laravel-mix.com/docs/6.0/vue
 - 
@@ -115,7 +115,31 @@ https://laravel-mix.com/docs/6.0/vue
         "sass-loader": "^11.0.1",
         "vue": "^2.6.12",
         "vue-loader": "^15.9.8",
+        "vue-router": "^3.2.0",
         "vue-template-compiler": "^2.6.12",
         "webpack-cli": "^4.9.2"
     }
+```
+
+5. Install Vue Router
+```php 
+$ npm i vue-router
+
+"devDependencies": {
+    "@popperjs/core": "^2.10.2",
+    "axios": "^0.19",
+    "bootstrap": "^5.1.3",
+    "cross-env": "^7.0",
+    "laravel-mix": "^6.0.6",
+    "lodash": "^4.17.19",
+    "resolve-url-loader": "^3.1.2",
+    "sass": "^1.32.11",
+    "sass-loader": "^11.0.1",
+    "vue": "^2.6.12",
+    "vue-loader": "^15.9.8",
+    "vue-router": "^3.2.0",
+    "vue-template-compiler": "^2.6.12",
+    "webpack-cli": "^4.9.2"
+}
+    
 ```

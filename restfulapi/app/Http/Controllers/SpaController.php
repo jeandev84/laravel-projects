@@ -14,6 +14,6 @@ class SpaController extends Controller
 {
       public function index()
       {
-           return view('spa.index');
+           return view('index');
       }
 }
