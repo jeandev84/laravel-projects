@@ -50,6 +50,7 @@ export default {
                 }
             })
             .then(res => {
+
                if (res.data.status) {
                    // redirect to the same page
                    this.$router.push('/post/' + res.data.post.id)

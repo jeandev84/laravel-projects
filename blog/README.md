@@ -82,3 +82,7 @@ $ php artisan route:list
 ```php 
 $ npm i vue-axios
 ```
+
+
+Source template :
+- https://getuikit.com/docs/cover
