@@ -39,8 +39,10 @@ Vue.use(VueRouter)
 
 import App from './components/App'
 import Home from './components/Home'
-import About from './components/About'
+import Desks from "./components/desks/Desks";
 
+
+/** router */
 const router = new VueRouter({
     'mode': 'history',
     routes: [
@@ -50,10 +52,10 @@ const router = new VueRouter({
             component: Home
         },
         {
-            path: '/about',
-            name: 'about',
-            component: About
-        },
+            path: '/desks',
+            name: 'desks',
+            component: Desks
+        }
     ]
 })
 
