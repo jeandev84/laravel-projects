@@ -38,8 +38,11 @@
             <div class="col-lg-4" v-for="desk_list in desk_lists">
                 <div class="card mt-3">
                     <div class="card-body">
-                        <form v-if="desk_list_input_id == desk_list.id">
+                        <form @submit.prevent="updateDeskList(desk_list.id, desk_list.name)" v-if="desk_list_input_id == desk_list.id" class="d-flex justify-content-between align-items-center">
                             <input type="text" v-model="desk_list.name" class="form-control" placeholder="Введите название списка">
+                            <button type="button" @click="desk_list_input_id = null" class="close" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </form>
                         <h4 v-else class="card-title d-flex justify-content-between align-items-center" style="cursor: pointer;" @click="desk_list_input_id = desk_list.id">
                             {{ desk_list.name }}
@@ -83,6 +86,29 @@ export default {
     },
     methods: {
 
+        updateDeskList(id, name) {
+
+               axios.post('/api/v1/desk-lists/'+ id, {
+                   _method: 'PUT',
+                   name
+               })
+                .then(response => {
+                    this.desk_list_input_id = null
+                    // this.desk_lists = response.data.data
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.errored = true
+                })
+                .finally(() => {
+
+                    // Setting after then (success)
+
+                    setTimeout(() => {
+                        this.loading = false
+                    }, 300)
+                })
+        },
         getDeskLists() {
 
             axios.get('/api/v1/desk-lists', {

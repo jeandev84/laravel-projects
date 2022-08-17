@@ -166,6 +166,8 @@ $ php artisan make:controller Api/V1/DeskListController --resource --api
 
 $ php artisan make:request DeskListStoreRequest
 
+$ php artisan make:request DeskListUpdateRequest 
+
 ```
 
 
