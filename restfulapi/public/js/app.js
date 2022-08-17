@@ -5985,7 +5985,7 @@ var render = function render() {
         "font-size": "15px",
         cursor: "pointer"
       }
-    })])]), _vm._v(" "), _c("button", {
+    })]), _vm._v(" "), _c("button", {
       staticClass: "btn btn-danger mt-3",
       attrs: {
         type: "button"
@@ -5995,7 +5995,26 @@ var render = function render() {
           return _vm.deleteDeskList(desk_list.id);
         }
       }
-    }, [_vm._v("Удалить")])])]);
+    }, [_vm._v("Удалить список")]), _vm._v(" "), _c("div", {
+      staticClass: "card mt-3 bg-light"
+    }, [_c("div", {
+      staticClass: "card-body"
+    }, [_c("h4", {
+      staticClass: "card-title d-flex justify-content-between align-items-center",
+      staticStyle: {
+        cursor: "pointer"
+      },
+      on: {
+        click: function click($event) {
+          _vm.desk_list_input_id = desk_list.id;
+        }
+      }
+    }, [_vm._v("\n                                " + _vm._s(desk_list.name) + "\n                            ")]), _vm._v(" "), _c("button", {
+      staticClass: "btn btn-secondary mt-3",
+      attrs: {
+        type: "button"
+      }
+    }, [_vm._v("Удалить")])])]), _vm._v(" "), _vm._m(0, true)])])]);
   }), 0), _vm._v(" "), _vm.errored ? _c("div", {
     staticClass: "alert alert-danger",
     attrs: {
@@ -6015,7 +6034,20 @@ var render = function render() {
   })]) : _vm._e()]);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("form", {
+    staticClass: "d-flex justify-content-between align-items-center mt-3"
+  }, [_c("input", {
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Введите название карточки"
+    }
+  })]);
+}];
 render._withStripped = true;
 
 

@@ -48,8 +48,19 @@
                             {{ desk_list.name }}
                             <i class="fas fa-pencil-alt" style="font-size: 15px; cursor: pointer;"></i>
                         </h4>
+                        <button type="button" class="btn btn-danger mt-3" @click="deleteDeskList(desk_list.id)">Удалить список</button>
+                        <div class="card mt-3 bg-light">
+                            <div class="card-body">
+                                <h4 class="card-title d-flex justify-content-between align-items-center" style="cursor: pointer;" @click="desk_list_input_id = desk_list.id">
+                                    {{ desk_list.name }}
+                                </h4>
+                                <button type="button" class="btn btn-secondary mt-3">Удалить</button>
+                            </div>
+                        </div>
+                        <form class="d-flex justify-content-between align-items-center mt-3">
+                            <input type="text" class="form-control" placeholder="Введите название карточки">
+                        </form>
                     </div>
-                    <button type="button" class="btn btn-danger mt-3" @click="deleteDeskList(desk_list.id)">Удалить</button>
                 </div>
             </div>
         </div>
