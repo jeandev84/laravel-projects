@@ -135,8 +135,8 @@ export default {
         saveName() {
 
             // Заверщаем процесс в случае если возникла ошибка
-            this.$v.$touch()
-            if(this.$v.$anyError) {
+            this.$v.name.$touch()
+            if(this.$v.name.$anyError) {
                 return;
             }
 

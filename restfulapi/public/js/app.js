@@ -5522,9 +5522,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       // Заверщаем процесс в случае если возникла ошибка
-      this.$v.$touch();
+      this.$v.name.$touch();
 
-      if (this.$v.$anyError) {
+      if (this.$v.name.$anyError) {
         return;
       }
 
