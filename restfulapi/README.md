@@ -163,6 +163,9 @@ $ php artisan db:seed
 8. Create Resource Controller "Api/V1/DeskListController"
 ```php 
 $ php artisan make:controller Api/V1/DeskListController --resource --api
+
+$ php artisan make:request DeskListStoreRequest
+
 ```
 
 

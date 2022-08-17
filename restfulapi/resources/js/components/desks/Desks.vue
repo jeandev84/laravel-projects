@@ -139,7 +139,7 @@ export default {
             }
 
             axios.post('/api/v1/desks', {
-                name: this.name
+                name: this.name,
             })
             .then(response => {
 

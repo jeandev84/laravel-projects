@@ -18,7 +18,7 @@
         </div>
 
         <!-- Add desk -->
-        <form @submit.prevent="" class="mt-3">
+        <form @submit.prevent="addNewDeskList" class="mt-3">
             <div class="form-group">
                 <input type="text" v-model="desk_list_name" class="form-control" :class="{ 'is-invalid': $v.desk_list_name.$error }" placeholder="Введите название списка">
 
@@ -40,6 +40,7 @@
                     <a href="#" class="card-body">
                         <h4 class="card-title">{{ desk_list.name }}</h4>
                     </a>
+                    <button type="button" class="btn btn-danger mt-3" @click="deleteDeskList(desk_list.id)">Удалить</button>
                 </div>
             </div>
         </div>
@@ -83,7 +84,6 @@ export default {
                }
             })
             .then(response => {
-
                 this.desk_lists = response.data.data
             })
             .catch(error => {
@@ -127,6 +127,72 @@ export default {
                     }, 300)
             })
 
+        },
+        addNewDeskList() {
+
+            // Заверщаем процесс в случае если возникла ошибка
+            this.$v.$touch()
+
+            if(this.$v.$anyError) {
+                return;
+            }
+
+               axios.post('/api/v1/desk-lists', {
+                  name: this.desk_list_name,
+                  desk_id: this.deskId
+               })
+                .then(response => {
+
+                    // refresh data and stay in the same page
+                    this.desk_list_name = ''
+                    this.desk_lists = []
+                    this.getDeskLists()
+
+                })
+                .catch(error => {
+
+                    console.log(error)
+                    this.errored = true
+                })
+                .finally(() => {
+
+                    // Setting after then (success)
+
+                    setTimeout(() => {
+                        this.loading = false
+                    }, 300)
+                })
+
+        },
+        deleteDeskList(id) {
+
+                axios.post('/api/v1/desk-lists/' + id, {
+                   _method: 'DELETE'
+                })
+                .then(response => {
+
+                    // Get response data
+                    // console.log(response)
+                    // console.log(response.data)
+
+                    this.desk_lists = []
+                    this.getDeskLists()
+                })
+                .catch(error => {
+
+                    // Setting when we have error from server
+
+                    console.log(error)
+                    this.errored = true
+                })
+                .finally(() => {
+
+                    // Setting after then (success)
+
+                    setTimeout(() => {
+                        this.loading = false
+                    }, 300)
+                })
         }
     },
     mounted() {

@@ -5521,25 +5521,77 @@ __webpack_require__.r(__webpack_exports__);
           _this2.loading = false;
         }, 300);
       });
+    },
+    addNewDeskList: function addNewDeskList() {
+      var _this3 = this;
+
+      // Заверщаем процесс в случае если возникла ошибка
+      this.$v.$touch();
+
+      if (this.$v.$anyError) {
+        return;
+      }
+
+      axios.post('/api/v1/desk-lists', {
+        name: this.desk_list_name,
+        desk_id: this.deskId
+      }).then(function (response) {
+        // refresh data and stay in the same page
+        _this3.desk_list_name = '';
+        _this3.desk_lists = [];
+
+        _this3.getDeskLists();
+      })["catch"](function (error) {
+        console.log(error);
+        _this3.errored = true;
+      })["finally"](function () {
+        // Setting after then (success)
+        setTimeout(function () {
+          _this3.loading = false;
+        }, 300);
+      });
+    },
+    deleteDeskList: function deleteDeskList(id) {
+      var _this4 = this;
+
+      axios.post('/api/v1/desk-lists/' + id, {
+        _method: 'DELETE'
+      }).then(function (response) {
+        // Get response data
+        // console.log(response)
+        // console.log(response.data)
+        _this4.desk_lists = [];
+
+        _this4.getDeskLists();
+      })["catch"](function (error) {
+        // Setting when we have error from server
+        console.log(error);
+        _this4.errored = true;
+      })["finally"](function () {
+        // Setting after then (success)
+        setTimeout(function () {
+          _this4.loading = false;
+        }, 300);
+      });
     }
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this5 = this;
 
     // Show Desk
     axios.get('/api/v1/desks/' + this.deskId).then(function (response) {
       // Get response data
       // console.log(response)
       // console.log(response.data)
-      _this3.name = response.data.data.name;
+      _this5.name = response.data.data.name;
     })["catch"](function (error) {
       // Setting when we have error from server
       console.log(error);
-      _this3.errored = true;
+      _this5.errored = true;
     })["finally"](function () {
       // Setting after then (success)
       setTimeout(function () {
-        _this3.loading = false;
+        _this5.loading = false;
       }, 300);
     }); // Show desks list
 
@@ -5806,6 +5858,7 @@ var render = function render() {
     on: {
       submit: function submit($event) {
         $event.preventDefault();
+        return _vm.addNewDeskList.apply(null, arguments);
       }
     }
   }, [_c("div", {
@@ -5857,7 +5910,17 @@ var render = function render() {
       }
     }, [_c("h4", {
       staticClass: "card-title"
-    }, [_vm._v(_vm._s(desk_list.name))])])])]);
+    }, [_vm._v(_vm._s(desk_list.name))])]), _vm._v(" "), _c("button", {
+      staticClass: "btn btn-danger mt-3",
+      attrs: {
+        type: "button"
+      },
+      on: {
+        click: function click($event) {
+          return _vm.deleteDeskList(desk_list.id);
+        }
+      }
+    }, [_vm._v("Удалить")])])]);
   }), 0), _vm._v(" "), _vm.errored ? _c("div", {
     staticClass: "alert alert-danger",
     attrs: {
