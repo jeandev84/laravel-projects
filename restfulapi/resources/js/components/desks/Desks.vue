@@ -139,7 +139,7 @@ export default {
             }
 
             axios.post('/api/v1/desks', {
-                name: this.name,
+                name: this.name
             })
             .then(response => {
 
@@ -150,8 +150,9 @@ export default {
 
             })
             .catch(error => {
+
                 console.log(error)
-                return;
+
                 if(error.response.data.errors.name) {
                     this.errors = []
                     this.errors.push(error.response.data.errors.name[0])

@@ -5428,7 +5428,6 @@ __webpack_require__.r(__webpack_exports__);
         _this3.getAllDesks();
       })["catch"](function (error) {
         console.log(error);
-        return;
 
         if (error.response.data.errors.name) {
           _this3.errors = [];
@@ -5474,6 +5473,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       name: null,
       // desk name
+      desk_list_name: null,
       errored: false,
       loading: true,
       desk_lists: true
@@ -5547,6 +5547,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   validations: {
     name: {
+      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__.required,
+      maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__.maxLength)(255)
+    },
+    desk_list_name: {
       required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__.required,
       maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__.maxLength)(255)
     }
@@ -5797,7 +5801,49 @@ var render = function render() {
     staticClass: "invalid-feedback"
   }, [_vm._v("\n            Обязательное поле.\n        ")]) : _vm._e(), _vm._v(" "), !_vm.$v.name.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v("\n            Макс. количество символов: " + _vm._s(_vm.$v.name.$params.maxLength.max) + " .\n        ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n            Макс. количество символов: " + _vm._s(_vm.$v.name.$params.maxLength.max) + " .\n        ")]) : _vm._e()]), _vm._v(" "), _c("form", {
+    staticClass: "mt-3",
+    on: {
+      submit: function submit($event) {
+        $event.preventDefault();
+      }
+    }
+  }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.desk_list_name,
+      expression: "desk_list_name"
+    }],
+    staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.$v.desk_list_name.$error
+    },
+    attrs: {
+      type: "text",
+      placeholder: "Введите название списка"
+    },
+    domProps: {
+      value: _vm.desk_list_name
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.desk_list_name = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), !_vm.$v.desk_list_name.required ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("\n                Обязательное поле.\n            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.desk_list_name.maxLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("\n                Макс. количество символов: " + _vm._s(_vm.$v.desk_list_name.$params.maxLength.max) + " .\n            ")]) : _vm._e()]), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-primary mt-3",
+    attrs: {
+      type: "submit"
+    }
+  }, [_vm._v("Добавить список")])]), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, _vm._l(_vm.desk_lists, function (desk_list) {
     return _c("div", {

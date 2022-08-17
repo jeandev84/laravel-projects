@@ -17,6 +17,22 @@
             </div>
         </div>
 
+        <!-- Add desk -->
+        <form @submit.prevent="" class="mt-3">
+            <div class="form-group">
+                <input type="text" v-model="desk_list_name" class="form-control" :class="{ 'is-invalid': $v.desk_list_name.$error }" placeholder="Введите название списка">
+
+                <div class="invalid-feedback" v-if="!$v.desk_list_name.required">
+                    Обязательное поле.
+                </div>
+                <div class="invalid-feedback" v-if="!$v.desk_list_name.maxLength">
+                    Макс. количество символов: {{$v.desk_list_name.$params.maxLength.max}} .
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Добавить список</button>
+        </form>
+
+
         <!-- Show  DeskList in one row -->
         <div class="row">
             <div class="col-lg-4" v-for="desk_list in desk_lists">
@@ -51,6 +67,7 @@ export default {
     data() {
         return {
             name: null, // desk name
+            desk_list_name: null,
             errored: false,
             loading: true,
             desk_lists: true
@@ -148,6 +165,10 @@ export default {
         name: {
            required,
            maxLength: maxLength(255)
+        },
+        desk_list_name: {
+            required,
+            maxLength: maxLength(255)
         }
     }
 }
