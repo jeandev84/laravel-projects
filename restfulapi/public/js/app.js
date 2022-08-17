@@ -5476,7 +5476,8 @@ __webpack_require__.r(__webpack_exports__);
       desk_list_name: null,
       errored: false,
       loading: true,
-      desk_lists: true
+      desk_lists: true,
+      desk_list_input_id: null
     };
   },
   methods: {
@@ -5903,14 +5904,47 @@ var render = function render() {
       staticClass: "col-lg-4"
     }, [_c("div", {
       staticClass: "card mt-3"
-    }, [_c("a", {
-      staticClass: "card-body",
-      attrs: {
-        href: "#"
-      }
+    }, [_c("div", {
+      staticClass: "card-body"
     }, [_c("h4", {
-      staticClass: "card-title"
-    }, [_vm._v(_vm._s(desk_list.name))])]), _vm._v(" "), _c("button", {
+      staticClass: "card-title d-flex justify-content-between align-items-center",
+      staticStyle: {
+        cursor: "pointer"
+      },
+      on: {
+        click: function click($event) {
+          _vm.desk_list_input_id = desk_list.id;
+        }
+      }
+    }, [_vm._v("\n                        " + _vm._s(desk_list.name) + "\n                        "), _c("i", {
+      staticClass: "fas fa-pencil-alt",
+      staticStyle: {
+        "font-size": "15px",
+        cursor: "pointer"
+      }
+    })]), _vm._v(" "), _vm.desk_list_input_id == desk_list.id ? _c("form", [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: desk_list.name,
+        expression: "desk_list.name"
+      }],
+      staticClass: "form-control",
+      attrs: {
+        type: "text",
+        placeholder: "Введите название списка"
+      },
+      domProps: {
+        value: desk_list.name
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+
+          _vm.$set(desk_list, "name", $event.target.value);
+        }
+      }
+    })]) : _vm._e()]), _vm._v(" "), _c("button", {
       staticClass: "btn btn-danger mt-3",
       attrs: {
         type: "button"
