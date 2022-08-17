@@ -5906,23 +5906,7 @@ var render = function render() {
       staticClass: "card mt-3"
     }, [_c("div", {
       staticClass: "card-body"
-    }, [_c("h4", {
-      staticClass: "card-title d-flex justify-content-between align-items-center",
-      staticStyle: {
-        cursor: "pointer"
-      },
-      on: {
-        click: function click($event) {
-          _vm.desk_list_input_id = desk_list.id;
-        }
-      }
-    }, [_vm._v("\n                        " + _vm._s(desk_list.name) + "\n                        "), _c("i", {
-      staticClass: "fas fa-pencil-alt",
-      staticStyle: {
-        "font-size": "15px",
-        cursor: "pointer"
-      }
-    })]), _vm._v(" "), _vm.desk_list_input_id == desk_list.id ? _c("form", [_c("input", {
+    }, [_vm.desk_list_input_id == desk_list.id ? _c("form", [_c("input", {
       directives: [{
         name: "model",
         rawName: "v-model",
@@ -5944,7 +5928,23 @@ var render = function render() {
           _vm.$set(desk_list, "name", $event.target.value);
         }
       }
-    })]) : _vm._e()]), _vm._v(" "), _c("button", {
+    })]) : _c("h4", {
+      staticClass: "card-title d-flex justify-content-between align-items-center",
+      staticStyle: {
+        cursor: "pointer"
+      },
+      on: {
+        click: function click($event) {
+          _vm.desk_list_input_id = desk_list.id;
+        }
+      }
+    }, [_vm._v("\n                        " + _vm._s(desk_list.name) + "\n                        "), _c("i", {
+      staticClass: "fas fa-pencil-alt",
+      staticStyle: {
+        "font-size": "15px",
+        cursor: "pointer"
+      }
+    })])]), _vm._v(" "), _c("button", {
       staticClass: "btn btn-danger mt-3",
       attrs: {
         type: "button"

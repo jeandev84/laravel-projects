@@ -38,13 +38,13 @@
             <div class="col-lg-4" v-for="desk_list in desk_lists">
                 <div class="card mt-3">
                     <div class="card-body">
-                        <h4 class="card-title d-flex justify-content-between align-items-center" style="cursor: pointer;" @click="desk_list_input_id = desk_list.id">
-                            {{ desk_list.name }}
-                            <i class="fas fa-pencil-alt" style="font-size: 15px; cursor: pointer;"></i>
-                        </h4>
                         <form v-if="desk_list_input_id == desk_list.id">
                             <input type="text" v-model="desk_list.name" class="form-control" placeholder="Введите название списка">
                         </form>
+                        <h4 v-else class="card-title d-flex justify-content-between align-items-center" style="cursor: pointer;" @click="desk_list_input_id = desk_list.id">
+                            {{ desk_list.name }}
+                            <i class="fas fa-pencil-alt" style="font-size: 15px; cursor: pointer;"></i>
+                        </h4>
                     </div>
                     <button type="button" class="btn btn-danger mt-3" @click="deleteDeskList(desk_list.id)">Удалить</button>
                 </div>
