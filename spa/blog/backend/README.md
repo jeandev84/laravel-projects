@@ -1,64 +1,200 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+### SPA (Single Page Application)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+- https://laravel.com/docs/8.x
+- https://laravel.com/docs/8.x/sanctum
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. Configuration Database environment (.env)
+```php 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=spa_blog
+DB_USERNAME=postgres
+DB_PASSWORD=123456
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```
 
-## Learning Laravel
+2. Add routes (./routes/api.php)
+```php 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+Route::group(['prefix' => 'v1', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('posts', [PostController::class, 'index']);
+});
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('login', [LoginController::class, 'index']);
+    Route::delete('logout', [LogoutController::class, 'index']);
+});
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2. List routes 
+```php 
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+$ php artisan route:list
 
-## License
++--------+----------+---------------------+------+------------------------------------------------------------+------------------------------------------+
+| Domain | Method   | URI                 | Name | Action                                                     | Middleware                               |
++--------+----------+---------------------+------+------------------------------------------------------------+------------------------------------------+
+|        | GET|HEAD | /                   |      | Closure                                                    | web                                      |
+|        | POST     | api/auth/login      |      | App\Http\Controllers\Auth\LoginController@index            | api                                      |
+|        | DELETE   | api/auth/logout     |      | App\Http\Controllers\Auth\LogoutController@index           | api                                      |
+|        | GET|HEAD | api/user            |      | Closure                                                    | api                                      |
+|        |          |                     |      |                                                            | App\Http\Middleware\Authenticate:sanctum |
+|        | GET|HEAD | api/v1/posts        |      | App\Http\Controllers\Api\V1\PostController@index           | api                                      |
+|        | GET|HEAD | sanctum/csrf-cookie |      | Laravel\Sanctum\Http\Controllers\CsrfCookieController@show | web                                      |
++--------+----------+---------------------+------+------------------------------------------------------------+------------------------------------------+
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+``` 
+
+3. Install Laravel Sanctum (Authentification CSRF-COOKIE) 
+```php 
+
+$ composer require laravel/sanctum:*
+$ php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+$ php artisan migrate
+
+and then :
+
+app/Http/Kernel.php file:
+
+'api' => [
+    \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+    'throttle:api',
+    \Illuminate\Routing\Middleware\SubstituteBindings::class,
+],
+
+
+```
+
+
+4. Configuration Sanctum from (./config/sanctum.php)
+
+```php 
+
+|--------------------------------------------------------------------------
+| Stateful Domains
+|--------------------------------------------------------------------------
+|
+| Requests from the following domains / hosts will receive stateful API
+| authentication cookies. Typically, these should include your local
+| and production domains which access your API via a frontend SPA.
+|
+*/
+
+'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
+    '%s%s',
+    'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
+    env('APP_URL') ? ','.parse_url(env('APP_URL'), PHP_URL_HOST) : ''
+))),
+
+=====================================================
+Configuration Global variables (.env) add this:
+
+SANCTUM_STATEFUL_DOMAINS=localhost,localhost:8000
+
+OR in real server
+SANCTUM_STATEFUL_DOMAINS=https://mydomain
+
+====================================================
+Make sure has this configuration in ./config/session.php 
+
+/*
+|--------------------------------------------------------------------------
+| Default Session Driver
+|--------------------------------------------------------------------------
+|
+| This option controls the default session "driver" that will be used on
+| requests. By default, we will use the lightweight native driver but
+| you may specify any of the other wonderful drivers provided here.
+|
+| Supported: "file", "cookie", "database", "apc",
+|            "memcached", "redis", "dynamodb", "array"
+|
+*/
+
+'driver' => env('SESSION_DRIVER', 'file'),
+
+Make sure has this configuration variables (.env) or add this configuration :
+
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+SESSION_DOMAIN=localhost
+
+
+```
+
+4. Configuration CORS (./config/cors.php)
+
+```php 
+
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cross-Origin Resource Sharing (CORS) Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure your settings for cross-origin resource sharing
+    | or "CORS". This determines what cross-origin operations may execute
+    | in web browsers. You are free to adjust these settings as needed.
+    |
+    | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    |
+    */
+
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+
+    'allowed_methods' => ['*'],
+
+    'allowed_origins' => ['*'],
+
+    'allowed_origins_patterns' => [],
+
+    'allowed_headers' => ['*'],
+
+    'exposed_headers' => [],
+
+    'max_age' => 0,
+
+    'supports_credentials' => true, // false
+
+];
+
+just set 'supports_credentials' => true
+
+```
+
+5. Create a user via tinker :
+```php 
+
+Psy Shell v0.11.8 (PHP 8.0.20 — cli) by Justin Hileman
+>>> use App\Models\User;
+>>> User::factory()->create(['email' => 'test@email.com']);
+=> App\Models\User {#3581
+     name: "Bryce Kiehn III",
+     email: "test@email.com",
+     email_verified_at: "2022-08-18 11:05:16",
+     #password: "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+     #remember_token: "KxJXqSw0E3",
+     updated_at: "2022-08-18 11:05:16",
+     created_at: "2022-08-18 11:05:16",
+     id: 1,
+:
+
+
+```
