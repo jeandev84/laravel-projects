@@ -5428,12 +5428,12 @@ __webpack_require__.r(__webpack_exports__);
         _this3.getAllDesks();
       })["catch"](function (error) {
         console.log(error);
-
-        if (error.response.data.errors.name) {
-          _this3.errors = [];
-
-          _this3.errors.push(error.response.data.errors.name[0]);
+        /*
+        if(error.response.data.errors.name) {
+            this.errors = []
+            this.errors.push(error.response.data.errors.name[0])
         }
+        */
 
         _this3.errored = true;
       })["finally"](function () {
@@ -5477,18 +5477,25 @@ __webpack_require__.r(__webpack_exports__);
       errored: false,
       loading: true,
       desk_lists: true,
-      desk_list_input_id: null
+      desk_list_input_id: null,
+      card_names: []
     };
   },
   methods: {
-    updateDeskList: function updateDeskList(id, name) {
+    addNewCard: function addNewCard(desk_list_id) {
       var _this = this;
 
-      axios.post('/api/v1/desk-lists/' + id, {
-        _method: 'PUT',
-        name: name
+      this.$v.card_names.$each[desk_list_id].$touch();
+
+      if (this.$v.card_names.$each[desk_list_id].$anyError) {
+        return;
+      }
+
+      axios.post('/api/v1/cards', {
+        name: this.card_names[desk_list_id],
+        desk_list_id: desk_list_id
       }).then(function (response) {
-        _this.desk_list_input_id = null; // this.desk_lists = response.data.data
+        _this.getDeskLists();
       })["catch"](function (error) {
         console.log(error);
         _this.errored = true;
@@ -5499,15 +5506,14 @@ __webpack_require__.r(__webpack_exports__);
         }, 300);
       });
     },
-    getDeskLists: function getDeskLists() {
+    updateDeskList: function updateDeskList(id, name) {
       var _this2 = this;
 
-      axios.get('/api/v1/desk-lists', {
-        params: {
-          desk_id: this.deskId
-        }
+      axios.post('/api/v1/desk-lists/' + id, {
+        _method: 'PUT',
+        name: name
       }).then(function (response) {
-        _this2.desk_lists = response.data.data;
+        _this2.desk_list_input_id = null; // this.desk_lists = response.data.data
       })["catch"](function (error) {
         console.log(error);
         _this2.errored = true;
@@ -5518,8 +5524,31 @@ __webpack_require__.r(__webpack_exports__);
         }, 300);
       });
     },
-    saveName: function saveName() {
+    getDeskLists: function getDeskLists() {
       var _this3 = this;
+
+      axios.get('/api/v1/desk-lists', {
+        params: {
+          desk_id: this.deskId
+        }
+      }).then(function (response) {
+        _this3.desk_lists = response.data.data;
+
+        _this3.desk_lists.forEach(function (el) {
+          _this3.card_names[el.id] = '';
+        });
+      })["catch"](function (error) {
+        console.log(error);
+        _this3.errored = true;
+      })["finally"](function () {
+        // Setting after then (success)
+        setTimeout(function () {
+          _this3.loading = false;
+        }, 300);
+      });
+    },
+    saveName: function saveName() {
+      var _this4 = this;
 
       // Заверщаем процесс в случае если возникла ошибка
       this.$v.name.$touch();
@@ -5533,16 +5562,16 @@ __webpack_require__.r(__webpack_exports__);
         name: this.name
       }).then(function (response) {})["catch"](function (error) {
         console.log(error);
-        _this3.errored = true;
+        _this4.errored = true;
       })["finally"](function () {
         // Setting after then (success)
         setTimeout(function () {
-          _this3.loading = false;
+          _this4.loading = false;
         }, 300);
       });
     },
     addNewDeskList: function addNewDeskList() {
-      var _this4 = this;
+      var _this5 = this;
 
       // Заверщаем процесс в случае если возникла ошибка
       this.$v.$touch();
@@ -5556,34 +5585,11 @@ __webpack_require__.r(__webpack_exports__);
         desk_id: this.deskId
       }).then(function (response) {
         // refresh data and stay in the same page
-        _this4.desk_list_name = '';
-        _this4.desk_lists = [];
-
-        _this4.getDeskLists();
-      })["catch"](function (error) {
-        console.log(error);
-        _this4.errored = true;
-      })["finally"](function () {
-        // Setting after then (success)
-        setTimeout(function () {
-          _this4.loading = false;
-        }, 300);
-      });
-    },
-    deleteDeskList: function deleteDeskList(id) {
-      var _this5 = this;
-
-      axios.post('/api/v1/desk-lists/' + id, {
-        _method: 'DELETE'
-      }).then(function (response) {
-        // Get response data
-        // console.log(response)
-        // console.log(response.data)
+        _this5.desk_list_name = '';
         _this5.desk_lists = [];
 
         _this5.getDeskLists();
       })["catch"](function (error) {
-        // Setting when we have error from server
         console.log(error);
         _this5.errored = true;
       })["finally"](function () {
@@ -5592,25 +5598,48 @@ __webpack_require__.r(__webpack_exports__);
           _this5.loading = false;
         }, 300);
       });
+    },
+    deleteDeskList: function deleteDeskList(id) {
+      var _this6 = this;
+
+      axios.post('/api/v1/desk-lists/' + id, {
+        _method: 'DELETE'
+      }).then(function (response) {
+        // Get response data
+        // console.log(response)
+        // console.log(response.data)
+        _this6.desk_lists = [];
+
+        _this6.getDeskLists();
+      })["catch"](function (error) {
+        // Setting when we have error from server
+        console.log(error);
+        _this6.errored = true;
+      })["finally"](function () {
+        // Setting after then (success)
+        setTimeout(function () {
+          _this6.loading = false;
+        }, 300);
+      });
     }
   },
   mounted: function mounted() {
-    var _this6 = this;
+    var _this7 = this;
 
     // Show Desk
     axios.get('/api/v1/desks/' + this.deskId).then(function (response) {
       // Get response data
       // console.log(response)
       // console.log(response.data)
-      _this6.name = response.data.data.name;
+      _this7.name = response.data.data.name;
     })["catch"](function (error) {
       // Setting when we have error from server
       console.log(error);
-      _this6.errored = true;
+      _this7.errored = true;
     })["finally"](function () {
       // Setting after then (success)
       setTimeout(function () {
-        _this6.loading = false;
+        _this7.loading = false;
       }, 300);
     }); // Show desks list
 
@@ -5624,6 +5653,12 @@ __webpack_require__.r(__webpack_exports__);
     desk_list_name: {
       required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__.required,
       maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__.maxLength)(255)
+    },
+    card_names: {
+      $each: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__.required,
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__.maxLength)(255)
+      }
     }
   }
 });
@@ -5915,7 +5950,12 @@ var render = function render() {
     attrs: {
       type: "submit"
     }
-  }, [_vm._v("Добавить список")])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Добавить список")])]), _vm._v(" "), _vm.errored ? _c("div", {
+    staticClass: "alert alert-danger",
+    attrs: {
+      role: "alert"
+    }
+  }, [_vm._v("\n        Ошибка загрузки данных!\n    ")]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, _vm._l(_vm.desk_lists, function (desk_list) {
     return _c("div", {
@@ -5995,32 +6035,67 @@ var render = function render() {
           return _vm.deleteDeskList(desk_list.id);
         }
       }
-    }, [_vm._v("Удалить список")]), _vm._v(" "), _c("div", {
-      staticClass: "card mt-3 bg-light"
-    }, [_c("div", {
-      staticClass: "card-body"
-    }, [_c("h4", {
-      staticClass: "card-title d-flex justify-content-between align-items-center",
-      staticStyle: {
-        cursor: "pointer"
-      },
+    }, [_vm._v("Удалить список")]), _vm._v(" "), _vm._l(desk_list.cards, function (card) {
+      return _c("div", {
+        key: card.id,
+        staticClass: "card mt-3 bg-light"
+      }, [_c("div", {
+        staticClass: "card-body"
+      }, [_c("h4", {
+        staticClass: "card-title d-flex justify-content-between align-items-center",
+        staticStyle: {
+          cursor: "pointer"
+        },
+        on: {
+          click: function click($event) {
+            _vm.desk_list_input_id = desk_list.id;
+          }
+        }
+      }, [_vm._v("\n                                " + _vm._s(card.name) + "\n                            ")]), _vm._v(" "), _c("button", {
+        staticClass: "btn btn-secondary mt-3",
+        attrs: {
+          type: "button"
+        }
+      }, [_vm._v("Удалить")])])]);
+    }), _vm._v(" "), _c("form", {
+      staticClass: "mt-3",
       on: {
-        click: function click($event) {
-          _vm.desk_list_input_id = desk_list.id;
+        submit: function submit($event) {
+          $event.preventDefault();
+          return _vm.addNewCard(desk_list.id);
         }
       }
-    }, [_vm._v("\n                                " + _vm._s(desk_list.name) + "\n                            ")]), _vm._v(" "), _c("button", {
-      staticClass: "btn btn-secondary mt-3",
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.card_names[desk_list.id],
+        expression: "card_names[desk_list.id]"
+      }],
+      staticClass: "form-control",
+      "class": {
+        "is-invalid": _vm.$v.card_names.$each[desk_list.id].$error
+      },
       attrs: {
-        type: "button"
+        type: "text",
+        placeholder: "Введите название карточки"
+      },
+      domProps: {
+        value: _vm.card_names[desk_list.id]
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+
+          _vm.$set(_vm.card_names, desk_list.id, $event.target.value);
+        }
       }
-    }, [_vm._v("Удалить")])])]), _vm._v(" "), _vm._m(0, true)])])]);
-  }), 0), _vm._v(" "), _vm.errored ? _c("div", {
-    staticClass: "alert alert-danger",
-    attrs: {
-      role: "alert"
-    }
-  }, [_vm._v("\n        Ошибка загрузки данных!\n    ")]) : _vm._e(), _vm._v(" "), _vm.loading ? _c("div", {
+    }), _vm._v(" "), !_vm.$v.card_names.$each[desk_list.id].required ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v("\n                            Обязательное поле.\n                        ")]) : _vm._e(), _vm._v(" "), !_vm.$v.desk_list_name.maxLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v("\n                            Макс. количество символов: " + _vm._s(_vm.$v.card_names.$each[desk_list.id].$params.maxLength.max) + " .\n                        ")]) : _vm._e()])], 2)])]);
+  }), 0), _vm._v(" "), _vm.loading ? _c("div", {
     staticClass: "spinner-border",
     staticStyle: {
       width: "4rem",
@@ -6034,20 +6109,7 @@ var render = function render() {
   })]) : _vm._e()]);
 };
 
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("form", {
-    staticClass: "d-flex justify-content-between align-items-center mt-3"
-  }, [_c("input", {
-    staticClass: "form-control",
-    attrs: {
-      type: "text",
-      placeholder: "Введите название карточки"
-    }
-  })]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 

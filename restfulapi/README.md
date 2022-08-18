@@ -170,6 +170,24 @@ $ php artisan make:request DeskListUpdateRequest
 
 ```
 
+9. Create CardResource for JSON format | Controller | Request
+```php 
+$ php artisan make:resource CardResource
+
+$ php artisan make:controller Api/V1/CardController --resource --api
+
+$ php artisan make:request CardStoreRequest
+
+$ php artisan make:request CardUpdateRequest
+
+```
+
+10. Vuex Installation
+```php 
+https://vuex.vuejs.org/installation.html
+
+$ npm install vuex@next --save
+```
 
 
 Source: 

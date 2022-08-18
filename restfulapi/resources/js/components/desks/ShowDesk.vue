@@ -33,6 +33,12 @@
         </form>
 
 
+        <!-- Error message shower -->
+        <div class="alert alert-danger" role="alert" v-if="errored">
+            Ошибка загрузки данных!
+        </div>
+
+
         <!-- Show  DeskList in one row -->
         <div class="row">
             <div class="col-lg-4" v-for="desk_list in desk_lists">
@@ -49,25 +55,26 @@
                             <i class="fas fa-pencil-alt" style="font-size: 15px; cursor: pointer;"></i>
                         </h4>
                         <button type="button" class="btn btn-danger mt-3" @click="deleteDeskList(desk_list.id)">Удалить список</button>
-                        <div class="card mt-3 bg-light">
+                        <div class="card mt-3 bg-light" v-for="card in desk_list.cards" :key="card.id">
                             <div class="card-body">
                                 <h4 class="card-title d-flex justify-content-between align-items-center" style="cursor: pointer;" @click="desk_list_input_id = desk_list.id">
-                                    {{ desk_list.name }}
+                                    {{ card.name }}
                                 </h4>
                                 <button type="button" class="btn btn-secondary mt-3">Удалить</button>
                             </div>
                         </div>
-                        <form class="d-flex justify-content-between align-items-center mt-3">
-                            <input type="text" class="form-control" placeholder="Введите название карточки">
+                        <form @submit.prevent="addNewCard(desk_list.id)" class="mt-3">
+                            <input type="text" v-model="card_names[desk_list.id]" class="form-control" :class="{ 'is-invalid': $v.card_names.$each[desk_list.id].$error }" placeholder="Введите название карточки">
+                            <div class="invalid-feedback" v-if="!$v.card_names.$each[desk_list.id].required">
+                                Обязательное поле.
+                            </div>
+                            <div class="invalid-feedback" v-if="!$v.desk_list_name.maxLength">
+                                Макс. количество символов: {{$v.card_names.$each[desk_list.id].$params.maxLength.max}} .
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Error message shower -->
-        <div class="alert alert-danger" role="alert" v-if="errored">
-            Ошибка загрузки данных!
         </div>
 
         <!-- Preloader -->
@@ -92,11 +99,42 @@ export default {
             errored: false,
             loading: true,
             desk_lists: true,
-            desk_list_input_id: null
+            desk_list_input_id: null,
+            card_names: []
         }
     },
     methods: {
 
+        addNewCard(desk_list_id) {
+
+            this.$v.card_names.$each[desk_list_id].$touch()
+
+            if(this.$v.card_names.$each[desk_list_id].$anyError) {
+                return;
+            }
+
+            axios.post('/api/v1/cards', {
+                name: this.card_names[desk_list_id],
+                desk_list_id
+            })
+            .then(response => {
+
+                  this.getDeskLists()
+            })
+            .catch(error => {
+                console.log(error)
+                this.errored = true
+            })
+            .finally(() => {
+
+                // Setting after then (success)
+
+                setTimeout(() => {
+                        this.loading = false
+                }, 300)
+            })
+
+        },
         updateDeskList(id, name) {
 
                axios.post('/api/v1/desk-lists/'+ id, {
@@ -128,7 +166,12 @@ export default {
                }
             })
             .then(response => {
+
                 this.desk_lists = response.data.data
+
+                this.desk_lists.forEach(el => {
+                     this.card_names[el.id] = ''
+                })
             })
             .catch(error => {
                 console.log(error)
@@ -279,6 +322,12 @@ export default {
         desk_list_name: {
             required,
             maxLength: maxLength(255)
+        },
+        card_names: {
+            $each: {
+                required,
+                maxLength: maxLength(255)
+            }
         }
     }
 }

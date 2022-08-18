@@ -25,9 +25,9 @@ class DeskStoreRequest extends FormRequest
     {
         // проверяем на уникальности кроме текущего доски
         // 'name' => 'required|max:255|unique:desks,name,'. $this->desk->id
+        // sprintf('required|max:255|unique:desks,name,%s', $this->desk->id)
         return [
-            // 'name' => 'required|max:255|unique:desks,name'
-            'name' => 'required|max:255|unique:desks,name,'. $this->desk->id
+            'name' => 'required|max:255|unique:desks,name,'.$this->desk->id
         ];
     }
 

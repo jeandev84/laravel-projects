@@ -153,10 +153,12 @@ export default {
 
                 console.log(error)
 
+                /*
                 if(error.response.data.errors.name) {
                     this.errors = []
                     this.errors.push(error.response.data.errors.name[0])
                 }
+                */
 
                 this.errored = true
             })

@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::apiResources([
-    'desks' => 'DeskController',
-    'desk-lists' => 'DeskListController'
+    'desks'      => 'DeskController',
+    'desk-lists' => 'DeskListController',
+    'cards'      => 'CardListController',
 ]);
