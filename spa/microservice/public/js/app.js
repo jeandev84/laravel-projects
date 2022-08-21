@@ -5324,6 +5324,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       isEditMode: false,
+      search: '',
       products: {},
       product: {
         id: '',
@@ -5333,13 +5334,24 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    /*
+    searchProduct() {
+       axios.get('/api/v1/products?search=' + this.search)
+           .then(response => {
+               // console.log(response)
+               this.products = response.data;
+           });
+    },
+    */
     view: function view() {
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('/api/v1/products?page=' + page).then(function (response) {
-        console.log(response.data); // this.products = response.data; [ without pagination ]
 
+      /* axios.get('/api/v1/products?page=' + page) */
+      axios.get("/api/v1/products?page=".concat(page, "&search=").concat(this.search)).then(function (response) {
+        // console.log(response.data);
+        // this.products = response.data; [ without pagination ]
         _this.products = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -5429,7 +5441,39 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "fas fa-plus-circle"
-  }), _vm._v(" Create\n            ")])]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("div", {
+  }), _vm._v(" Create\n            ")])]), _vm._v(" "), _c("div", {
+    staticClass: "col-4"
+  }, [_c("form", {
+    on: {
+      submit: function submit($event) {
+        $event.preventDefault();
+        return _vm.view.apply(null, arguments);
+      }
+    }
+  }, [_c("div", {
+    staticClass: "input-group"
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.search,
+      expression: "search"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Search"
+    },
+    domProps: {
+      value: _vm.search
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.search = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _vm._m(0)])])])]), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-4"
@@ -5543,16 +5587,6 @@ var staticRenderFns = [function () {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "col-4"
-  }, [_c("form", [_c("div", {
-    staticClass: "input-group"
-  }, [_c("input", {
-    staticClass: "form-control",
-    attrs: {
-      type: "text",
-      placeholder: "Search"
-    }
-  }), _vm._v(" "), _c("div", {
     staticClass: "input-group-append"
   }, [_c("button", {
     staticClass: "btn btn-primary",
@@ -5561,7 +5595,7 @@ var staticRenderFns = [function () {
     }
   }, [_c("i", {
     staticClass: "fas fa-search"
-  })])])])])]);
+  })])]);
 }, function () {
   var _vm = this,
       _c = _vm._self._c;

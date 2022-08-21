@@ -8,9 +8,15 @@
                 </button>
             </div>
             <div class="col-4">
-                <form>
+            <!-- <form @submit.prevent="searchProduct">  -->
+                 <form @submit.prevent="view">
                     <div class="input-group">
-                        <input type="text" placeholder="Search" class="form-control">
+                        <input
+                            v-model="search"
+                            type="text"
+                            placeholder="Search"
+                            class="form-control"
+                        >
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-search"></i>
@@ -94,6 +100,7 @@ export default {
     data() {
         return {
             isEditMode: false,
+            search: '',
             products: {},
             product: {
                 id: '',
@@ -103,11 +110,20 @@ export default {
         }
     },
     methods: {
-
+          /*
+          searchProduct() {
+             axios.get('/api/v1/products?search=' + this.search)
+                 .then(response => {
+                     // console.log(response)
+                     this.products = response.data;
+                 });
+          },
+          */
           view(page=1) {
-              axios.get('/api/v1/products?page=' + page)
+              /* axios.get('/api/v1/products?page=' + page) */
+              axios.get(`/api/v1/products?page=${page}&search=${this.search}`)
                   .then(response => {
-                      console.log(response.data);
+                      // console.log(response.data);
                       // this.products = response.data; [ without pagination ]
                       this.products = response.data;
                   })

@@ -214,3 +214,11 @@ https://github.com/axios/axios
 ```php 
 $ npm install laravel-vue-pagination
 ```
+
+13. Install vform (axios) for display errors
+- https://npmjs.com/package/vform 
+
+```php 
+npm i vform
+npm i axios vform (with axios)
+```

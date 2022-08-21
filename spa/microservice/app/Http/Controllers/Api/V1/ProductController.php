@@ -20,9 +20,9 @@ class ProductController extends Controller
     */
     public function index()
     {
-         // return Product::orderBy('id', 'desc')->get();
-
-         return Product::orderBy('id', 'desc')->paginate(5);
+         return Product::when(request('search'), function ($query) {
+             $query->where('name', 'like', '%'. request('search') .'%');
+         })->orderBy('id', 'desc')->paginate(Product::PerPage);
     }
 
 
@@ -103,4 +103,47 @@ class ProductController extends Controller
         $product->delete();
         return $product;
     }
+
+
+    protected function search(Request $request)
+    {
+        /* return Product::orderBy('id', 'desc')->get(); */
+        /*
+        Variant 1:
+        if ($request->search) {
+            return Product::where('name', 'like', '%'. $request->search .'%')
+                   ->orderBy('id', 'desc')
+                   ->paginate(5);
+        } else {
+            return Product::orderBy('id', 'desc')->paginate(5);
+        }
+
+        Variant 2:
+        if (request('search')) {
+           return Product::where('name', 'like', '%'. request('search') .'%')
+               ->orderBy('id', 'desc')
+               ->paginate(5);
+        } else {
+           return Product::orderBy('id', 'desc')->paginate(5);
+        }
+
+
+        Variant 3:
+        $products = Product::query();
+
+        if (request('search')) {
+           return $products->where('name', 'like', '%'. request('search') .'%')
+                           ->orderBy('id', 'desc')
+                           ->get();
+        } else {
+           return $products->orderBy('id', 'desc')->get();
+        }
+        */
+
+
+        return Product::when(request('search'), function ($query) {
+            $query->where('name', 'like', '%'. request('search') .'%');
+        })->orderBy('id', 'desc')->get();
+    }
+
 }
