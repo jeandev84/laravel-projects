@@ -217,6 +217,8 @@ $ npm install laravel-vue-pagination
 
 13. Install vform (axios) for display errors
 - https://npmjs.com/package/vform 
+- https://vform.vercel.app/#installation
+- https://github.com/cretueusebiu/vform
 
 ```php 
 npm i vform

@@ -35,15 +35,22 @@
                 <div class="card">
                     <h4 class="card-header">{{ isEditMode ? 'Edit' : 'Create' }}</h4>
                     <div class="card-body">
-                        <form @submit.prevent="isEditMode ? update() : store()">
+
+                        <alert-error :form="product" :message="message"></alert-error>
+
+                        <form @submit.prevent="isEditMode ? update() : store()" @keydown="product.onkeydown($event)">
                             <div class="form-group">
                                 <label for="name">Name: </label>
-                                <input type="text" v-model="product.name" id="name" class="form-control">
+                                <input type="text" v-model="product.name" id="name" class="form-control"
+                                       :class="{ 'is-invalid': product.errors.has('name') }"/>
+                                <has-error :form="product" field="name"></has-error>
                             </div>
 
                             <div class="form-group">
                                 <label for="price">Price: </label>
-                                <input type="number"v-model="product.price" id="price" class="form-control">
+                                <input type="number"v-model="product.price" id="price" class="form-control"
+                                       :class="{ 'is-invalid': product.errors.has('price') }"/>
+                                <has-error :form="product" field="price"></has-error>
                             </div>
 
                             <button class="btn btn-primary mt-3" type="submit">
@@ -91,22 +98,26 @@
 <script>
 
 import pagination from 'laravel-vue-pagination';
+// import { Form } from 'vform';
+// import { Form, HasError, AlertError } from 'vform';
+
 
 export default {
     name: "ProductComponent",
     components: {
-        pagination
+        pagination,
     },
     data() {
         return {
             isEditMode: false,
             search: '',
             products: {},
-            product: {
+            product: new Form({
                 id: '',
                 name: '',
                 price: ''
-            }
+            }),
+            message: ""
         }
     },
     methods: {
@@ -136,6 +147,7 @@ export default {
               this.product       = {};
           },
           store() {
+              /*
               axios.post('/api/v1/products', this.product)
                   .then(response => {
                       // console.log(response)
@@ -145,17 +157,40 @@ export default {
                   .catch(error => {
                       console.log(error)
                   });
+
+              */
+
+              this.product.post('/api/v1/products')
+                  .then(response => {
+                      // console.log(response)
+                      this.view();
+                      // this.product = response.data;
+                      this.product.id    = "";
+                      this.product.name  = "";
+                      this.product.price = "";
+                  })
+                  .catch(error => {
+                      // console.log(error)
+                      // console.log(error.response)
+                      // console.log(error.response.data.errors)
+                      // console.log(error.response.data.message)
+                      this.message = error.response.data.message;
+                  });
           },
           edit(product) {
               this.isEditMode    = true;
-              this.product       = product;
+              this.product.id    = product.id;
+              this.product.name  = product.name;
+              this.product.price = product.price;
           },
           update() {
-             axios.put('/api/v1/products/' + this.product.id, this.product)
+             this.product.put('/api/v1/products/' + this.product.id)
                   .then(response => {
-                     console.log(response)
-                     this.product = response.data;
+                     // console.log(response)
                      this.view();
+                     this.product.id    = "";
+                     this.product.name  = "";
+                     this.product.price = "";
                  })
                  .catch(error => {
                      console.log(error)
