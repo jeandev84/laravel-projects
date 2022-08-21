@@ -5319,12 +5319,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ProductComponent",
   components: {
-    'pagination': (laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_0___default())
+    pagination: (laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_0___default())
   },
   data: function data() {
     return {
       isEditMode: false,
-      productPagination: {},
       products: {},
       product: {
         id: '',
@@ -5341,10 +5340,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/v1/products?page=' + page).then(function (response) {
         console.log(response.data); // this.products = response.data; [ without pagination ]
 
-        /* Pagination: console.log(response.data.data) : with pagination */
-
         _this.products = response.data;
-        _this.productPagination = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -5510,7 +5506,7 @@ var render = function render() {
     staticClass: "col-8"
   }, [_c("table", {
     staticClass: "table"
-  }, [_vm._m(2), _vm._v(" "), _c("tbody", _vm._l(_vm.products, function (product) {
+  }, [_vm._m(2), _vm._v(" "), _c("tbody", _vm._l(_vm.products.data, function (product) {
     return _c("tr", {
       key: product.id
     }, [_c("td", [_vm._v(_vm._s(product.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(product.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(product.price))]), _vm._v(" "), _c("td", [_c("button", {
@@ -5532,14 +5528,14 @@ var render = function render() {
     }, [_c("i", {
       staticClass: "fas fa-trash-alt mr-1"
     })])])]);
-  }), 0)])])]), _vm._v(" "), _c("pagination", {
+  }), 0)]), _vm._v(" "), _c("pagination", {
     attrs: {
-      data: _vm.productPagination
+      data: _vm.products
     },
     on: {
       "pagination-change-page": _vm.view
     }
-  })], 1);
+  })], 1)])]);
 };
 
 var staticRenderFns = [function () {

@@ -58,7 +58,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="product in products" :key="product.id">
+                    <tr v-for="product in products.data" :key="product.id">
                         <td>{{ product.id }}</td>
                         <td>{{ product.name }}</td>
                         <td>{{ product.price }}</td>
@@ -73,13 +73,12 @@
                     </tr>
                     </tbody>
                 </table>
+                <!-- Pagination -->
+                <pagination :data="products" @pagination-change-page="view"/>
+                <!-- Pagination End -->
             </div>
         </div>
         <!-- Table End -->
-
-        <!-- Pagination -->
-        <pagination :data="productPagination" @pagination-change-page="view"/>
-        <!-- Pagination End -->
     </div>
 </template>
 
@@ -90,12 +89,11 @@ import pagination from 'laravel-vue-pagination';
 export default {
     name: "ProductComponent",
     components: {
-        'pagination': pagination
+        pagination
     },
     data() {
         return {
             isEditMode: false,
-            productPagination: {},
             products: {},
             product: {
                 id: '',
@@ -111,10 +109,7 @@ export default {
                   .then(response => {
                       console.log(response.data);
                       // this.products = response.data; [ without pagination ]
-
-                      /* Pagination: console.log(response.data.data) : with pagination */
                       this.products = response.data;
-                      this.productPagination = response.data;
                   })
                   .catch(error => {
                       console.log(error)
