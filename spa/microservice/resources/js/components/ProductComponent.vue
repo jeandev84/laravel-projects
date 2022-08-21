@@ -1,9 +1,10 @@
 <template>
     <div class="container my-5">
+        <!-- Create -->
         <div class="row justify-content-end mb-3">
             <div class="col-4">
                 <button class="btn btn-primary" @click="create">
-                     <i class="fas fa-plus-circle"></i> Create
+                    <i class="fas fa-plus-circle"></i> Create
                 </button>
             </div>
             <div class="col-4">
@@ -19,6 +20,10 @@
                 </form>
             </div>
         </div>
+        <!--/ Create End-->
+
+
+        <!-- Table -->
         <div class="row">
             <div class="col-4">
                 <div class="card">
@@ -45,41 +50,53 @@
             <div class="col-8">
                 <table class="table">
                     <thead>
-                         <tr>
-                             <th>ID</th>
-                             <th>Name</th>
-                             <th>Price</th>
-                             <th>Actions</th>
-                         </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
                     </thead>
                     <tbody>
-                         <tr v-for="product in products" :key="product.id">
-                             <td>{{ product.id}}</td>
-                             <td>{{ product.name }}</td>
-                             <td>{{ product.price }}</td>
-                             <td>
-                                 <button class="btn btn-success btn-sm" @click="edit(product)">
-                                     <i class="fas fa-edit mr-1"></i>
-                                 </button>
-                                 <button class="btn btn-danger btn-sm" @click="destroy(product.id)">
-                                     <i class="fas fa-trash-alt mr-1"></i>
-                                 </button>
-                             </td>
-                         </tr>
+                    <tr v-for="product in products" :key="product.id">
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>
+                            <button class="btn btn-success btn-sm" @click="edit(product)">
+                                <i class="fas fa-edit mr-1"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm" @click="destroy(product.id)">
+                                <i class="fas fa-trash-alt mr-1"></i>
+                            </button>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <!-- Table End -->
+
+        <!-- Pagination -->
+        <pagination :data="productPagination" @pagination-change-page="view"/>
+        <!-- Pagination End -->
     </div>
 </template>
 
 <script>
+
+import pagination from 'laravel-vue-pagination';
+
 export default {
     name: "ProductComponent",
+    components: {
+        'pagination': pagination
+    },
     data() {
         return {
             isEditMode: false,
-            products: [],
+            productPagination: {},
+            products: {},
             product: {
                 id: '',
                 name: '',
@@ -89,11 +106,15 @@ export default {
     },
     methods: {
 
-          view() {
-              axios.get('/api/v1/products')
+          view(page=1) {
+              axios.get('/api/v1/products?page=' + page)
                   .then(response => {
-                      console.log(response)
+                      console.log(response.data);
+                      // this.products = response.data; [ without pagination ]
+
+                      /* Pagination: console.log(response.data.data) : with pagination */
                       this.products = response.data;
+                      this.productPagination = response.data;
                   })
                   .catch(error => {
                       console.log(error)

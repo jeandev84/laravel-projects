@@ -20,7 +20,9 @@ class ProductController extends Controller
     */
     public function index()
     {
-         return Product::orderBy('id', 'desc')->get();
+         // return Product::orderBy('id', 'desc')->get();
+
+         return Product::orderBy('id', 'desc')->paginate(5);
     }
 
 
@@ -28,21 +30,21 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
     */
     public function store(ProductStoreRequest $request)
     {
          /*
-         $request->validate([
+            $request->validate([
              'name'  => 'required|string',
              'price' => 'required|numeric'
-         ], [
-             'name.required'   => 'Поле обязательное.',
-             'name.string'     => 'Содержимое данного поля должно быть строковое значение.',
-             'price.required'  => 'Поле обязательное.',
-             'price.numeric'   => 'Содержимое данного поля должно быть целое число.',
-         ]);
+            ], [
+               'name.required'   => 'Поле обязательное.',
+               'name.string'     => 'Содержимое данного поля должно быть строковое значение.',
+               'price.required'  => 'Поле обязательное.',
+               'price.numeric'   => 'Содержимое данного поля должно быть целое число.',
+           ]);
           */
 
          return Product::create($request->only('name', 'price'));

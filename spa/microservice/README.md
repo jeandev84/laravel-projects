@@ -212,5 +212,5 @@ https://github.com/axios/axios
 
 12. Vue Pagination
 ```php 
-
+$ npm install laravel-vue-pagination
 ```
