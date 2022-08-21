@@ -24,7 +24,7 @@
                 <div class="card">
                     <h4 class="card-header">{{ isEditMode ? 'Edit' : 'Create' }}</h4>
                     <div class="card-body">
-                        <form @submit.prevent="store">
+                        <form @submit.prevent="isEditMode ? update() : store()">
                             <div class="form-group">
                                 <label for="name">Name: </label>
                                 <input type="text" v-model="product.name" id="name" class="form-control">
@@ -61,7 +61,7 @@
                                  <button class="btn btn-success btn-sm" @click="edit(product)">
                                      <i class="fas fa-edit mr-1"></i>
                                  </button>
-                                 <button class="btn btn-danger btn-sm">
+                                 <button class="btn btn-danger btn-sm" @click="destroy(product.id)">
                                      <i class="fas fa-trash-alt mr-1"></i>
                                  </button>
                              </td>
@@ -101,14 +101,12 @@ export default {
           },
           create() {
               this.isEditMode    = false;
-              this.product.id    = '';
-              this.product.name  = '';
-              this.product.price = '';
+              this.product       = {};
           },
           store() {
               axios.post('/api/v1/products', this.product)
                   .then(response => {
-                      console.log(response)
+                      // console.log(response)
                       this.product = response.data;
                       this.view();
                   })
@@ -117,24 +115,34 @@ export default {
                   });
           },
           edit(product) {
-
               this.isEditMode    = true;
-              this.product.id    = product.id;
-              this.product.name  = product.name;
-              this.product.price = product.price;
+              this.product       = product;
+          },
+          update() {
+             axios.put('/api/v1/products/' + this.product.id, this.product)
+                  .then(response => {
+                     console.log(response)
+                     this.product = response.data;
+                     this.view();
+                 })
+                 .catch(error => {
+                     console.log(error)
+                 });
+          },
+          destroy(id) {
 
+              if (! confirm('Are you sure to delete ?')) {
+                   return;
+              }
 
-              /*
-              axios.post('/api/v1/products/' + this.product.id, this.product)
+              axios.delete('/api/v1/products/' + id)
                   .then(response => {
                       console.log(response)
-                      this.product = response.data;
                       this.view();
                   })
                   .catch(error => {
                       console.log(error)
                   });
-              */
           }
     },
     created() {
@@ -154,7 +162,7 @@ export default {
   </button>
 </form>
 
-  OR
+OR
 
 <form @submit.prevent="store">
   <button class="btn btn-primary mt-3" type="submit">

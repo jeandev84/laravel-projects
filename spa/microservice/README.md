@@ -209,3 +209,8 @@ https://cdnjs.com/libraries/font-awesome
 ```php 
 https://github.com/axios/axios
 ```
+
+12. Vue Pagination
+```php 
+
+```

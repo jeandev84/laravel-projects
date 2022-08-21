@@ -5358,15 +5358,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     create: function create() {
       this.isEditMode = false;
-      this.product.id = '';
-      this.product.name = '';
-      this.product.price = '';
+      this.product = {};
     },
     store: function store() {
       var _this2 = this;
 
       axios.post('/api/v1/products', this.product).then(function (response) {
-        console.log(response);
+        // console.log(response)
         _this2.product = response.data;
 
         _this2.view();
@@ -5376,20 +5374,34 @@ __webpack_require__.r(__webpack_exports__);
     },
     edit: function edit(product) {
       this.isEditMode = true;
-      this.product.id = product.id;
-      this.product.name = product.name;
-      this.product.price = product.price;
-      /*
-      axios.post('/api/v1/products/' + this.product.id, this.product)
-          .then(response => {
-              console.log(response)
-              this.product = response.data;
-              this.view();
-          })
-          .catch(error => {
-              console.log(error)
-          });
-      */
+      this.product = product;
+    },
+    update: function update() {
+      var _this3 = this;
+
+      axios.put('/api/v1/products/' + this.product.id, this.product).then(function (response) {
+        console.log(response);
+        _this3.product = response.data;
+
+        _this3.view();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    destroy: function destroy(id) {
+      var _this4 = this;
+
+      if (!confirm('Are you sure to delete ?')) {
+        return;
+      }
+
+      axios["delete"]('/api/v1/products/' + id).then(function (response) {
+        console.log(response);
+
+        _this4.view();
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   created: function created() {
@@ -5484,7 +5496,7 @@ var render = function render() {
     on: {
       submit: function submit($event) {
         $event.preventDefault();
-        return _vm.store.apply(null, arguments);
+        _vm.isEditMode ? _vm.update() : _vm.store();
       }
     }
   }, [_c("div", {
@@ -5559,7 +5571,16 @@ var render = function render() {
       }
     }, [_c("i", {
       staticClass: "fas fa-edit mr-1"
-    })]), _vm._v(" "), _vm._m(3, true)])]);
+    })]), _vm._v(" "), _c("button", {
+      staticClass: "btn btn-danger btn-sm",
+      on: {
+        click: function click($event) {
+          return _vm.destroy(product.id);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "fas fa-trash-alt mr-1"
+    })])])]);
   }), 0)])])])]);
 };
 
@@ -5604,15 +5625,6 @@ var staticRenderFns = [function () {
       _c = _vm._self._c;
 
   return _c("thead", [_c("tr", [_c("th", [_vm._v("ID")]), _vm._v(" "), _c("th", [_vm._v("Name")]), _vm._v(" "), _c("th", [_vm._v("Price")]), _vm._v(" "), _c("th", [_vm._v("Actions")])])]);
-}, function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("button", {
-    staticClass: "btn btn-danger btn-sm"
-  }, [_c("i", {
-    staticClass: "fas fa-trash-alt mr-1"
-  })]);
 }];
 render._withStripped = true;
 
