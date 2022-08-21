@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -27,8 +29,9 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
     */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
+         /*
          $request->validate([
              'name'  => 'required|string',
              'price' => 'required|numeric'
@@ -38,6 +41,7 @@ class ProductController extends Controller
              'price.required'  => 'Поле обязательное.',
              'price.numeric'   => 'Содержимое данного поля должно быть целое число.',
          ]);
+          */
 
          $product = Product::create($request->only('name', 'price'));
 
@@ -69,8 +73,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
     */
-    public function update(Request $request, $id)
+    public function update(ProductUpdateRequest $request, $id)
     {
+        /*
         $request->validate([
             'name'  => 'nullable|string',
             'price' => 'nullable|numeric'
@@ -81,10 +86,11 @@ class ProductController extends Controller
             'price.required'  => 'Поле обязательное.',
             'price.numeric'   => 'Содержимое данного поля должно быть целое число.',
         ]);
+        */
 
         $product = Product::find($id);
-         $product->update($request->only('name', 'price'));
-         return $product;
+        $product->update($request->only('name', 'price'));
+        return $product;
     }
 
 

@@ -179,3 +179,9 @@ class DatabaseSeeder extends Seeder
 $ php artisan db:seed
 
 ```
+
+8. Make Resource 
+```php 
+$ php artisan make:request ProductStoreRequest
+$ php artisan make:request ProductUpdateRequest
+```
