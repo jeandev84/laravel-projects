@@ -185,3 +185,27 @@ $ php artisan db:seed
 $ php artisan make:request ProductStoreRequest
 $ php artisan make:request ProductUpdateRequest
 ```
+
+
+9. Install Vue JS
+- https://laravel.com/docs/8.x/authentication
+- https://jetstream.laravel.com/2.x/introduction.html
+- https://inertiajs.com/
+```php 
+$ composer require laravel/ui:* || composer require laravel/ui:^2.4 || composer require laravel/ui
+$ php artisan ui vue || php artisan ui vue --auth
+$ npm install || npm i
+$ npm run watch (must to install vue loader!!!) || npm run dev
+```
+
+10. Assets Links 
+```php 
+https://bootstrapcdn.com/fontawesome/
+https://cdnjs.com/libraries/font-awesome
+```
+
+
+11. Vue JS
+```php 
+https://github.com/axios/axios
+```

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
+use App\Models\Post;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProductController extends Controller
 {
@@ -18,7 +20,7 @@ class ProductController extends Controller
     */
     public function index()
     {
-         return Product::all();
+         return Product::orderBy('id', 'desc')->get();
     }
 
 
@@ -43,9 +45,7 @@ class ProductController extends Controller
          ]);
           */
 
-         $product = Product::create($request->only('name', 'price'));
-
-         return $product;
+         return Product::create($request->only('name', 'price'));
     }
 
 
@@ -53,27 +53,23 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Post $product
      * @return \Illuminate\Http\Response
     */
-    public function show($id)
+    public function show(Post $product)
     {
-         $product =  Product::find($id);
-
          return $product;
     }
-
-
 
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-    */
-    public function update(ProductUpdateRequest $request, $id)
+     * @param ProductUpdateRequest $request
+     * @param Product $product
+     * @return Response
+     */
+    public function update(ProductUpdateRequest $request, Product $product)
     {
         /*
         $request->validate([
@@ -88,22 +84,20 @@ class ProductController extends Controller
         ]);
         */
 
-        $product = Product::find($id);
         $product->update($request->only('name', 'price'));
+
         return $product;
     }
-
 
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-    */
-    public function destroy($id)
+     * @param Product $product
+     * @return Response
+     */
+    public function destroy(Product $product)
     {
-        $product = Product::find($id);
         $product->delete();
         return $product;
     }
