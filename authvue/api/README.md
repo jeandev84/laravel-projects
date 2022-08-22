@@ -263,4 +263,5 @@ $ vue create client
 AFTER CONFIGURATION RUN SERVER :
 
 $ npm run serve
+http://localhost:8080/
 ```
