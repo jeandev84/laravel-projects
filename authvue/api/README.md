@@ -351,9 +351,6 @@ Vue CLI v5.0.8
 
 
 
-
-
-
 AFTER CONFIGURATION RUN SERVER :
 
 $ npm run serve
@@ -361,6 +358,21 @@ http://localhost:8080/
 
 https://eslint.vuejs.org/rules/multi-word-component-names.html
 
-
-
 ```
+
+11. Install Laravel CORS ```$ composer require fruitcake/laravel-cors```
+- https://github.com/barryvdh/laravel-cors
+```php 
+$composer require fruitcake/laravel-cors
+$ composer remove barryvdh/laravel-cors fruitcake/laravel-cors
+$ composer require fruitcake/laravel-cors
+
+To allow CORS for all your routes, add the HandleCors middleware at the top of the $middleware property of app/Http/Kernel.php class:
+
+protected $middleware = [
+  \Fruitcake\Cors\HandleCors::class,
+    // ...
+];
+
+``
+
