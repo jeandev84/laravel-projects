@@ -264,4 +264,7 @@ AFTER CONFIGURATION RUN SERVER :
 
 $ npm run serve
 http://localhost:8080/
+
+https://eslint.vuejs.org/rules/multi-word-component-names.html
+
 ```
