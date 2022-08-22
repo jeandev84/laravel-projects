@@ -15,7 +15,7 @@ const app = createApp(App);
 app.config.productionTip = false;
 
 // Reauthenticate USER if user refresh browser
-store.dispatch('auth/attempt', localStorage.getItem('token'));
+store.dispatch('auth/attempt', localStorage.getItem('token')).then(() => {
+    app.use(store).use(router).mount('#app');
+});
 
-
-app.use(store).use(router).mount('#app')
