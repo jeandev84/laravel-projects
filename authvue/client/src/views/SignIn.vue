@@ -30,7 +30,8 @@ export default {
          form: {
             email: '',
             password: ''
-         }
+         },
+         errors: null
      }
   },
   components: {
@@ -60,7 +61,14 @@ export default {
                  this.$router.replace({
                       name: 'dashboard'
                  });
-             })
+             }).catch((error) => {
+
+                  console.log('failed');
+
+                  // check error message from backend for validation
+                  console.log(error);
+                  // this.errors = error.message.data;
+             });
 
          // Redirect User to Dashboard page
       }
