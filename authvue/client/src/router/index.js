@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from "@/views/Home.vue"
 import SignIn from "@/views/SignIn";
 import Dashboard from "@/views/Dashboard";
+import store from "@/store";
 
 
 const routes = [
@@ -18,7 +19,20 @@ const routes = [
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: Dashboard
+    component: Dashboard,
+    beforeEnter: (to, from, next) => {
+
+         // console.log('middleware dashboard');
+         // console.log(store.getters);
+
+         if (!store.getters['auth/authenticated']) {
+              return next({
+                 name: 'signin'
+              });
+         }
+
+         next();
+    }
   }
 ]
 
