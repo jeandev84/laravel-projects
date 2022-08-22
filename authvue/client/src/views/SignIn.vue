@@ -19,7 +19,9 @@
 
 <script>
 
-// import axios from 'axios'
+import { mapActions } from 'vuex';
+
+
 
 export default {
   name: 'SignInView',
@@ -35,14 +37,23 @@ export default {
 
   },
   methods: {
-     async submit() {
+       /*
+        async submit() {
 
-         // console.log('submitted');
+           // console.log('submitted');
 
-         // let response = axios.post('http://127.0.0.1:8000/api/auth/signin', this.form)
+           let response = axios.post('/auth/signin', this.form)
 
-         // console.log((await response).data);
-     }
+           console.log((await response).data);
+       }
+      */
+
+      ...mapActions({
+          signIn: 'auth/signIn'
+      }),
+      submit() {
+         this.signIn(this.form)
+      }
   }
 }
 </script>
