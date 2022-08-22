@@ -25,6 +25,8 @@
     },
     "dependencies": {
         "laravel-vue-pagination": "^2.3.1",
-        "vform": "^1.0.1"
+        "sweetalert2": "^11.4.29",
+        "vform": "^1.0.1",
+        "vue-progressbar": "^0.7.5"
     }
 }

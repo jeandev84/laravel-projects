@@ -97,16 +97,16 @@
 
 <script>
 
-import pagination from 'laravel-vue-pagination';
-// import { Form } from 'vform';
-// import { Form, HasError, AlertError } from 'vform';
-
 // Reference : https://npmjs.com/package/vform
+// https://sweetalert2.github.io/
+
 export default {
     name: "ProductComponent",
+    /*
     components: {
         pagination,
     },
+    */
     data() {
         return {
             isEditMode: false,
@@ -132,14 +132,18 @@ export default {
           */
           view(page=1) {
               /* axios.get('/api/v1/products?page=' + page) */
+              this.$Progress.start();
+
               axios.get(`/api/v1/products?page=${page}&search=${this.search}`)
                   .then(response => {
                       // console.log(response.data);
                       // this.products = response.data; [ without pagination ]
                       this.products = response.data;
+                      this.$Progress.finish();
                   })
                   .catch(error => {
-                      console.log(error)
+                      // console.log(error)
+                      this.$Progress.fail();
                   });
           },
           create() {
@@ -166,6 +170,10 @@ export default {
                       // console.log(response)
                       this.view();
                       this.product.reset();
+                      Toast.fire({
+                          icon: "success",
+                          title: "Created successfully"
+                      });
                   })
                   .catch(error => {
                       // console.log(error)
@@ -192,6 +200,10 @@ export default {
                      // console.log(response)
                      this.view();
                      this.product.reset();
+                     Toast.fire({
+                         icon: "success",
+                         title: "Updated successfully"
+                     });
                  })
                  .catch(error => {
                      console.log(error)
@@ -199,11 +211,14 @@ export default {
           },
           destroy(id) {
 
-              if (! confirm('Are you sure to delete ?')) {
-                   return;
-              }
+              // Demo : Swal.fire('Any fool can use a computer');
 
-              axios.delete('/api/v1/products/' + id)
+                /*
+                 if (! confirm('Are you sure to delete ?')) {
+                    return;
+                 }
+
+                 axios.delete('/api/v1/products/' + id)
                   .then(response => {
                       console.log(response)
                       this.view();
@@ -211,6 +226,43 @@ export default {
                   .catch(error => {
                       console.log(error)
                   });
+              */
+
+              Swal.fire({
+                 title: 'Are you sure?',
+                 // text: "You won't be able to revert this!",
+                 icon: 'warning',
+                 showCancelButton: true,
+                 confirmButtonColor: '#3085d6',
+                 cancelButtonColor: '#d33',
+                 confirmButtonText: 'Delete'
+              }).then((result) => {
+
+                  if (result.isConfirmed) {
+
+                      /*
+                        Swal.fire(
+                           'Deleted',
+                          'Your file has been deleted.',
+                          'success'
+                        )
+                      */
+
+                      axios.delete('/api/v1/products/' + id)
+                           .then(response => {
+                              console.log(response)
+
+                              this.view();
+
+                              Swal.fire({ title: 'Deleted!', icon: 'success'});
+
+                              Toast.fire({
+                                   icon: "success",
+                                   title: "Deleted successfully"
+                              });
+                           })
+                  }
+              });
           }
     },
     created() {

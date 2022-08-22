@@ -223,4 +223,19 @@ $ npm install laravel-vue-pagination
 ```php 
 npm i vform
 npm i axios vform (with axios)
+
+```
+
+14. Install Sweet (Alert message)
+- https://sweetalert2.github.io/
+```php 
+$ npm install sweetalert2
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+```
+
+15. Install Vue-progressbar 
+- https://hilongjw.github.io/vue-progressbar/index.html
+- https://github.com/hilongjw/vue-progressbar
+```php 
+$ npm install vue-progressbar
 ```
