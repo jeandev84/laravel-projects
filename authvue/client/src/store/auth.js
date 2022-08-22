@@ -42,19 +42,30 @@ export default {
             return dispatch('attempt', response.data.token);
         },
         // first param _ { dispatch || commit } a mutations
-        async attempt({ commit }, token) {
+        // state (current state)
+        async attempt({ commit, state }, token) {
 
             // console.log(token);
 
-            commit('SET_TOKEN', token);
+            if (token) {
+                commit('SET_TOKEN', token);
+            }
+
+            if (! state.token) {
+                 return;
+            }
 
             try {
 
+                /*
                 let response = await axios.get('auth/me', {
                      headers: {
                          'Authorization': 'Bearer ' + token
                      }
                 });
+                */
+
+                let response = await axios.get('auth/me');
 
                 commit('SET_USER', response.data);
 
