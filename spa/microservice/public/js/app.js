@@ -2069,6 +2069,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_0__);
  // import { Form } from 'vform';
 // import { Form, HasError, AlertError } from 'vform';
+// Reference : https://npmjs.com/package/vform
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ProductComponent",
@@ -2147,9 +2148,12 @@ __webpack_require__.r(__webpack_exports__);
     edit: function edit(product) {
       this.product.clear();
       this.isEditMode = true;
-      this.product.id = product.id;
-      this.product.name = product.name;
+      this.product.fill(product);
+      /*
+      this.product.id    = product.id;
+      this.product.name  = product.name;
       this.product.price = product.price;
+      */
     },
     update: function update() {
       var _this3 = this;

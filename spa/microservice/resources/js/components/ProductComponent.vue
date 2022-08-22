@@ -101,7 +101,7 @@ import pagination from 'laravel-vue-pagination';
 // import { Form } from 'vform';
 // import { Form, HasError, AlertError } from 'vform';
 
-
+// Reference : https://npmjs.com/package/vform
 export default {
     name: "ProductComponent",
     components: {
@@ -178,9 +178,13 @@ export default {
           edit(product) {
               this.product.clear();
               this.isEditMode    = true;
+              this.product.fill(product);
+
+              /*
               this.product.id    = product.id;
               this.product.name  = product.name;
               this.product.price = product.price;
+              */
           },
           update() {
              this.product.put('/api/v1/products/' + this.product.id)
