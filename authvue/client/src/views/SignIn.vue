@@ -19,7 +19,7 @@
 
 <script>
 
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
   name: 'SignInView',
@@ -39,9 +39,9 @@ export default {
 
          // console.log('submitted');
 
-         let response = axios.post('http://127.0.0.1:8000/api/auth/signin', this.form)
+         // let response = axios.post('http://127.0.0.1:8000/api/auth/signin', this.form)
 
-         console.log((await response).data);
+         // console.log((await response).data);
      }
   }
 }
