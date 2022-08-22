@@ -92,6 +92,10 @@
             </div>
         </div>
         <!-- Table End -->
+
+        <!-- Loading -->
+        <!-- <loading :active.sync="isLoading" :is-full-page="true"/> -->
+        <!-- End Loading -->
     </div>
 </template>
 
@@ -100,15 +104,12 @@
 // Reference : https://npmjs.com/package/vform
 // https://sweetalert2.github.io/
 
+
 export default {
     name: "ProductComponent",
-    /*
-    components: {
-        pagination,
-    },
-    */
     data() {
         return {
+            // fullPage: false,
             isEditMode: false,
             search: '',
             products: {},
@@ -133,6 +134,25 @@ export default {
           view(page=1) {
               /* axios.get('/api/v1/products?page=' + page) */
               this.$Progress.start();
+              // this.isLoading = true;
+
+              /*
+               let loader = this.$loading.show( {
+                     container: this.fullPage ? null : this.$refs.formContainer,
+                     canCancel: false,
+                     onCancel: this.onCancel,
+               });
+
+               let loader = this.$loading.show({
+                  color: '#3490dc',
+                  width: '45px',
+                  height: '45px'
+                });
+
+               */
+
+              let loader = this.$loading.show();
+
 
               axios.get(`/api/v1/products?page=${page}&search=${this.search}`)
                   .then(response => {
@@ -140,10 +160,25 @@ export default {
                       // this.products = response.data; [ without pagination ]
                       this.products = response.data;
                       this.$Progress.finish();
+
+                      /*
+                      setTimeout(() => {
+                          this.isLoading = false;
+                      }, 500);
+                      */
+
+                      // simulate AJAX
+                      setTimeout(() => {
+                          loader.hide();
+                      }, 500);
                   })
                   .catch(error => {
                       // console.log(error)
                       this.$Progress.fail();
+
+                      setTimeout(() => {
+                          loader.hide();
+                      }, 500);
                   });
           },
           create() {

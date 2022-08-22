@@ -239,3 +239,13 @@ $ npm install sweetalert2
 ```php 
 $ npm install vue-progressbar
 ```
+
+16. Install Vue Overlay (Loading ...)
+- https://npmjs.com/package/vue-loading-overlay/
+- https://ankurk91.github.io/vue-loading-overlay/
+
+```php 
+$ npm install vue-loading-overlay
+$ npm install vue-loading-overlay@^5.0 
+```
+

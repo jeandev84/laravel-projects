@@ -3,14 +3,26 @@ window.Vue = require('vue').default;
 import { Form, HasError, AlertError } from 'vform';
 import Swal from 'sweetalert2';
 import VueProgressBar from 'vue-progressbar';
+import Loading from 'vue-loading-overlay';
 
 
+// Loading
+Vue.use(Loading, {
+    color: '#3490dc',
+    width: '45px',
+    height: '45px'
+});
+
+
+// Progress Bar
 Vue.use(VueProgressBar, {
     color: '#3490dc',
     failedColor: 'red',
     thickness: '5px'
-})
+});
 
+
+// Register component globally
 Vue.component(HasError.name, HasError);
 Vue.component(AlertError.name, HasError);
 Vue.component('pagination', require('laravel-vue-pagination'));
