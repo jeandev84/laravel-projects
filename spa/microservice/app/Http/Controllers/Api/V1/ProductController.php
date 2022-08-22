@@ -75,8 +75,8 @@ class ProductController extends Controller
     {
         /*
         $request->validate([
-            'name'  => 'nullable|string',
-            'price' => 'nullable|numeric'
+            'name'  => 'string|string',
+            'price' => 'string|numeric'
         ],
         [
             'name.required'   => 'Поле обязательное.',

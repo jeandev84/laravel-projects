@@ -143,8 +143,9 @@ export default {
                   });
           },
           create() {
-              this.isEditMode    = false;
-              this.product       = {};
+              this.product.clear();
+              this.isEditMode = false;
+              this.product.reset();
           },
           store() {
               /*
@@ -164,10 +165,7 @@ export default {
                   .then(response => {
                       // console.log(response)
                       this.view();
-                      // this.product = response.data;
-                      this.product.id    = "";
-                      this.product.name  = "";
-                      this.product.price = "";
+                      this.product.reset();
                   })
                   .catch(error => {
                       // console.log(error)
@@ -178,6 +176,7 @@ export default {
                   });
           },
           edit(product) {
+              this.product.clear();
               this.isEditMode    = true;
               this.product.id    = product.id;
               this.product.name  = product.name;
@@ -185,12 +184,10 @@ export default {
           },
           update() {
              this.product.put('/api/v1/products/' + this.product.id)
-                  .then(response => {
+                 .then(response => {
                      // console.log(response)
                      this.view();
-                     this.product.id    = "";
-                     this.product.name  = "";
-                     this.product.price = "";
+                     this.product.reset();
                  })
                  .catch(error => {
                      console.log(error)
