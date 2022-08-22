@@ -255,8 +255,12 @@ $ sudo snap install vue (Linux)
 $ sudo chown -R $USER /usr/local/lib
 $ sudo chown -R $USER /usr/local/lib/node_modules (Give access to node_modules)
 $ sudo npm install | sudo npm install -g
-$ npm install -g @vue/cli
+$ sudo npm install -g @vue/cli
 
 Create a new project vue-js
 $ vue create client
+
+AFTER CONFIGURATION RUN SERVER :
+
+$ npm run serve
 ```
