@@ -1,11 +1,25 @@
 import axios from "axios";
 
 export default {
-    namespaced: true, // import the namespace for using inside views/ for example
+    // Import the namespace for using inside views/ for example
+    namespaced: true,
+    // Store information from backend
     state: {
         token: null,
         user: null // user : {email: '', 'name': ''} from backend
     },
+    // Extract from at state.
+    getters: {
+       // if we have token + user that it mean user authenticated.
+       authenticated(state) {
+           return state.token && state.user;
+       },
+       // Get user information
+       user(state) {
+           return state.user;
+       }
+    },
+    // Assignment
     mutations: {
 
         SET_TOKEN(state, token) {
@@ -18,13 +32,14 @@ export default {
     actions: {
 
         // first param _ { dispatch || commit } a mutations
+        // return axios
         async signIn({ dispatch }, credentials) {
 
             let response = await axios.post('/auth/signin', credentials)
 
             // console.log(response.data);
 
-            dispatch('attempt', response.data.token);
+            return dispatch('attempt', response.data.token);
         },
         // first param _ { dispatch || commit } a mutations
         async attempt({ commit }, token) {

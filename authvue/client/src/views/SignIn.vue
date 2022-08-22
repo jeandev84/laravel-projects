@@ -52,7 +52,17 @@ export default {
           signIn: 'auth/signIn'
       }),
       submit() {
+         // Sign In User (Login)
          this.signIn(this.form)
+             .then(() => {
+
+                 // redirect to dashboard page
+                 this.$router.replace({
+                      name: 'dashboard'
+                 });
+             })
+
+         // Redirect User to Dashboard page
       }
   }
 }
