@@ -29,7 +29,7 @@
            </router-link>
          </li>
          <li>
-           <a href="#">
+           <a href="#" @click.prevent="signOut">
              Sign out
            </a>
          </li>
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
   export default {
     name: "TheNavigationView",
@@ -60,6 +60,21 @@ import { mapGetters } from "vuex";
             authenticated: 'auth/authenticated',
             user: 'auth/user',
         })
+    },
+    methods: {
+        ...mapActions({
+             signOutAction: 'auth/signOut'
+        }),
+
+        signOut() {
+            this.signOutAction()
+                .then(() => {
+                     // redirect to home page
+                     this.$router.replace({
+                         name: 'home'
+                     });
+                })
+        }
     }
   }
 </script>
