@@ -44,7 +44,10 @@ export default {
                 commit('SET_USER', response.data);
 
             } catch (e) {
-                 console.log('failed');
+
+                // console.log('failed');
+                commit('SET_TOKEN', null);
+                commit('SET_USER', null);
             }
         }
     }
