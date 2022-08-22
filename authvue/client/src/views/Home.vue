@@ -1,13 +1,13 @@
 <template>
   <div>
-     Home
+      Home
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'DashboardView',
+  name: 'HomeView',
   components: {
 
   }
