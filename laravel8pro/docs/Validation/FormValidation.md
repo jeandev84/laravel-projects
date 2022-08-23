@@ -1,3 +1,51 @@
+### Form Validation 
+
+```php 
+
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class LoginController extends Controller
+{
+      public function index()
+      {
+           return view('login');
+      }
+
+
+      public function submit(Request $request)
+      {
+           $validated = $request->validate([
+                'email'    => 'required|email',
+                'password' => 'required|min:6|max:12'
+           ]);
+
+
+           $email    = $request->input('email');
+           $password = $request->input('password');
+
+           return sprintf('Email : %s || Password : %s', $email, $password);
+      }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,3 +105,5 @@
     </div>
 </body>
 </html>
+
+```
