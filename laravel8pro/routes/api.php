@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+/*
 // api/users
 Route::get('/users', function () {
      return [
@@ -64,3 +65,4 @@ Route::match(['get', 'post'], '/students', function () {
 Route::any('/posts', function (Request $request) {
      return sprintf('Requested method is [ %s ]', $request->method());
 });
+*/
