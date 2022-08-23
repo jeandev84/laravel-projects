@@ -23,7 +23,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 */
 
 
-Route::group(['namespace' => 'V1', 'prefix' => 'v1'], function () {
+Route::group(['prefix' => 'v1', 'namespace' => 'V1'], function () {
       /* Route::get('dummy', [DummyController::class, 'index']); */
-      Route::get('devices', [DeviceController::class, 'index']);
+      /* Route::get('/devices/{id?}', [DeviceController::class, 'getListWithOptionalParams']); */
+      /* Route::get('/devices', [DeviceController::class, 'list']); */
+      /* Route::get('/devices/{id}', [DeviceController::class, 'show']); */
+
+      Route::get('dummy', [DummyController::class, 'index']);
+      Route::get('/devices/{id?}', [DeviceController::class, 'getListWithOptionalParams']);
+      Route::post('/devices/add', [DeviceController::class, 'add']);
+      Route::put('/devices/{id}', [DeviceController::class, 'update']);
 });
