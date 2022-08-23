@@ -112,4 +112,12 @@ class ProductController extends Controller
       }
 }
 
+
+===================================
+  ADD ROUTE
+===================================
+
+Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+
+
 ```
