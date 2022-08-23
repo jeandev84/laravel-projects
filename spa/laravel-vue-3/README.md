@@ -32,10 +32,39 @@ $ npm i -D @vue/compiler-sfc vue-loader@next
 $ npm install autoprefixer@10.4.5 --save-exact
 ```
 
-4. Laravel/ui 
+4. Install Laravel/ui 
 ```php 
 $ composer require laravel/ui:^3.4.5 || composer require laravel/ui
 $ php artisan ui bootstrap
 $ npm run watch || npm i && npm run development
+```
+
+5. Install Laravel/Sanctum
+```php 
+$ composer require laravel/sanctum:^2.15 || composer require laravel/sanctum
+$ php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+
+./app/Http/Kernel.php :
+( uncomment \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class )
+'api' => [
+        \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+        'throttle:api',
+        \Illuminate\Routing\Middleware\SubstituteBindings::class,
+    ],
+    
+    
+    
+config/cors.php set : 
+'supports_credentials' => true,
+
+
+.env set :
+SESSION_DRIVER=cookie
+
+```
+
+6. Make Controller 
+```
+$ php artisan make:controller Api/V1/UserController
 ```
 
