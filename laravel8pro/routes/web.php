@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -22,3 +23,23 @@ Route::get('/', function () {
 
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+
+
+# Client Routes
+Route::get('/client/posts', [ClientController::class, 'getAllPosts'])
+    ->name('client.posts.get_all');
+
+Route::get('/client/post/{id}', [ClientController::class, 'getPostById'])
+     ->name('client.post.get_by_id');
+
+
+Route::get('/client/add-post', [ClientController::class, 'addPost'])
+    ->name('client.posts.add');
+
+
+Route::get('/client/update-post', [ClientController::class, 'updatePost'])
+    ->name('client.posts.update');
+
+
+Route::get('/client/delete-post/{id}', [ClientController::class, 'deletePost'])
+    ->name('client.posts.delete');
