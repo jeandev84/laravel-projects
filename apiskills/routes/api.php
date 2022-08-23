@@ -31,6 +31,8 @@ Route::group(['prefix' => 'v1', 'namespace' => 'V1'], function () {
 
       Route::get('dummy', [DummyController::class, 'index']);
       Route::get('/devices/{id?}', [DeviceController::class, 'getListWithOptionalParams']);
-      Route::post('/devices/add', [DeviceController::class, 'add']);
+      Route::post('/devices/create', [DeviceController::class, 'create']);
       Route::put('/devices/{id}', [DeviceController::class, 'update']);
+      Route::delete('/devices/{id}', [DeviceController::class, 'delete']);
+      Route::get('/search/{name}', [DeviceController::class, 'search']);
 });

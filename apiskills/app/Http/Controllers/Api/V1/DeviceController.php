@@ -26,7 +26,7 @@ class DeviceController extends Controller
        }
        */
 
-        public function add(Request $request)
+        public function create(Request $request)
         {
              $device = new Device();
              $device->name = $request->name;
@@ -51,6 +51,30 @@ class DeviceController extends Controller
             }
 
             return ['result' => 'Update operation failed.'];
+        }
+
+
+
+        public function delete($id)
+        {
+            $device = Device::find($id);
+
+            if ($device instanceof Device && $device->delete()) {
+                 return ["result" => "record has been delete ". $id];
+            }
+
+            return ["result" => "delete operation  is failed"];
+        }
+
+
+
+        /**
+         * @param $name
+         * @return mixed
+        */
+        public function search($name)
+        {
+            return Device::where("name", "like", '%'. $name . '%')->get();
         }
 
 }
