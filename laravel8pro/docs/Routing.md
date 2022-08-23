@@ -1,3 +1,6 @@
+### Routing 
+```php 
+
 <?php
 
 use Illuminate\Http\Request;
@@ -31,6 +34,18 @@ Route::get('/users', function () {
      ];
 });
 
+Route::get('/users/{name}', function ($name) {
+     return sprintf('Hi, %s', $name);
+});
+
+=========================================================
+             Optional parameters:
+=========================================================
+
+Route::get('/users/{name?}', function ($name = null) {
+     return $name ? sprintf('Hi, %s', $name) : 'Hi!)';
+});
+
 
 Route::get('/users/{name?}', function ($name = null) {
      return $name ? sprintf('Hi, %s', $name) : 'Hi!)';
@@ -38,16 +53,26 @@ Route::get('/users/{name?}', function ($name = null) {
 
 
 Route::get('/products/{id?}', function ($id = null) {
+    if(! $id) {
+         return [
+           ['id' => 1, 'title' => 'Product 1', 'price' => 301, 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, veniam.'],
+           ['id' => 2, 'title' => 'Product 2', 'price' => 302, 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, veniam.'],
+           ['id' => 3, 'title' => 'Product 3', 'price' => 303, 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, veniam.'],
+           ['id' => 4, 'title' => 'Product 4', 'price' => 304, 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, veniam.'],
+        ];
+    }
+    
     return [
-        'id' => $id,
-        'title' => 'Product '. $id,
-        'price' => (300 + $id),
-        'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, veniam.'
+        'id' => $id, 'title' => 'Product '. $id, 'price' => (300 + $id), 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, veniam.'
     ];
 })->where('id', '[0-9]+');
 
 
-Route::match(['get', 'post'], '/students', function () {
+
+Route::match(['get', 'post'], '/students', function (Request $request) {
+
+    echo "Requested method is [ $request->method() ]";
+    
     return [
         ['id' => 1, 'email' => 'student1@gmail.com', 'name' => 'Student 1', 'address' => 'Moscow, golovinskoe shosse dom 8 k 2a'],
         ['id' => 2, 'email' => 'student2@gmail.com', 'name' => 'Student 2', 'address' => 'Moscow, golovinskoe shosse dom 8 k 2a'],
@@ -59,8 +84,9 @@ Route::match(['get', 'post'], '/students', function () {
 });
 
 
-
 // Call by each method GET|POST|PUT|DELETE ...
 Route::any('/posts', function (Request $request) {
      return sprintf('Requested method is [ %s ]', $request->method());
 });
+
+```
