@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Api\V1\DeviceController;
 use App\Http\Controllers\Api\V1\DummyController;
+use App\Http\Controllers\Api\V1\FileController;
+use App\Http\Controllers\Api\V1\MemberController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +38,14 @@ Route::group(['prefix' => 'v1', 'namespace' => 'V1'], function () {
       Route::put('/devices/{id}', [DeviceController::class, 'update']);
       Route::delete('/devices/{id}', [DeviceController::class, 'delete']);
       Route::get('/search/{name}', [DeviceController::class, 'search']);
+      Route::post('/devices/save', [DeviceController::class, 'save']);
+
+      Route::apiResource("member", MemberController::class);
+
+      Route::post('/upload', [FileController::class, 'upload']);
+});
+
+
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
+     Route::post("login", [LoginController::class, 'index']);
 });
