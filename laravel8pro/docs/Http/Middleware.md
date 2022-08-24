@@ -1,3 +1,37 @@
+### Middleware 
+
+```php 
+$ php artisan make:middleware CheckUser
+
+
+./app/Http/Kernel.php
+
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+
+class CheckUser
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+    */
+    public function handle(Request $request, Closure $next)
+    {
+        echo "CheckUser Middleware is applied on the this route";
+        return $next($request);
+    }
+}
+
+
+./app/Http/Kernel.php
+
 <?php
 
 namespace App\Http;
@@ -57,7 +91,7 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $routeMiddleware = [
-        // 'check.user' => \App\Http\Middleware\CheckUser::class,
+        'check.user' => \App\Http\Middleware\CheckUser::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
@@ -69,3 +103,9 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];
 }
+
+
+Route::get('/login', [LoginController::class, 'index'])
+      ->name('login.index')->middleware('check.user');
+      
+```

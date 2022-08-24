@@ -54,7 +54,7 @@ Route::get('/fluent-string', [FluentController::class, 'index'])
 
 # HttpRequest and FormRequest
 Route::get('/login', [LoginController::class, 'index'])
-    ->name('login.index');
+    ->name('login.index')->middleware('check.user');
 
 
 Route::post('/login', [LoginController::class, 'submit'])
