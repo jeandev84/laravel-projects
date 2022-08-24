@@ -49,11 +49,11 @@ Route::get('/session/get', [SessionController::class, 'getSessionData'])
     ->name('session.get');
 
 
-Route::get('/session/store', [SessionController::class, 'storeSessionData'])
+Route::get('/session/set', [SessionController::class, 'storeSessionData'])
     ->name('session.store');
 
 
-Route::get('/session/delete', [SessionController::class, 'deleteSessionData'])
+Route::get('/session/remove', [SessionController::class, 'deleteSessionData'])
     ->name('session.delete');
 
 ```
