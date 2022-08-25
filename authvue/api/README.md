@@ -50,6 +50,17 @@ $ php artisan jwt:secret
 JWT_SECRET=7gqSku93ByNAY1Vepk721gW21cjquw5d8mQPbzmb1oKluM9w40dFtBQu2cw2LTpE
 JWT_TTL=9999999
 
+
+===============================================
+
+Добавить ./config/app.php 
+
+'providers' => [
+
+    ...
+
+    Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+]
 ....
 
 
