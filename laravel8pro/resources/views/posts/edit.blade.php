@@ -16,11 +16,12 @@
             <div class="col-md-6 offset-md-3">
                 <div class="card">
                     <div class="card-header">
-                        Post Details
+                        Edit Post
                     </div>
 
                     <div class="card-body">
-                        <form>
+                        <form method="POST" action="{{ route('post.edit', ['id' =>  $post->id]) }}">
+                            @csrf
                             <div class="form-group">
                                 <label for="title">Title</label>
                                 <input type="text" id="title" name="title" value="{{ $post->title }}" class="form-control" placeholder="Post Title">
@@ -32,8 +33,8 @@
                                      {{ $post->body }}
                                 </textarea>
                             </div>
-
                         </form>
+                        <input type="submit" class="btn btn-success" value="Update" />
                     </div>
                 </div>
             </div>

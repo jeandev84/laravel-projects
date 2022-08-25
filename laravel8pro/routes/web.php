@@ -79,10 +79,10 @@ Route::get('/session/remove', [SessionController::class, 'deleteSessionData'])
 # Posts (CRUD)
 Route::get('/posts', [PostController::class, 'list'])->name('posts.list');
 Route::get('/post/add', [PostController::class, 'add'])->name('post.add');
-Route::post('/post/submit', [PostController::class, 'submit'])->name('post.submit');
-Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
-Route::post('/post/{id}/edit', [PostController::class, 'update'])->name('post.update');
-Route::post('/posts/{id}/delete', [PostController::class, 'delete'])->name('posts.delete');
-
+Route::post('/post/add', [PostController::class, 'submit'])->name('post.submit');
+Route::get('/post/show/{id}', [PostController::class, 'show'])->name('post.show');
+Route::get('/post/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
+Route::get('/post/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
+Route::post('/post/edit/{id}', [PostController::class, 'update'])->name('post.update');
 
 

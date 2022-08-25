@@ -20,6 +20,13 @@
                             All Posts
                         </div>
                         <div class="card-body">
+
+                            @if(Session::has('post_deleted'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ Session::get('post_deleted') }}
+                                </div>
+                            @endif
+
                             <table class="table">
                                  <thead>
                                     <tr>
@@ -38,6 +45,12 @@
                                             <td>
                                                 <a href="{{ route('post.show', ['id' => $post->id]) }}" class="btn btn-success">
                                                     View
+                                                </a>
+                                                <a href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-info">
+                                                    Edit
+                                                </a>
+                                                <a href="{{ route('post.delete', ['id' => $post->id]) }}" class="btn btn-danger">
+                                                    Delete
                                                 </a>
                                             </td>
                                         </tr>
