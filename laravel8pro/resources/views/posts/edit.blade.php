@@ -19,6 +19,12 @@
                         Edit Post
                     </div>
 
+                    @if(Session::has('post_updated'))
+                        <div class="alert alert-success" role="alert">
+                            {{ Session::get('post_updated') }}
+                        </div>
+                    @endif
+
                     <div class="card-body">
                         <form method="POST" action="{{ route('post.edit', ['id' =>  $post->id]) }}">
 
