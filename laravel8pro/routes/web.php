@@ -4,6 +4,7 @@ use App\Http\Controllers\BladeController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FluentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PaginationController;
 use App\Http\Controllers\PostController;
@@ -127,3 +128,13 @@ Route::get('/users', [PaginationController::class, 'listUsers'])->name('paginati
 # Upload File
 Route::get('/upload', [UploadController::class, 'uploadForm'])->name('upload.form');
 Route::post('/upload', [UploadController::class, 'uploadFile'])->name('upload.file');
+
+
+# Localization
+Route::get('/{locate}', function ($locate) {
+
+    App::setLocale($locate);
+
+    return view('localization.index');
+
+})->name('lang');
