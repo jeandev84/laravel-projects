@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\DB;
 class PostController extends Controller
 {
 
+       public function __construct()
+       {
+            // resolve Maximum execution time of 60 seconds exceeded in php
+            ini_set('max_execution_time', 300);
+       }
+
+
        public function list()
        {
            $posts = DB::table('posts')->get();
