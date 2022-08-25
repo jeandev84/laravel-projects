@@ -26,6 +26,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/product', [ProductController::class, 'index'])->name('product.index');
 
@@ -96,7 +97,22 @@ Route::get('/posts/right-join', [PostController::class, 'rightJoinClause'])->nam
 Route::get('/all-posts', [PostController::class, 'getAllPostsUsingModel'])->name('posts.all');
 
 
-# Blade
+# Blade Template
 Route::get('/blade', function () {
      return view('blade.index');
 })->name('blade.index');
+
+# Layout blade
+Route::get('/home', function () {
+     return view('pages.index');
+})->name('page.home');
+
+
+Route::get('/about', function () {
+    return view('pages.about');
+})->name('page.about');
+
+
+Route::get('/contact', function () {
+    return view('pages.contact');
+})->name('page.contact');
