@@ -85,4 +85,13 @@ Route::get('/post/delete/{id}', [PostController::class, 'delete'])->name('post.d
 Route::get('/post/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
 Route::post('/post/edit/{id}', [PostController::class, 'update'])->name('post.update');
 
+# Join Clause
+Route::get('/posts/inner-join', [PostController::class, 'innerJoinClause'])->name('post.inner.join');
+Route::get('/posts/left-join', [PostController::class, 'leftJoinClause'])->name('post.left.join');
+Route::get('/posts/right-join', [PostController::class, 'rightJoinClause'])->name('post.right.join');
+
+
+# Models
+Route::get('/all-posts', [PostController::class, 'getAllPostsUsingModel'])->name('posts.all');
+
 

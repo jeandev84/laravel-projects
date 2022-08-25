@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -75,4 +76,48 @@ class PostController extends Controller
 
           return back()->with('post_deleted', 'Post has been deleted successfully');
       }
+
+
+
+      public function innerJoinClause()
+      {
+
+          /*
+            $result = DB::table('users')
+               ->join('posts', 'user_id', '=', 'posts.user_id')
+               ->select('users.name as userName', 'posts.title as postTitle', 'posts.body as postBody')
+               ->get();
+          */
+
+           return DB::table('users')
+                        ->join('posts', 'user_id', '=', 'posts.user_id')
+                        ->select('users.name', 'posts.title', 'posts.body')
+                        ->get();
+
+      }
+
+
+
+      public function leftJoinClause()
+      {
+          return DB::table('users')
+                 ->leftJoin('posts', 'user_id', '=', 'posts.user_id')
+                 ->get();
+      }
+
+
+
+    public function rightJoinClause()
+    {
+        return DB::table('users')
+            ->rightJoin('posts', 'user_id', '=', 'posts.user_id')
+            ->get();
+    }
+
+
+
+    public function getAllPostsUsingModel()
+    {
+         return Post::all();
+    }
 }
