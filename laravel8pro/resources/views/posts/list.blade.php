@@ -11,13 +11,20 @@
 <body>
 
 
-    <section>
+    <section class="mt-3">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            All Posts
+                            <div class="row">
+                                <div class="col-10">
+                                    All Posts
+                                </div>
+                                <div class="col-2">
+                                    <a href="{{ route('post.add') }}" class="btn btn-success">New Post</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
 
