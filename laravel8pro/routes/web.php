@@ -4,6 +4,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FluentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
@@ -73,3 +74,15 @@ Route::get('/session/set', [SessionController::class, 'storeSessionData'])
 
 Route::get('/session/remove', [SessionController::class, 'deleteSessionData'])
     ->name('session.delete');
+
+
+# Posts (CRUD)
+Route::get('/posts', [PostController::class, 'list'])->name('posts.list');
+Route::get('/post/add', [PostController::class, 'add'])->name('post.add');
+Route::post('/post/submit', [PostController::class, 'submit'])->name('post.submit');
+Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
+Route::post('/post/{id}/edit', [PostController::class, 'update'])->name('post.update');
+Route::post('/posts/{id}/delete', [PostController::class, 'delete'])->name('posts.delete');
+
+
+
