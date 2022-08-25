@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BladeController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FluentController;
 use App\Http\Controllers\HomeController;
@@ -95,3 +96,7 @@ Route::get('/posts/right-join', [PostController::class, 'rightJoinClause'])->nam
 Route::get('/all-posts', [PostController::class, 'getAllPostsUsingModel'])->name('posts.all');
 
 
+# Blade
+Route::get('/blade', function () {
+     return view('blade.index');
+})->name('blade.index');
