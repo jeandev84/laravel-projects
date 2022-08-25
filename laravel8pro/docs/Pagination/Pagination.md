@@ -2,6 +2,9 @@
 
 ```php 
 
+$ php artisan make:controller PaginationController
+
+
 <?php
 
 namespace App\Http\Controllers;

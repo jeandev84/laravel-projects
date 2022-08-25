@@ -9,6 +9,7 @@ use App\Http\Controllers\PaginationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -121,3 +122,8 @@ Route::get('/contact', function () {
 
 # Pagination
 Route::get('/users', [PaginationController::class, 'listUsers'])->name('pagination.users');
+
+
+# Upload File
+Route::get('/upload', [UploadController::class, 'uploadForm'])->name('upload.form');
+Route::post('/upload', [UploadController::class, 'uploadFile'])->name('upload.file');
