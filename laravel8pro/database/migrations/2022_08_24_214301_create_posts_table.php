@@ -17,6 +17,13 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('title', 200);
             $table->text('body');
+            $table->bigInteger('user_id')->nullable();
+
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade'); // or SET NULL
+
             $table->timestamps();
         });
     }

@@ -1,10 +1,17 @@
+### Migration 
+
+```php 
+
+$ php artisan make:migration create_posts_table --create=posts
+
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUserIdToPostsTable extends Migration
+class CreatePostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +20,18 @@ class AddUserIdToPostsTable extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->string('title', 200);
+            $table->text('body');
             $table->bigInteger('user_id')->nullable();
 
             $table->foreign('user_id')
                   ->references('id')
                   ->on('users')
                   ->onDelete('cascade'); // or SET NULL
+
+            $table->timestamps();
         });
     }
 
@@ -33,9 +44,16 @@ class AddUserIdToPostsTable extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-             $table->dropForeign('user_id');
-             $table->dropColumn('user_id');
-        });
+        Schema::dropIfExists('posts');
     }
 }
+
+
+$ php artisan migrate
+$ php artisan migrate:rollback
+$ php artisan migrate:refresh
+$ php artisan migrate:fresh
+$ php artisan migrate:reset
+
+
+```
