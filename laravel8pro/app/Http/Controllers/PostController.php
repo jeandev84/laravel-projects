@@ -56,6 +56,8 @@ class PostController extends Controller
      public function update(Request $request, $id)
      {
            DB::table('posts')->where('id', $id)->update($request->only('title', 'body'));
+
+           return back()->with('post_updated', 'Post has been updated successfully');
      }
 
 

@@ -21,7 +21,11 @@
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('post.edit', ['id' =>  $post->id]) }}">
+
                             @csrf
+
+                            <input type="hidden" name="id" value="{{ $post->id }}" />
+
                             <div class="form-group">
                                 <label for="title">Title</label>
                                 <input type="text" id="title" name="title" value="{{ $post->title }}" class="form-control" placeholder="Post Title">
