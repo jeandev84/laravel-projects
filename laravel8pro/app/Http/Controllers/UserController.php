@@ -26,7 +26,7 @@ class UserController extends Controller
             "phone" => "1234567890"
         ];
 
-        return view('user', compact('name', 'users'));
+        return view('users.view', compact('name', 'users'));
     }
 
 

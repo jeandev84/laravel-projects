@@ -62,11 +62,11 @@ Route::get('/fluent-string', [FluentController::class, 'index'])
 
 
 # HttpRequest and FormRequest
-Route::get('/login', [LoginController::class, 'index'])
+Route::get('/auth/login', [LoginController::class, 'index'])
     ->name('login.index')->middleware('check.user');
 
 
-Route::post('/login', [LoginController::class, 'submit'])
+Route::post('/auth/login', [LoginController::class, 'submit'])
     ->name('login.submit');
 
 
@@ -153,3 +153,15 @@ Route::get('/payment', function () {
 # Send Mail
 
 Route::get('/send-mail', [MailController::class, 'sendEmail'])->name('send.mail');
+
+
+# JetStream Auth
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
