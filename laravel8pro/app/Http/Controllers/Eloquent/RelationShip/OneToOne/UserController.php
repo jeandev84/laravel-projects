@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Eloquent;
+namespace App\Http\Controllers\Eloquent\RelationShip\OneToOne;
 
 use App\Http\Controllers\Controller;
 use App\Models\Phone;

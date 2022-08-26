@@ -182,9 +182,20 @@ Route::get('/post/delete/{id}', [PostController::class, 'delete'])->name('post.d
 
 
 # Eloquent RelationShip (OneToOne)
-Route::get('/add-user', [\App\Http\Controllers\Eloquent\UserController::class, 'insertRecord'])
+Route::get('/add-user', [\App\Http\Controllers\Eloquent\RelationShip\OneToOne\UserController::class, 'insertRecord'])
     ->name('user.insertRecord');
 
 
-Route::get('/get-phone/{id}', [\App\Http\Controllers\Eloquent\UserController::class, 'fetchPhoneByUserId'])
+Route::get('/get-phone/{id}', [\App\Http\Controllers\Eloquent\RelationShip\OneToOne\UserController::class, 'fetchPhoneByUserId'])
     ->name('user.fetchByUser');
+
+
+# Eloquent RelationShip (OneToMany)
+Route::get('/add-post', [\App\Http\Controllers\Eloquent\RelationShip\OneToMany\PostController::class, 'addPost'])
+    ->name('post.add');
+
+Route::get('/add-comment/{postId}', [\App\Http\Controllers\Eloquent\RelationShip\OneToMany\PostController::class, 'addComment'])
+    ->name('post.add.comment');
+
+Route::get('/get-comments/{postId}', [\App\Http\Controllers\Eloquent\RelationShip\OneToMany\PostController::class, 'getCommentsByPostId'])
+    ->name('post.get.comments');

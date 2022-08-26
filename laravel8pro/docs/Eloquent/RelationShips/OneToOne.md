@@ -1,5 +1,6 @@
-### One To One
+### One To One 
 
+- Example : One User Has Hone Phone.
 ```php 
 $ php artisan make:model Phone -m
 
