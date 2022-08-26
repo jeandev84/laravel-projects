@@ -27,12 +27,6 @@
                            </div>
                        @endif
 
-                       @if(Session::has('post_updated'))
-                           <div class="alert alert-success" role="alert">
-                               {{ Session::get('post_updated') }}
-                           </div>
-                       @endif
-
                        <table class="table table-striped">
                             <thead>
                             <tr>
