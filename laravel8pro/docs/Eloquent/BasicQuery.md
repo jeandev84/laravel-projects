@@ -1,4 +1,4 @@
-### Eloquent
+### Basic Query Eloquent (ORM)
 
 1. Create a model Eloquent and migration associated to this model.
 ```php 

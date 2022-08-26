@@ -9,6 +9,9 @@ class Post extends Model
 {
     use HasFactory;
 
+    const PerPage = 10;
+
     protected $table = 'posts';
 
+    protected $fillable = ['title', 'body'];
 }

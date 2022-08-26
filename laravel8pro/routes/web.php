@@ -5,7 +5,8 @@ use App\Http\Controllers\Demo\FluentController;
 use App\Http\Controllers\Demo\LoginController;
 use App\Http\Controllers\Demo\MailController;
 use App\Http\Controllers\Demo\PaginationController;
-use App\Http\Controllers\Demo\PostController;
+//use App\Http\Controllers\Demo\PostController;
+use App\Http\Controllers\Eloquent\PostController;
 use App\Http\Controllers\Demo\ProductController;
 use App\Http\Controllers\Demo\SessionController;
 use App\Http\Controllers\Demo\UploadController;
@@ -167,3 +168,12 @@ Route::middleware([
 
 # Eloquent
 Route::get('/students', [StudentController::class, 'fetchStudents']);
+
+# Eloquent CRUD
+Route::get('/posts', [PostController::class, 'list'])->name('post.list');
+Route::get('/post/add', [PostController::class, 'add'])->name('post.add');
+Route::post('/post/create', [PostController::class, 'create'])->name('post.create');
+Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
+Route::get('/post/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
+Route::post('/post/update/{id}', [PostController::class, 'update'])->name('post.update');
+Route::get('/post/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
