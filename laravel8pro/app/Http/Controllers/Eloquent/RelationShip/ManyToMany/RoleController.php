@@ -33,6 +33,7 @@ class RoleController extends Controller
 
       public function addUser()
       {
+          /*
           $user = new User();
           $user->name = "John";
           $user->email = "john@gmail.com";
@@ -42,6 +43,18 @@ class RoleController extends Controller
           // 1: ID Administrator
           // 2: ID Editor
           $roleIds = [1, 2];
+          */
+
+          $user = new User();
+          $user->name = "Brown";
+          $user->email = "brown@gmail.com";
+          $user->password = encrypt('secret');
+          $user->save();
+
+          // 2: ID Editor
+          // 3: ID Author
+          // 4: ID Contributor
+          $roleIds = [2, 3, 4];
 
           $user->roles()->attach($roleIds);
 
