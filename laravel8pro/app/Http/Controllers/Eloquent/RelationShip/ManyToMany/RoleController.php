@@ -60,4 +60,23 @@ class RoleController extends Controller
 
           return "Record has been created successfully!";
       }
+
+
+
+      public function getAllRolesByUserId($userId)
+      {
+           $user  = User::find($userId);
+           $roles = $user->roles;
+
+           return $roles;
+      }
+
+
+      public function getAllUsersByRoleId($roleId)
+      {
+          $role = Role::find($roleId);
+          $users = $role->users;
+
+          return $users;
+      }
 }

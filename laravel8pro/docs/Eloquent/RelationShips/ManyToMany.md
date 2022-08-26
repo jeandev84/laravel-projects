@@ -233,6 +233,7 @@ $ php artisan migrate
 
 $  php artisan make:controller Eloquent/RelationShip/ManyToMany/RoleController
 
+
 <?php
 
 namespace App\Http\Controllers\Eloquent\RelationShip\ManyToMany;
@@ -268,6 +269,7 @@ class RoleController extends Controller
 
       public function addUser()
       {
+          /*
           $user = new User();
           $user->name = "John";
           $user->email = "john@gmail.com";
@@ -277,23 +279,64 @@ class RoleController extends Controller
           // 1: ID Administrator
           // 2: ID Editor
           $roleIds = [1, 2];
+          */
+
+          $user = new User();
+          $user->name = "Brown";
+          $user->email = "brown@gmail.com";
+          $user->password = encrypt('secret');
+          $user->save();
+
+          // 2: ID Editor
+          // 3: ID Author
+          // 4: ID Contributor
+          $roleIds = [2, 3, 4];
 
           $user->roles()->attach($roleIds);
 
           return "Record has been created successfully!";
       }
+
+
+
+      public function getAllRolesByUserId($userId)
+      {
+           $user  = User::find($userId);
+           $roles = $user->roles;
+
+           return $roles;
+      }
+
+
+      public function getAllUsersByRoleId($roleId)
+      {
+          $role = Role::find($roleId);
+          $users = $role->users;
+
+          return $users;
+      }
 }
 
 
 
+=====================================================================
 
 
 
 # Eloquent RelationShip (ManyToMany)
 Route::get('/add-roles', [\App\Http\Controllers\Eloquent\RelationShip\ManyToMany\RoleController::class, 'addRoles'])
     ->name('add.roles');
-    
+
+
 Route::get('/add-user-and-roles', [\App\Http\Controllers\Eloquent\RelationShip\ManyToMany\RoleController::class, 'addUser'])
     ->name('add.user.and.roles');
+
+
+Route::get('/get-roles-by-user/{userId}', [\App\Http\Controllers\Eloquent\RelationShip\ManyToMany\RoleController::class, 'getAllRolesByUserId'])
+    ->name('get.roles.by_user');
+
+
+Route::get('/get-users-by-role/{roleId}', [\App\Http\Controllers\Eloquent\RelationShip\ManyToMany\RoleController::class, 'getAllUsersByRoleId'])
+    ->name('get.roles.by_role');
     
 ```

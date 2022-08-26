@@ -208,3 +208,11 @@ Route::get('/add-roles', [\App\Http\Controllers\Eloquent\RelationShip\ManyToMany
 
 Route::get('/add-user-and-roles', [\App\Http\Controllers\Eloquent\RelationShip\ManyToMany\RoleController::class, 'addUser'])
     ->name('add.user.and.roles');
+
+
+Route::get('/get-roles-by-user/{userId}', [\App\Http\Controllers\Eloquent\RelationShip\ManyToMany\RoleController::class, 'getAllRolesByUserId'])
+    ->name('get.roles.by_user');
+
+
+Route::get('/get-users-by-role/{roleId}', [\App\Http\Controllers\Eloquent\RelationShip\ManyToMany\RoleController::class, 'getAllUsersByRoleId'])
+    ->name('get.roles.by_role');
