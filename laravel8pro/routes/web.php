@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
+use App\PaymentGateway\Payment;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -131,10 +132,18 @@ Route::post('/upload', [UploadController::class, 'uploadFile'])->name('upload.fi
 
 
 # Localization
-Route::get('/{locate}', function ($locate) {
+Route::get('/{locate}/lang', function ($locate) {
 
     App::setLocale($locate);
 
     return view('localization.index');
 
-})->name('lang');
+})->name('locate.page');
+
+
+# Facades (PaymentGateway)
+
+Route::get('/payment', function () {
+
+    return Payment::process();
+});
