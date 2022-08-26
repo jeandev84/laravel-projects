@@ -6,6 +6,7 @@ use App\Http\Controllers\FluentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\PaginationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
@@ -147,3 +148,8 @@ Route::get('/payment', function () {
 
     return Payment::process();
 });
+
+
+# Send Mail
+
+Route::get('/send-mail', [MailController::class, 'sendEmail'])->name('send.mail');
