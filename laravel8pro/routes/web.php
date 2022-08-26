@@ -1,18 +1,16 @@
 <?php
 
-use App\Http\Controllers\BladeController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\FluentController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LocalizationController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MailController;
-use App\Http\Controllers\PaginationController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SessionController;
-use App\Http\Controllers\UploadController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Demo\ClientController;
+use App\Http\Controllers\Demo\FluentController;
+use App\Http\Controllers\Demo\LoginController;
+use App\Http\Controllers\Demo\MailController;
+use App\Http\Controllers\Demo\PaginationController;
+use App\Http\Controllers\Demo\PostController;
+use App\Http\Controllers\Demo\ProductController;
+use App\Http\Controllers\Demo\SessionController;
+use App\Http\Controllers\Demo\UploadController;
+use App\Http\Controllers\Demo\UserController;
+use App\Http\Controllers\Eloquent\StudentController;
 use App\PaymentGateway\Payment;
 use Illuminate\Support\Facades\Route;
 
@@ -165,3 +163,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+# Eloquent
+Route::get('/students', [StudentController::class, 'fetchStudents']);

@@ -1,6 +1,7 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Demo;
 
+use App\Http\Controllers\Controller;
 use App\Mail\TestGmailMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
