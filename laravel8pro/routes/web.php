@@ -199,3 +199,12 @@ Route::get('/add-comment/{postId}', [\App\Http\Controllers\Eloquent\RelationShip
 
 Route::get('/get-comments/{postId}', [\App\Http\Controllers\Eloquent\RelationShip\OneToMany\PostController::class, 'getCommentsByPostId'])
     ->name('post.get.comments');
+
+
+# Eloquent RelationShip (ManyToMany)
+Route::get('/add-roles', [\App\Http\Controllers\Eloquent\RelationShip\ManyToMany\RoleController::class, 'addRoles'])
+    ->name('add.roles');
+
+
+Route::get('/add-user-and-roles', [\App\Http\Controllers\Eloquent\RelationShip\ManyToMany\RoleController::class, 'addUser'])
+    ->name('add.user.and.roles');
