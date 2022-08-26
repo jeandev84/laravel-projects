@@ -30,7 +30,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+/*
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/product', [ProductController::class, 'index'])->name('product.index');
 
@@ -177,3 +177,14 @@ Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
 Route::get('/post/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
 Route::post('/post/update/{id}', [PostController::class, 'update'])->name('post.update');
 Route::get('/post/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
+
+*/
+
+
+# Eloquent RelationShip (OneToOne)
+Route::get('/add-user', [\App\Http\Controllers\Eloquent\UserController::class, 'insertRecord'])
+    ->name('user.insertRecord');
+
+
+Route::get('/get-phone/{id}', [\App\Http\Controllers\Eloquent\UserController::class, 'fetchPhoneByUserId'])
+    ->name('user.fetchByUser');
