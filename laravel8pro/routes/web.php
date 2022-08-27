@@ -312,3 +312,8 @@ Route::get('/contact-us', [\App\Http\Controllers\Form\ContactController::class, 
 
 Route::post('/send-message', [\App\Http\Controllers\Form\ContactController::class, 'sendEmail'])
     ->name('contact.send');
+
+
+# Helpers functions
+Route::get('/get-name', [\App\Http\Controllers\Helpers\DemoController::class, 'getFirstLastName'])
+   ->name('get.name');
