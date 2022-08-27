@@ -45,11 +45,6 @@ class CreateEmployeesTable extends Migration
     }
 }
 
-
-
-# Export CSV Data
-Route::get('/add-employees', [\App\Http\Controllers\CSV\EmployeeController::class, 'addEmployee'])
-     ->name('add.employees');
      
      
 $ php artisan migrate
@@ -67,7 +62,16 @@ $ php artisan migrate
 - Upload File : https://techvblogs.com/blog/upload-files-images-laravel
 
 ```php
+$ composer require maatwebsite/excel:^3.0
 $ composer require maatwebsite/excel:*
+
+In Laravel 8
+
+// 1. Install "maatwebsite/excel": "3.0" with php 7.2 
+// 2. Install other dependencies of Laravel 
+
+1. sudo update-alternatives --set php /usr/bin/php8.1
+2. composer install --ignore-platform-reqs
 
 ./config/app.php 
 
