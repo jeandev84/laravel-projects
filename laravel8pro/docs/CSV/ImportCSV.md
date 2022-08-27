@@ -10,7 +10,7 @@ In Laravel 8
 // 2. Install other dependencies of Laravel 
 
 1. sudo update-alternatives --set php /usr/bin/php8.1
-2. composer install --ignore-platform-reqs
+2. composer install --ignore-platform-reqs || composer update --ignore-platform-reqs
 
 ./config/app.php 
 

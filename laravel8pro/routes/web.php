@@ -247,3 +247,12 @@ Route::get('/import-form', [\App\Http\Controllers\CSV\EmployeeController::class,
 
 Route::post('/import-csv', [\App\Http\Controllers\CSV\EmployeeController::class, 'importCSV'])
     ->name('import.csv');
+
+
+# Resize Image
+Route::get('/resize-image', [\App\Http\Controllers\Image\ImageController::class, 'resizeImageForm'])
+    ->name('resize.image.form');
+
+
+Route::post('/resize-image', [\App\Http\Controllers\Image\ImageController::class, 'resizeImageSubmit'])
+    ->name('resize.image.submit');
