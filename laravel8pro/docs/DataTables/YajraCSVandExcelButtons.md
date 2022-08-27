@@ -134,4 +134,8 @@ class EmployeeController extends Controller
 </body>
 </html>
 
+# DataTables
+Route::get('/employees', [\App\Http\Controllers\DataTables\EmployeeController::class, 'index'])
+  ->name('employees.list');
+  
 ```
