@@ -178,7 +178,6 @@ Route::get('/post/edit/{id}', [PostController::class, 'edit'])->name('post.edit'
 Route::post('/post/update/{id}', [PostController::class, 'update'])->name('post.update');
 Route::get('/post/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
 
-*/
 
 
 # Eloquent RelationShip (OneToOne)
@@ -339,3 +338,16 @@ Route::get('/zip-download', [\App\Http\Controllers\ZipFile\ZipController::class,
 # DataTables
 Route::get('/employees', [\App\Http\Controllers\DataTables\EmployeeController::class, 'index'])
   ->name('employees.list');
+
+*/
+
+
+# AJAX Records
+
+Route::get('/students', [\App\Http\Controllers\Ajax\StudentController::class, 'index'])
+     ->name('students.list');
+
+
+Route::post('/add-student', [\App\Http\Controllers\Ajax\StudentController::class, 'addStudent'])
+    ->name('student.add');
+

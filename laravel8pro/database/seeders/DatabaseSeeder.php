@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Employee;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -43,5 +44,8 @@ class DatabaseSeeder extends Seeder
                   'phone' => $faker->phoneNumber,
              ]);
         }
+
+
+        Employee::factory()->count(100)->create();
     }
 }
