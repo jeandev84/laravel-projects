@@ -216,3 +216,16 @@ Route::get('/get-roles-by-user/{userId}', [\App\Http\Controllers\Eloquent\Relati
 
 Route::get('/get-users-by-role/{roleId}', [\App\Http\Controllers\Eloquent\RelationShip\ManyToMany\RoleController::class, 'getAllUsersByRoleId'])
     ->name('get.roles.by_role');
+
+
+# Export CSV Data
+Route::get('/add-employees', [\App\Http\Controllers\CSV\EmployeeController::class, 'addEmployee'])
+    ->name('add.employees');
+
+
+Route::get('/export-excel', [\App\Http\Controllers\CSV\EmployeeController::class, 'exportIntoExcel'])
+    ->name('export.excel');
+
+
+Route::get('/export-csv', [\App\Http\Controllers\CSV\EmployeeController::class, 'exportIntoCSV'])
+    ->name('export.csv');
