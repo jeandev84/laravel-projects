@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Exports\EmployeeExport;
-use Excel;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 
