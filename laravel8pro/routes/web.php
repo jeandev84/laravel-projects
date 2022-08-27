@@ -256,3 +256,12 @@ Route::get('/resize-image', [\App\Http\Controllers\Image\ImageController::class,
 
 Route::post('/resize-image', [\App\Http\Controllers\Image\ImageController::class, 'resizeImageSubmit'])
     ->name('resize.image.submit');
+
+
+# DropZoneJS File Upload
+Route::get('/dropzone-image', [\App\Http\Controllers\Image\DropZoneJSFileUploadController::class, 'dropzoneForm'])
+    ->name('dropzone.form');
+
+
+Route::post('/dropzone-store', [\App\Http\Controllers\Image\DropZoneJSFileUploadController::class, 'dropzoneStore'])
+    ->name('dropzone.store');

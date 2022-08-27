@@ -21,7 +21,7 @@ class ImageController extends Controller
 
            $resizeImage = Image::make($image->getRealPath());
            $resizeImage->resize(300, 300);
-           $resizeImage->save(public_path('images/'. $filename));
+           $resizeImage->save(public_path('images/uploads/'. $filename));
 
            return "Image has been resized successfully!";
       }
