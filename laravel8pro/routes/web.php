@@ -304,3 +304,11 @@ Route::get('/delete-student/{id}', [\App\Http\Controllers\Image\CRUD\StudentCont
 
 # Notification Toastr
 # Notification Sweet Alert
+
+# Contact Form
+Route::get('/contact-us', [\App\Http\Controllers\Form\ContactController::class, 'contactForm'])
+    ->name('contact.us');
+
+
+Route::post('/send-message', [\App\Http\Controllers\Form\ContactController::class, 'sendEmail'])
+    ->name('contact.send');
