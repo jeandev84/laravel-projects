@@ -265,3 +265,9 @@ Route::get('/dropzone-image', [\App\Http\Controllers\Image\DropZoneJSFileUploadC
 
 Route::post('/dropzone-store', [\App\Http\Controllers\Image\DropZoneJSFileUploadController::class, 'dropzoneStore'])
     ->name('dropzone.store');
+
+
+# LazyLoading Image
+Route::get('/gallery-images', [\App\Http\Controllers\Image\GalleryController::class, 'gallery'])
+     ->name('gallery.images');
+
