@@ -317,3 +317,15 @@ Route::post('/send-message', [\App\Http\Controllers\Form\ContactController::clas
 # Helpers functions
 Route::get('/get-name', [\App\Http\Controllers\Helpers\DemoController::class, 'getFirstLastName'])
    ->name('get.name');
+
+
+# Search Autocomplete
+Route::get('/add-products', [\App\Http\Controllers\Search\ProductController::class, 'addProducts'])
+   ->name('add.products');
+
+Route::get('/search', [\App\Http\Controllers\Search\ProductController::class, 'search'])
+    ->name('search');
+
+
+Route::get('/autocomplete', [\App\Http\Controllers\Search\ProductController::class, 'autocomplete'])
+    ->name('autocomplete');
