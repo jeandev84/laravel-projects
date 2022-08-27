@@ -334,3 +334,8 @@ Route::get('/autocomplete', [\App\Http\Controllers\Search\ProductController::cla
 # Zip File Download
 Route::get('/zip-download', [\App\Http\Controllers\ZipFile\ZipController::class, 'downloadZipFile'])
    ->name('zip.download');
+
+
+# DataTables
+Route::get('/employees', [\App\Http\Controllers\DataTables\EmployeeController::class, 'index'])
+  ->name('employees.list');

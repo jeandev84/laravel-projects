@@ -18,7 +18,8 @@ class CreateEmployeesTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->string('salary');
+            // $table->string('salary');
+            $table->decimal('salary');
             $table->string('department');
             $table->timestamps();
         });
