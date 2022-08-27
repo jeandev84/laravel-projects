@@ -275,3 +275,28 @@ Route::get('/gallery-images', [\App\Http\Controllers\Image\GalleryController::cl
 # TinyMCE ( WYSIWYG HTML Editor )
 Route::get('/tinymce-editor', [\App\Http\Controllers\TinyMCE\EditorController::class, 'editor'])
     ->name('tinymce.editor');
+
+
+# Image CRUD
+Route::get('/add-student', [\App\Http\Controllers\Image\CRUD\StudentController::class, 'addStudent'])
+   ->name('student.add');
+
+
+Route::post('/add-student', [\App\Http\Controllers\Image\CRUD\StudentController::class, 'storeStudent'])
+    ->name('student.store');
+
+
+Route::get('/students', [\App\Http\Controllers\Image\CRUD\StudentController::class, 'getStudents'])
+    ->name('students.list');
+
+
+Route::get('/edit-student/{id}', [\App\Http\Controllers\Image\CRUD\StudentController::class, 'editStudent'])
+    ->name('student.edit');
+
+
+Route::post('/update-student/{id}', [\App\Http\Controllers\Image\CRUD\StudentController::class, 'updateStudent'])
+    ->name('student.update');
+
+
+Route::get('/delete-student/{id}', [\App\Http\Controllers\Image\CRUD\StudentController::class, 'deleteStudent'])
+    ->name('student.delete');
