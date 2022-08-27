@@ -185,7 +185,7 @@ class EmployeeDataTable extends DataTable
                     ->setTableId('employee-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
+                    ->dom('Bfrtip') display Show (sorting)
                     ->orderBy(1)
                     ->buttons(
                         Button::make('create'),
@@ -201,7 +201,6 @@ class EmployeeDataTable extends DataTable
             ->setTableId('employee-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->dom('Bfrtip')
             ->orderBy(1);
     }
 

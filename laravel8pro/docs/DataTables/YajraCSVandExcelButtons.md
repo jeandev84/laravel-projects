@@ -1,3 +1,98 @@
+### Yajra CSV and Excel Buttons
+
+
+- https://cdn.datatables.net
+- https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap4.min.css
+- https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js
+- https://cdn.datatables.net/buttons/2.2.3/js/buttons.bootstrap4.min.js
+```php 
+
+$ composer require yajra/laravel-datatables-buttons
+$ composer update --ignore-platform-reqs
+
+
+./confi/app.php
+
+'providers' => [
+   ...
+   \Yajra\DataTables\ButtonsServiceProvider::class,
+   
+],
+
+'aliases' => [
+  
+   ... 
+   
+]
+
+
+$ php artisan vendor:publish --provider="Yajra\DataTables\ButtonsServiceProvider"
+
+
+
+<?php
+
+namespace App\DataTables;
+
+use App\Models\Employee;
+use Yajra\DataTables\Html\Button;
+use Yajra\DataTables\Html\Column;
+use Yajra\DataTables\Html\Editor\Editor;
+use Yajra\DataTables\Html\Editor\Fields;
+use Yajra\DataTables\Services\DataTable;
+
+class EmployeeDataTable extends DataTable
+{
+   
+   ....
+   
+    /**
+     * Optional method if you want to use html builder.
+     *
+     * @return \Yajra\DataTables\Html\Builder
+     */
+    public function html()
+    {
+
+        return $this->builder()
+            ->setTableId('employee-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->orderBy(1)
+            ->buttons(
+                Button::make('excel'),
+                Button::make('csv')
+            );
+    }
+
+
+    ....
+}
+
+
+
+<?php
+namespace App\Http\Controllers\DataTables;
+
+use App\DataTables\EmployeeDataTable;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+
+/**
+ *
+*/
+class EmployeeController extends Controller
+{
+      public function index(EmployeeDataTable $dataTable)
+      {
+           return $dataTable->render('datatables.employees.list');
+      }
+}
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,3 +133,5 @@
 
 </body>
 </html>
+
+```

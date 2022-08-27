@@ -17,7 +17,8 @@
         "livewire/livewire": "^2.5",
         "maatwebsite/excel": "^3.0",
         "intervention/image": "^2.0",
-        "yajra/laravel-datatables": "*"
+        "yajra/laravel-datatables": "*",
+        "yajra/laravel-datatables-buttons": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
