@@ -5,53 +5,16 @@ namespace App\Http\Controllers\CSV;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use Illuminate\Http\Request;
-use App\Exports\EmployeeExport;
 use Maatwebsite\Excel\Facades\Excel;
-
+use App\Exports\EmployeeExport;
+use App\Imports\EmployeeImport;
 
 
 class EmployeeController extends Controller
 {
        public function addEmployee()
        {
-           $employees = [
-               [
-                   "name" => "Alex",
-                   "email" => "alice@gmail.com",
-                   "phone" => "1234567890",
-                   "salary" => "20000",
-                   "department" => "Accounting"
-               ],
-               [
-                   "name" => "Andrew",
-                   "email" => "andrew@gmail.com",
-                   "phone" => "1234567891",
-                   "salary" => "21000",
-                   "department" => "Marketing"
-               ],
-               [
-                   "name" => "Mike",
-                   "email" => "mike@gmail.com",
-                   "phone" => "1234567892",
-                   "salary" => "22000",
-                   "department" => "Quality"
-               ],
-               [
-                   "name" => "Sophie",
-                   "email" => "sophie@gmail.com",
-                   "phone" => "1234567893",
-                   "salary" => "21000",
-                   "department" => "Accounting"
-               ],
-               [
-                   "name" => "Steve",
-                   "email" => "steve@gmail.com",
-                   "phone" => "1234567894",
-                   "salary" => "22000",
-                   "department" => "Marketing"
-               ],
-           ];
-
+           $employees = EmployeeStorage::getStack();
 
            Employee::insert($employees);
 
@@ -70,5 +33,21 @@ class EmployeeController extends Controller
        public function exportIntoCSV()
        {
            return Excel::download(new EmployeeExport(), 'employeelist.csv');
+       }
+
+
+
+       public function importForm()
+       {
+           return view('csv.import-form');
+       }
+
+
+
+       public function importCSV(Request $request): string
+       {
+            Excel::import(new EmployeeImport(), $request->file);
+
+            return "Record are imported successfully!";
        }
 }

@@ -63,7 +63,6 @@ $ php artisan migrate
 
 ```php
 $ composer require maatwebsite/excel:^3.0
-$ composer require maatwebsite/excel:*
 
 In Laravel 8
 
@@ -98,6 +97,7 @@ $ php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider"
 
 $ php artisan migrate
 
+$ php artisan make:model Employee -mf 
 
 <?php
 
@@ -125,7 +125,7 @@ class Employee extends Model
 }
 
 
-$ php artisan make:export EmployeeExport --model=App\Models\Employee
+$ php artisan make:export EmployeeExport --model=Employee
 
 
 <?php

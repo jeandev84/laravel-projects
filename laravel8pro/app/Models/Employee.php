@@ -14,6 +14,9 @@ class Employee extends Model
     protected $table = 'employees';
 
 
+    protected $fillable = ['name', 'email', 'phone', 'salary', 'department'];
+
+
     public static function getEmployee()
     {
         return DB::table('employees')

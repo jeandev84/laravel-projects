@@ -238,3 +238,12 @@ Route::get('/get-all-employees', [\App\Http\Controllers\PDF\EmpController::class
 
 Route::get('/download-pdf-employees', [\App\Http\Controllers\PDF\EmpController::class, 'downloadPDF'])
     ->name('download.pdf.employees');
+
+
+# Import CSV
+Route::get('/import-form', [\App\Http\Controllers\CSV\EmployeeController::class, 'importForm'])
+    ->name('import.form');
+
+
+Route::post('/import-csv', [\App\Http\Controllers\CSV\EmployeeController::class, 'importCSV'])
+    ->name('import.csv');
