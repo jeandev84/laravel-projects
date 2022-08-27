@@ -303,3 +303,4 @@ Route::get('/delete-student/{id}', [\App\Http\Controllers\Image\CRUD\StudentCont
 
 
 # Notification Toastr
+# Notification Sweet Alert

@@ -60,6 +60,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <!-- Sweet alert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- Custom scripts -->
     <script>
 
@@ -80,10 +83,22 @@
          }
     </script>
 
+    <!-- Toastr -->
     @if(Session::has('student_added'))
         <script>
             toastr.success("{!! Session::get('student_added') !!}");
         </script>
     @endif
+
+   <!-- Sweet Alert -->
+    @if(Session::has('student_added'))
+        <script>
+           swal("Great Job!", "{!! Session::get('student_added') !!}", "success", {
+               button: "OK"
+           });
+        </script>
+    @endif
+
+
 </body>
 </html>
