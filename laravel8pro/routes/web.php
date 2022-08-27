@@ -329,3 +329,8 @@ Route::get('/search', [\App\Http\Controllers\Search\ProductController::class, 's
 
 Route::get('/autocomplete', [\App\Http\Controllers\Search\ProductController::class, 'autocomplete'])
     ->name('autocomplete');
+
+
+# Zip File Download
+Route::get('/zip-download', [\App\Http\Controllers\ZipFile\ZipController::class, 'downloadZipFile'])
+   ->name('zip.download');
