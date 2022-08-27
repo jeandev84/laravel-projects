@@ -271,3 +271,7 @@ Route::post('/dropzone-store', [\App\Http\Controllers\Image\DropZoneJSFileUpload
 Route::get('/gallery-images', [\App\Http\Controllers\Image\GalleryController::class, 'gallery'])
      ->name('gallery.images');
 
+
+# TinyMCE ( WYSIWYG HTML Editor )
+Route::get('/tinymce-editor', [\App\Http\Controllers\TinyMCE\EditorController::class, 'editor'])
+    ->name('tinymce.editor');
