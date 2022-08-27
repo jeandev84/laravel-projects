@@ -167,6 +167,7 @@ return [
         */
         \Maatwebsite\Excel\ExcelServiceProvider::class,
         \Barryvdh\DomPDF\ServiceProvider::class,
+        \Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -236,6 +237,7 @@ return [
         'Payment' => \App\PaymentGateway\PaymentFacade::class,
         'Excel'   => \Maatwebsite\Excel\Facades\Excel::class,
         'PDF'     => \Barryvdh\DomPDF\Facade\Pdf::class,
+        'Image'   => \Intervention\Image\Facades\Image::class,
     ],
 
 ];
