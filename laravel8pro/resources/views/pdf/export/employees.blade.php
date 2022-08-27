@@ -1,57 +1,3 @@
-### Export PDF
-
-1. Installation package for working with PDF 
-```php
-$ composer require barryvdh/laravel-dompdf
-
-./config/app.php 
-
-... 
-
-'providers' => [
-   ... 
-   \Barryvdh\DomPDF\ServiceProvider::class,
-   ...
-],
-'aliases' => [
-   'PDF' => \Barryvdh\DomPDF\Facade\Pdf::class,
-];
-
-
-$ php artisan vendor:publish --provider="Barryvdh\DomPDF\ServiceProvider"
-$ php artisan make:controller PDF/EmpController 
-
-
-<?php
-
-namespace App\Http\Controllers\PDF;
-
-use App\Http\Controllers\Controller;
-use App\Models\Employee;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
-
-class EmpController extends Controller
-{
-      public function getAllEmployees()
-      {
-           $employees = Employee::all();
-
-           return view('pdf.export.employees', compact('employees'));
-      }
-
-
-      public function downloadPDF(): \Illuminate\Http\Response
-      {
-          $employees = Employee::all();
-
-          $pdf = PDF::loadView('pdf.export.employees', compact('employees'));
-
-          return $pdf->download('employees.pdf');
-      }
-}
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,14 +69,3 @@ class EmpController extends Controller
 
 </body>
 </html>
-
-
-# Export PDF
-Route::get('/get-all-employees', [\App\Http\Controllers\PDF\EmpController::class, 'getAllEmployees'])
-    ->name('get.all.employees');
-
-
-Route::get('/download-pdf-employees', [\App\Http\Controllers\PDF\EmpController::class, 'downloadPDF'])
-    ->name('download.pdf.employees');
-
-```

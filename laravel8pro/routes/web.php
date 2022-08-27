@@ -229,3 +229,12 @@ Route::get('/export-excel', [\App\Http\Controllers\CSV\EmployeeController::class
 
 Route::get('/export-csv', [\App\Http\Controllers\CSV\EmployeeController::class, 'exportIntoCSV'])
     ->name('export.csv');
+
+
+# Export PDF
+Route::get('/get-all-employees', [\App\Http\Controllers\PDF\EmpController::class, 'getAllEmployees'])
+    ->name('get.all.employees');
+
+
+Route::get('/download-pdf-employees', [\App\Http\Controllers\PDF\EmpController::class, 'downloadPDF'])
+    ->name('download.pdf.employees');
