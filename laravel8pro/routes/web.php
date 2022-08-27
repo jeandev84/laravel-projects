@@ -300,3 +300,6 @@ Route::post('/update-student/{id}', [\App\Http\Controllers\Image\CRUD\StudentCon
 
 Route::get('/delete-student/{id}', [\App\Http\Controllers\Image\CRUD\StudentController::class, 'deleteStudent'])
     ->name('student.delete');
+
+
+# Notification Toastr
