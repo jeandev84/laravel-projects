@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+# Livewire components routes
+Route::get('/post', \App\Http\Livewire\Post::class);
+Route::get('/user', \App\Http\Livewire\User::class);

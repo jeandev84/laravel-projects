@@ -2,7 +2,7 @@
 
 ```php 
 
-$ composer create-project laravel/laravel:^8.0 laravel8livewire
+$ composer create-project --prefer-dist laravel/laravel:^8.0 laravel8livewire
 
 ```
 

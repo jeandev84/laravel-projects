@@ -1,3 +1,77 @@
+### Livewire Component
+
+1. Make Liveware Component named Post
+```php 
+
+
+$ php artisan make:livewire Post
+
+Created Class : app/Http/Livewire/Post.php
+Created View  : resources/views/livewire/post.blade.php
+
+
+<?php
+
+namespace App\Http\Livewire;
+
+use Livewire\Component;
+
+class Post extends Component
+{
+    public function render()
+    {
+        return view('livewire.post');
+    }
+}
+
+./routes/web.php 
+
+# Livewire components routes
+Route::get('/post', \App\Http\Livewire\Post::class);
+
+
+```
+
+
+
+2. Make inline component (Create only one class file)
+
+```php 
+
+$ php artisan make:livewire User --inline
+COMPONENT CREATED 
+ 
+CLASS: app/Http/Livewire/User.php
+
+=====================================================
+
+<?php
+
+namespace App\Http\Livewire;
+
+use Livewire\Component;
+
+class User extends Component
+{
+    public function render()
+    {
+        return <<<'blade'
+            <div>
+                <h1>This is User Component</h1>
+            </div>
+        blade;
+    }
+}
+
+
+Route::get('/user', \App\Http\Livewire\User::class);
+```
+
+3. Render Component 
+
+
+```php 
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -23,8 +97,6 @@
         @livewireStyles
     </head>
     <body class="antialiased">
-       @livewire('post')
-       @livewire('user')
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
@@ -137,3 +209,27 @@
 
     </body>
 </html>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    @livewireStyles
+</head>
+<body>
+
+   <div class="container">
+        @livewire('post') //==> name of component lower string
+        @livewire('user') ==> name of component lower string
+   </div>
+
+   @livewireScripts
+</body>
+</html>
+
+
+```
