@@ -358,3 +358,8 @@ Route::get('/student/{id}', [\App\Http\Controllers\Ajax\StudentController::class
 
 Route::put('/student', [\App\Http\Controllers\Ajax\StudentController::class, 'updateStudent'])
     ->name('student.update');
+
+
+
+Route::delete('/student/{id}', [\App\Http\Controllers\Ajax\StudentController::class, 'deleteStudent'])
+    ->name('student.delete');

@@ -1,3 +1,31 @@
+### Delete Record using AJAX 
+
+
+```php 
+
+
+<?php
+
+namespace App\Http\Controllers\Ajax;
+
+use App\Http\Controllers\Controller;
+use App\Models\Student;
+use Illuminate\Http\Request;
+
+class StudentController extends Controller
+{
+      ....
+
+      public function deleteStudent($id)
+      {
+          $student = Student::find($id);
+          $student->delete();
+
+          return response()->json(['success' => 'Record has been deleted.']);
+      }
+}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -299,3 +327,9 @@
   </script>
 </body>
 </html>
+
+
+Route::delete('/student/{id}', [\App\Http\Controllers\Ajax\StudentController::class, 'deleteStudent'])
+    ->name('student.delete');
+
+```
