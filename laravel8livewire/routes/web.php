@@ -23,3 +23,4 @@ Route::get('/post', \App\Http\Livewire\Post::class);
 Route::get('/user', \App\Http\Livewire\User::class);
 Route::get('/home/{name?}', \App\Http\Livewire\Home::class);
 Route::get('/form', \App\Http\Livewire\Form::class);
+Route::get('/actions', \App\Http\Livewire\Action::class);
