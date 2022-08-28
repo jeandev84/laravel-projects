@@ -1,62 +1,3 @@
-### BarCharts 
-
-```php 
-
-
-<?php
-
-namespace App\Http\Controllers\Charts;
-
-use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
-class ChartController extends Controller
-{
-
-     ...
-
-      public function barCharts()
-      {
-          /*
-           MYSQL
-           $users = User::select(DB::raw("COUNT(*) as count"))
-                        ->whereYear('created_at', date('Y'))
-                        ->groupBy(DB::raw("MONTH(created_at)"))
-                        ->pluck('count');
-
-           $months = User::select(DB::raw("MONTH(created_at) as month"))
-                      ->whereYear('created_at', date('Y'))
-                      ->groupBy(DB::raw("MONTH(created_at)"))
-                      ->pluck('month');
-          */
-
-           // PGSQL
-           $users = User::select(DB::raw("COUNT(*) as count"))
-              ->whereYear('created_at', date('Y'))
-              ->groupBy(DB::raw("extract(month from created_at)"))
-              ->pluck('count');
-
-           $months = User::select(DB::raw("extract(month from created_at) as month"))
-               ->whereYear('created_at', date('Y'))
-              ->groupBy(DB::raw("extract(month from created_at)"))
-              ->pluck('month');
-
-
-          // 12 items
-          $items = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
-          foreach ($months as $index => $month) {
-              $items[$month] = $users[$index];
-          }
-
-          return view('charts.barcharts', compact('items'));
-      }
-}
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,10 +60,3 @@ class ChartController extends Controller
     </script>
 </body>
 </html>
-
-
-# Bar Charts
-Route::get('/bar-charts', [\App\Http\Controllers\Charts\ChartController::class, 'barCharts'])
-    ->name('bar.charts');
-
-```

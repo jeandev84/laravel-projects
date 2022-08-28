@@ -386,6 +386,10 @@ Route::get('/posts', [\App\Http\Controllers\Pagination\PostController::class, 'i
    ->name('posts.list');
 
 
-# HighCharts
-Route::get('/chart', [\App\Http\Controllers\Charts\ChartController::class, 'index'])
-   ->name('chart.high');
+# Charts
+Route::get('/high-charts', [\App\Http\Controllers\Charts\ChartController::class, 'highCharts'])
+   ->name('high.charts');
+
+
+Route::get('/bar-charts', [\App\Http\Controllers\Charts\ChartController::class, 'barCharts'])
+    ->name('bar.charts');

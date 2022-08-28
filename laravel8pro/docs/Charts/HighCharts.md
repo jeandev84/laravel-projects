@@ -62,7 +62,7 @@ class ChartController extends Controller
 {
 
       // HighCharts
-      public function index()
+      public function highCharts()
       {
 
            /*
@@ -225,8 +225,9 @@ class ChartController extends Controller
 </html>
 
 
-# HighCharts
-Route::get('/chart', [\App\Http\Controllers\Charts\ChartController::class, 'index'])
-   ->name('chart.high');
+
+# Charts
+Route::get('/high-charts', [\App\Http\Controllers\Charts\ChartController::class, 'highCharts'])
+   ->name('highcharts');
 
 ```
