@@ -21,3 +21,5 @@ Route::get('/', function () {
 # Livewire components routes
 Route::get('/post', \App\Http\Livewire\Post::class);
 Route::get('/user', \App\Http\Livewire\User::class);
+/* Route::get('/home/{name}', \App\Http\Livewire\Home::class); */
+Route::get('/home/{name?}', \App\Http\Livewire\Home::class);
