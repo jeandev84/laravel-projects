@@ -19,4 +19,25 @@ class Student extends Model
         'phone'
     ];
 
+
+    // MUTATOR
+    public function setEmailAttribute($value)
+    {
+         $this->attributes['email'] = strtolower($value);
+    }
+
+
+    // ACCESSOR NAME
+    public function getNameAttribute($value)
+    {
+         return strtoupper($value);
+    }
+
+
+    // ACCESSOR EMAIl
+    public function getEmailAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
 }

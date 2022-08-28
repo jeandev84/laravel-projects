@@ -339,8 +339,6 @@ Route::get('/zip-download', [\App\Http\Controllers\ZipFile\ZipController::class,
 Route::get('/employees', [\App\Http\Controllers\DataTables\EmployeeController::class, 'index'])
   ->name('employees.list');
 
-*/
-
 
 # AJAX Records
 
@@ -407,3 +405,14 @@ Route::get('/form', [\App\Http\Controllers\Form\MultiStepFormController::class, 
 Route::post('/form', [\App\Http\Controllers\Form\MultiStepFormController::class, 'formSubmit'])
      ->name('form.submit');
 
+
+*/
+
+
+# Accessors and Mutators
+Route::get('/add-student', [\App\Http\Controllers\Accessor\StudentController::class, 'addStudent'])
+     ->name('add.student');
+
+
+Route::get('/students', [\App\Http\Controllers\Accessor\StudentController::class, 'getStudents'])
+    ->name('students.list');

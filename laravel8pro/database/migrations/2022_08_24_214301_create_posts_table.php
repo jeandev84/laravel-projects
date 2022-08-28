@@ -14,7 +14,7 @@ class CreatePostsTable extends Migration
     public function up()
     {
         // mysql2 from ./config/database.php
-        Schema::connection('mysql2')->create('posts', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title', 200);
             $table->text('body');
