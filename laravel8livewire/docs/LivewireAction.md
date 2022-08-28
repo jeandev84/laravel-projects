@@ -121,5 +121,8 @@ class Action extends Component
 
 
 
+Add Action Route :
+
+Route::get('/actions', \App\Http\Livewire\Action::class);
 
 ```
