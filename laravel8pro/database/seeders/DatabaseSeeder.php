@@ -17,6 +17,12 @@ class DatabaseSeeder extends Seeder
     */
     public function run()
     {
+
+        \App\Models\User::factory(10)->create();
+
+        // $this->call([PostTableSeeder::class]);
+
+
         $faker = Faker::create();
 
         /*
@@ -29,14 +35,7 @@ class DatabaseSeeder extends Seeder
                  'phone' => $faker->phoneNumber
              ]);
         }
-        */
 
-
-        // \App\Models\User::factory(35)->create();
-
-        // $this->call([PostTableSeeder::class]);
-
-        /*
         foreach (range(1, 100) as $index)
         {
              DB::table('students')->insert([
@@ -48,10 +47,7 @@ class DatabaseSeeder extends Seeder
 
 
         Employee::factory()->count(100)->create();
-        */
 
-        /*
-        $faker = Faker::create();
 
         foreach (range(1, 100) as $index) {
 
@@ -62,9 +58,6 @@ class DatabaseSeeder extends Seeder
 
         }
         */
-
-
-        $faker = Faker::create();
 
         foreach (range(1, 100) as $index)
         {
