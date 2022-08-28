@@ -123,5 +123,12 @@ class StudentController extends Controller
        }
 }
 
+# Accessors and Mutators
+Route::get('/add-student', [\App\Http\Controllers\Accessor\StudentController::class, 'addStudent'])
+     ->name('add.student');
+
+
+Route::get('/students', [\App\Http\Controllers\Accessor\StudentController::class, 'getStudents'])
+    ->name('students.list');
 
 ```
