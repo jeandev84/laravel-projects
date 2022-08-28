@@ -396,10 +396,14 @@ Route::get('/bar-charts', [\App\Http\Controllers\Charts\ChartController::class, 
 
 
 # Multi connection to databases
-
 Route::get('/add-students', [\App\Http\Controllers\Connection\MultipleConnectionController::class, 'addStudents']);
 Route::get('/add-posts', [\App\Http\Controllers\Connection\MultipleConnectionController::class, 'addPosts']);
 Route::get('/students', [\App\Http\Controllers\Connection\MultipleConnectionController::class, 'getStudents']);
 Route::get('/posts', [\App\Http\Controllers\Connection\MultipleConnectionController::class, 'getPosts']);
 
+
+# Multi Step Form
+Route::get('/form', [\App\Http\Controllers\Form\MultiStepFormController::class, 'index']);
+Route::post('/form', [\App\Http\Controllers\Form\MultiStepFormController::class, 'formSubmit'])
+     ->name('form.submit');
 

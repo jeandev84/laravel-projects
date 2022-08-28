@@ -1,34 +1,3 @@
-### Multi Step Form 
-
-- https://cdnjs.com/libraries/parsley.js
-```php 
-
-$ php artisan make:controller Form/MultiStepFormController
-
-
-<?php
-
-namespace App\Http\Controllers\Form;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-class MultiStepFormController extends Controller
-{
-       public function index()
-       {
-            return view('form.multi.step');
-       }
-
-
-       public function formSubmit(Request $request)
-       {
-             return $request->all();
-       }
-}
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -167,13 +136,3 @@ class MultiStepFormController extends Controller
 </script>
 </body>
 </html>
-
-
-# Multi Step Form
-Route::get('/form', [\App\Http\Controllers\Form\MultiStepFormController::class, 'index']);
-Route::post('/form', [\App\Http\Controllers\Form\MultiStepFormController::class, 'formSubmit'])
-     ->name('form.submit');
-
-
-
-```
