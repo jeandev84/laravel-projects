@@ -49,7 +49,13 @@ $ php artisan down
 </html>
 
 
-3. Disabled Maintenance mode
-$ php artisan up  (Disabled Maintenance mode)
-$ php artisan down --secret="abcde12345" (Active Maintenance  mode)
+3. (Active Maintenance  mode)
+$ php artisan down --secret="abcde12345" 
+
+4. (Disabled Maintenance mode)
+
+Browse this link http://mydomain/abcde12345
+           OR 
+$ php artisan up
+
 ```
