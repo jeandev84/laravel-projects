@@ -380,3 +380,8 @@ Route::post('/register', [\App\Http\Controllers\Form\AuthController::class, 'reg
     ->name('auth.register.submit');
 
 
+
+# Infinite Scroll Pagination
+
+Route::get('/posts', [\App\Http\Controllers\Pagination\PostController::class, 'index'])
+   ->name('posts.list');

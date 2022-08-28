@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
 
         // $this->call([PostTableSeeder::class]);
 
+        /*
         foreach (range(1, 100) as $index)
         {
              DB::table('students')->insert([
@@ -47,5 +48,18 @@ class DatabaseSeeder extends Seeder
 
 
         Employee::factory()->count(100)->create();
+        */
+
+        $faker = Faker::create();
+
+        foreach (range(1, 100) as $index) {
+
+            DB::table('posts')->insert([
+                'title' => $faker->text(40),
+                'body'  => $faker->text(300)
+            ]);
+
+        }
+
     }
 }
