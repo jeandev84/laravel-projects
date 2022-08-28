@@ -368,3 +368,15 @@ Route::delete('/student/{id}', [\App\Http\Controllers\Ajax\StudentController::cl
 
 Route::delete('/delete-selected-students', [\App\Http\Controllers\Ajax\StudentController::class, 'deleteCheckedStudents'])
     ->name('students.delete.selected');
+
+
+# Client Side Form Validation
+
+Route::get('/register', [\App\Http\Controllers\Form\AuthController::class, 'index'])
+      ->name('auth.register.index');
+
+
+Route::post('/register', [\App\Http\Controllers\Form\AuthController::class, 'registerSubmit'])
+    ->name('auth.register.submit');
+
+
