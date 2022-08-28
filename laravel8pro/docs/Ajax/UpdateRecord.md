@@ -1,3 +1,45 @@
+### Update Record 
+
+
+```php 
+
+<?php
+
+namespace App\Http\Controllers\Ajax;
+
+use App\Http\Controllers\Controller;
+use App\Models\Student;
+use Illuminate\Http\Request;
+
+class StudentController extends Controller
+{
+      ...
+
+
+      public function getStudentById($id)
+      {
+           $student = Student::find($id);
+
+           return response()->json($student);
+      }
+
+
+
+      public function updateStudent(Request $request)
+      {
+           $student = Student::find($request->id);
+           $student->firstname = $request->firstname;
+           $student->lastname  = $request->lastname;
+           $student->email     = $request->email;
+           $student->phone     = $request->phone;
+
+           $student->save();
+
+           return response()->json($student);
+      }
+}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -277,3 +319,15 @@
   </script>
 </body>
 </html>
+
+# Update Record using AJAX
+
+Route::get('/student/{id}', [\App\Http\Controllers\Ajax\StudentController::class, 'getStudentById'])
+    ->name('student.show');
+
+
+Route::put('/student', [\App\Http\Controllers\Ajax\StudentController::class, 'updateStudent'])
+    ->name('student.update');
+
+
+````

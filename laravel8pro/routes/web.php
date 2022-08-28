@@ -344,10 +344,17 @@ Route::get('/employees', [\App\Http\Controllers\DataTables\EmployeeController::c
 
 # AJAX Records
 
-Route::get('/students', [\App\Http\Controllers\Ajax\StudentController::class, 'index'])
+Route::get('/students', [\App\Http\Controllers\Ajax\StudentController::class, 'listStudents'])
      ->name('students.list');
 
 
 Route::post('/add-student', [\App\Http\Controllers\Ajax\StudentController::class, 'addStudent'])
     ->name('student.add');
 
+
+Route::get('/student/{id}', [\App\Http\Controllers\Ajax\StudentController::class, 'getStudentById'])
+    ->name('student.show');
+
+
+Route::put('/student', [\App\Http\Controllers\Ajax\StudentController::class, 'updateStudent'])
+    ->name('student.update');
