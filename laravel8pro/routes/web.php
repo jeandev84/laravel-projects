@@ -382,6 +382,10 @@ Route::post('/register', [\App\Http\Controllers\Form\AuthController::class, 'reg
 
 
 # Infinite Scroll Pagination
-
 Route::get('/posts', [\App\Http\Controllers\Pagination\PostController::class, 'index'])
    ->name('posts.list');
+
+
+# HighCharts
+Route::get('/chart', [\App\Http\Controllers\Charts\ChartController::class, 'index'])
+   ->name('chart.high');
