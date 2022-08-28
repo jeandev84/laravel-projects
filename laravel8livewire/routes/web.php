@@ -24,3 +24,4 @@ Route::get('/user', \App\Http\Livewire\User::class);
 Route::get('/home/{name?}', \App\Http\Livewire\Home::class);
 Route::get('/form', \App\Http\Livewire\Form::class);
 Route::get('/actions', \App\Http\Livewire\Action::class);
+Route::get('/product', \App\Http\Livewire\Product::class);
