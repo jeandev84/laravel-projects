@@ -66,6 +66,7 @@ Views: /resources/views/layouts/app.blade.php
 </body>
 </html>
 
+Route::get('/form', \App\Http\Livewire\Form::class);
 
 Views: /resources/views/livewire/form.blade.php
 
