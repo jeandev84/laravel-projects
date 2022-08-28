@@ -363,3 +363,8 @@ Route::put('/student', [\App\Http\Controllers\Ajax\StudentController::class, 'up
 
 Route::delete('/student/{id}', [\App\Http\Controllers\Ajax\StudentController::class, 'deleteStudent'])
     ->name('student.delete');
+
+
+
+Route::delete('/delete-selected-students', [\App\Http\Controllers\Ajax\StudentController::class, 'deleteCheckedStudents'])
+    ->name('students.delete.selected');

@@ -1,3 +1,33 @@
+### Delete Multi Record
+
+
+```php 
+
+
+<?php
+
+namespace App\Http\Controllers\Ajax;
+
+use App\Http\Controllers\Controller;
+use App\Models\Student;
+use Illuminate\Http\Request;
+
+class StudentController extends Controller
+{
+     
+      ...
+
+      public function deleteCheckedStudents(Request $request)
+      {
+            $ids = $request->ids;
+
+            Student::whereIn('id', $ids)->delete();
+
+            return response()->json(['success' => "Students have been deleted!"]);
+      }
+}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -344,3 +374,10 @@
   </script>
 </body>
 </html>
+
+
+Route::delete('/delete-selected-students', [\App\Http\Controllers\Ajax\StudentController::class, 'deleteCheckedStudents'])
+    ->name('students.delete.selected');
+
+
+```
