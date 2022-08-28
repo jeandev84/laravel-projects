@@ -393,3 +393,13 @@ Route::get('/high-charts', [\App\Http\Controllers\Charts\ChartController::class,
 
 Route::get('/bar-charts', [\App\Http\Controllers\Charts\ChartController::class, 'barCharts'])
     ->name('bar.charts');
+
+
+# Multi connection to databases
+
+Route::get('/add-students', [\App\Http\Controllers\Connection\MultipleConnectionController::class, 'addStudents']);
+Route::get('/add-posts', [\App\Http\Controllers\Connection\MultipleConnectionController::class, 'addPosts']);
+Route::get('/students', [\App\Http\Controllers\Connection\MultipleConnectionController::class, 'getStudents']);
+Route::get('/posts', [\App\Http\Controllers\Connection\MultipleConnectionController::class, 'getPosts']);
+
+
