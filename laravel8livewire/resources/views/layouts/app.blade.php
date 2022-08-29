@@ -7,6 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Livewire Project</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <style>
+        nav svg {
+            height: 20px;
+        }
+    </style>
     @livewireStyles
 </head>
 <body>
@@ -22,5 +27,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
     @livewireScripts
 
+    <script>
+
+        // Event for adding student
+        window.livewire.on('studentAdded', () => {
+            $('#addStudentModal').modal('hide')
+        })
+
+        // Event for updating student
+        window.livewire.on('studentUpdated', () => {
+            $('#updateStudentModal').modal('hide')
+        })
+
+        /*
+        function callEvent(target, callback) {
+            window.livewire.on(callback, () => {
+                $('#' + target).modal('hide')
+            })
+        }
+       */
+    </script>
 </body>
 </html>

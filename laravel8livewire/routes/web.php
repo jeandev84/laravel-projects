@@ -27,3 +27,6 @@ Route::get('/product', \App\Http\Livewire\Product::class);
 Route::get('/contact', \App\Http\Livewire\Contact::class);
 Route::get('/users', \App\Http\Livewire\User::class);
 Route::get('/all-users', \App\Http\Livewire\Users::class);
+
+# Livewire CRUD System
+Route::get('/students', \App\Http\Livewire\CRUD\Students::class);
