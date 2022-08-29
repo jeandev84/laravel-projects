@@ -29,6 +29,14 @@
 
     <script>
 
+        /*
+          function callEvent(target, callback) {
+            window.livewire.on(callback, () => {
+              $('#' + target).modal('hide')
+            })
+         }
+     */
+
         // Event for adding student
         window.livewire.on('studentAdded', () => {
             $('#addStudentModal').modal('hide')
@@ -39,13 +47,11 @@
             $('#updateStudentModal').modal('hide')
         })
 
-        /*
-        function callEvent(target, callback) {
-            window.livewire.on(callback, () => {
-                $('#' + target).modal('hide')
-            })
-        }
-       */
+        // Event for uploading file
+        window.livewire.on('fileUploaded', () => {
+            $('#form-upload')[0].reset();
+        })
+
     </script>
 </body>
 </html>
