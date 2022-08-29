@@ -9,7 +9,7 @@ class Student extends Model
 {
     use HasFactory;
 
-    const PerPage = 10;
+    const PerPage = 5;
 
     protected $table = "students";
 

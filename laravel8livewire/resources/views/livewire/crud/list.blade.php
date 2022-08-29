@@ -5,7 +5,7 @@
     <!-- Include Update Student Modal -->
     @include('livewire.crud.update')
 
-    <section>
+    <section style="padding-top: 60px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -20,12 +20,23 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3>
-                                All Students
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addStudentModal">
-                                    Add New Student
-                                </button>
-                            </h3>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h3>
+                                        All Students
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addStudentModal">
+                                            Add New Student
+                                        </button>
+                                    </h3>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="Search..."
+                                           wire:model="searchTerm"
+                                    />
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <table class="table table-striped">

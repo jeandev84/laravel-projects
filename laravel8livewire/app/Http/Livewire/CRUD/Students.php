@@ -10,12 +10,15 @@ class Students extends Component
 {
     use WithPagination;
 
+    // properties form
     public $ids;
     public $firstname;
     public $lastname;
     public $email;
     public $phone;
 
+    // property search
+    public $searchTerm;
 
 
     public function resetInputFields()
@@ -97,8 +100,15 @@ class Students extends Component
 
     public function render()
     {
-        $students = Student::orderBy('id', 'desc')->paginate(Student::PerPage);
+        $searchTerm = '%'. $this->searchTerm . '%';
 
-        return view('livewire.crud.students', compact('students'));
+        $students = Student::where('firstname', 'LIKE', $searchTerm)
+                           ->orWhere('lastname', 'LIKE', $searchTerm)
+                           ->orWhere('email', 'LIKE', $searchTerm)
+                           ->orWhere('phone', 'LIKE', $searchTerm)
+                           ->orderBy('id', 'desc')
+                           ->paginate(Student::PerPage);
+
+        return view('livewire.crud.list', compact('students'));
     }
 }
