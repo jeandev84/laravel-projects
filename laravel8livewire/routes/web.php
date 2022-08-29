@@ -34,3 +34,7 @@ Route::get('/students', \App\Http\Livewire\CRUD\Students::class);
 
 # Livewire File Upload
 Route::get('/uploads', \App\Http\Livewire\Uploads::class);
+
+
+# Livewire Multiple Image Upload
+Route::get('/upload-images', \App\Http\Livewire\Images::class);

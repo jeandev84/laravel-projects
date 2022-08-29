@@ -52,6 +52,11 @@
             $('#form-upload')[0].reset();
         })
 
+        // Event for uploading images
+        window.livewire.on('imagesUploaded', () => {
+            $('#upload-images')[0].reset();
+        })
+
     </script>
 </body>
 </html>
