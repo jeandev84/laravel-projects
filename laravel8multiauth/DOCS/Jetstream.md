@@ -1,6 +1,7 @@
 ### Multiple Authentication 
 
 
+1. Installation JetStream and Laravel Livewire
 ```php 
 
 $ composer require laravel/jetstream:*
@@ -65,6 +66,28 @@ $ npm run watch || npm run build
 
 $ php artisan migrate
 
+Fix styles and scripts JetStream 
+Add inside files :
+ - ./resources/views/layouts/app.blade.php 
+ - ./resources/views/layouts/app.blade.php 
+ 
+{{--  @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
+<link rel="stylesheet" href="{{ mix('css/app.css') }}">
+<script src="{{ mix('js/app.js') }}"></script>
 
 ```
+
+2. Registration new Admin & User ( via https://mydomain/register )
+```
+Name             : Admin
+Email            : admin@gmail.com
+Pasword          : password
+Confirm Password : password   
+
+============================================================
+
+Name             : Normal User
+Email            : user@gmail.com
+Pasword          : password
+Confirm Password : password    
