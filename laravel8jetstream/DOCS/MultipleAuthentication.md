@@ -1,9 +1,0 @@
-### Multiple Authentication 
-
-
-```php 
-
-
-
-
-```
