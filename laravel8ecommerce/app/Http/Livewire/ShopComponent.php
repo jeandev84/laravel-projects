@@ -16,8 +16,6 @@ class ShopComponent extends Component
 {
 
     public $sorting;
-
-
     public $pagesize;
 
 
