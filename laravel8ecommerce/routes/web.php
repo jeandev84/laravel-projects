@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
+
+
+# Components routes
+Route::get('/', \App\Http\Livewire\HomeComponent::class);
