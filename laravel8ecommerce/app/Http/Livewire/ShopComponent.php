@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Livewire;
 
+use App\Managers\ProductManager;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Product;
@@ -12,6 +14,20 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 */
 class ShopComponent extends Component
 {
+
+    public $sorting;
+
+
+    public $pagesize;
+
+
+
+    public function mount()
+    {
+        $this->sorting  = "default";
+        $this->pagesize = 12;
+    }
+
 
 
     /**
@@ -46,7 +62,9 @@ class ShopComponent extends Component
     use WithPagination;
     public function render()
     {
-        $products = Product::paginate(Product::PerPage);
+        /* $products = Product::paginate(Product::PerPage); */
+
+        $products = ProductManager::sortingWithPagination($this->sorting, $this->pagesize);
 
         return view('livewire.shop-component', [
             'products' => $products
