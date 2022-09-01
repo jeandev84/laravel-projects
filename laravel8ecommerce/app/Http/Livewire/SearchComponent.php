@@ -71,9 +71,10 @@ class SearchComponent extends Component
     protected function getSearchCredentials(): array
     {
          return [
-             'sorting'  => $this->sorting,
-             'pageSize' => $this->pagesize,
-             'search'   => $this->search
+             'sorting'     => $this->sorting,
+             'pageSize'    => $this->pagesize,
+             'search'      => $this->search,
+             'category_id' => $this->product_cat_id
          ];
     }
 
