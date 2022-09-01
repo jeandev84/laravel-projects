@@ -4,8 +4,9 @@
 
         <div class="wrap-breadcrumb">
             <ul>
-                <li class="item-link"><a href="#" class="link">home</a></li>
-                <li class="item-link"><span>Digital & Electronics</span></li>
+                <li class="item-link"><a href="/" class="link">home</a></li>
+                <li class="item-link"><span>Product Categories</span></li>
+                <li class="item-link"><span>{{ $category_name }}</span></li>
             </ul>
         </div>
         <div class="row">
@@ -20,12 +21,9 @@
 
                 <div class="wrap-shop-control">
 
-                    <h1 class="shop-title">Digital & Electronics</h1>
+                    <h1 class="shop-title">{{ $category_name }}</h1>
 
                     <div class="wrap-right">
-
-                        <form action="" method="POST">
-                             @csrf
                             <div class="sort-item orderby">
                                 <select name="orderby" class="use-chosen" wire:model="sorting">
                                     <option value="default" selected="selected">Default sorting</option>
@@ -53,8 +51,6 @@
                                 <a href="#" class="grid-mode display-mode active"><i class="fa fa-th"></i>Grid</a>
                                 <a href="list.html" class="list-mode display-mode"><i class="fa fa-th-list"></i>List</a>
                             </div>
-
-                        </form>
 
                     </div>
 
@@ -93,13 +89,13 @@
                 </div>
 
                 <div class="wrap-pagination-info">
-{{--                    <ul class="page-numbers">--}}
-{{--                        <li><span class="page-number-item current" >1</span></li>--}}
-{{--                        <li><a class="page-number-item" href="#" >2</a></li>--}}
-{{--                        <li><a class="page-number-item" href="#" >3</a></li>--}}
-{{--                        <li><a class="page-number-item next-link" href="#" >Next</a></li>--}}
-{{--                    </ul>--}}
-{{--                    <p class="result-count">Showing 1-8 of 12 result</p>--}}
+                    {{--                    <ul class="page-numbers">--}}
+                    {{--                        <li><span class="page-number-item current" >1</span></li>--}}
+                    {{--                        <li><a class="page-number-item" href="#" >2</a></li>--}}
+                    {{--                        <li><a class="page-number-item" href="#" >3</a></li>--}}
+                    {{--                        <li><a class="page-number-item next-link" href="#" >Next</a></li>--}}
+                    {{--                    </ul>--}}
+                    {{--                    <p class="result-count">Showing 1-8 of 12 result</p>--}}
 
                     {{ $products->links() }}
 
