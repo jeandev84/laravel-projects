@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Admin\AdminCategoryComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\CartComponent;
 use App\Http\Livewire\CategoryComponent;
@@ -29,7 +30,7 @@ Route::get('/', function () {
 */
 
 
-# Components routes
+# Frontend components routes
 Route::get('/', HomeComponent::class);
 Route::get('/shop', ShopComponent::class);
 Route::get('/cart', CartComponent::class)->name('product.cart');
@@ -53,6 +54,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 */
 
 
+# Authentication routes
 // For User or Customer
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/user/dashboard', UserDashboardComponent::class)
@@ -66,4 +68,6 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
 
     Route::get('/admin/dashboard', AdminDashboardComponent::class)
          ->name('admin.dashboard');
+    Route::get('/admin/categories', AdminCategoryComponent::class)
+         ->name('admin.categories');
 });
