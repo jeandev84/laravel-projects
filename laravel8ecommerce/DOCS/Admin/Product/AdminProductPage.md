@@ -1,3 +1,10 @@
+### Admin Product Page
+
+```php 
+$ php artisan make:livewire admin/AdminProductComponent
+
+
+add method category() for related relation
 <?php
 
 namespace App\Models;
@@ -23,3 +30,6 @@ class Product extends Model
          return $this->belongsTo(Category::class, 'category_id');
     }
 }
+
+
+```

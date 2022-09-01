@@ -17,6 +17,16 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/color-01.css') }}">
     @livewireStyles
+
+    <style>
+        nav svg {
+            height: 20px;
+        }
+
+        nav .hidden {
+            display: block !important;
+        }
+    </style>
 </head>
 <body class="home-page home-01 ">
 
@@ -79,6 +89,9 @@
                                                 </li>
                                                 <li class="menu-item">
                                                     <a title="Categories" href="{{ route('admin.categories') }}">Categories</a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a title="Products" href="{{ route('admin.products') }}">All Products</a>
                                                 </li>
                                                 <li class="menu-item">
                                                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Logout</a>
