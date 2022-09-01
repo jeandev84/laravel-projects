@@ -9,12 +9,14 @@ class ProductManager
 {
 
     /**
-     * @param $sorting
-     * @param $pageSize
+     * @param array $credentials
      * @return LengthAwarePaginator
-    */
-    public static function sortingWithPagination($sorting, $pageSize): LengthAwarePaginator
+     */
+    public static function sortingWithPagination(array $credentials): LengthAwarePaginator
     {
+        $sorting  = $credentials['sorting'];
+        $pageSize = $credentials['pageSize'];
+
         switch ($sorting) {
             case 'date':
                 return Product::orderBy('created_at', 'DESC')->paginate($pageSize);
@@ -31,15 +33,42 @@ class ProductManager
     }
 
 
+    /**
+     * @param array $credentials
+     * @return mixed
+     */
+    public static function searchProducts(array $credentials)
+    {
+        $sorting  = $credentials['sorting'];
+        $pageSize = $credentials['pageSize'];
+        $search   = $credentials['search'];
+
+        switch ($sorting) {
+            case 'date':
+                return Product::orderBy('created_at', 'DESC')->paginate($pageSize);
+                break;
+            case 'price':
+                return Product::orderBy('regular_price', 'ASC')->paginate($pageSize);
+                break;
+            case 'price-desc':
+                return Product::orderBy('regular_price', 'DESC')->paginate($pageSize);
+                break;
+            default:
+                return Product::paginate($pageSize);
+        }
+    }
+
 
     /**
-     * @param Category $category
-     * @param $sorting
-     * @param $pageSize
+     * @param array $credentials
      * @return LengthAwarePaginator
     */
-    public static function getProductsByCategory(Category $category, $sorting, $pageSize): LengthAwarePaginator
+    public static function getProductsByCategory(array $credentials): LengthAwarePaginator
     {
+        $category = $credentials['category'];
+        $sorting  = $credentials['sorting'];
+        $pageSize = $credentials['pageSize'];
+
         switch ($sorting) {
             case 'date':
                 return Product::where('category_id', $category->id)->orderBy('created_at', 'DESC')->paginate($pageSize);
@@ -54,4 +83,5 @@ class ProductManager
                 return Product::where('category_id', $category->id)->paginate($pageSize);
         }
     }
+
 }

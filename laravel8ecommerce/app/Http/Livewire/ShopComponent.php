@@ -63,7 +63,7 @@ class ShopComponent extends Component
     {
         /* $products = Product::paginate(Product::PerPage); */
 
-        $products = ProductManager::sortingWithPagination($this->sorting, $this->pagesize);
+        $products = ProductManager::sortingWithPagination($this->getSortingCredentials());
 
         $categories = Category::all();
 
@@ -71,5 +71,17 @@ class ShopComponent extends Component
             'products'   => $products,
             'categories' => $categories
         ])->layout('layouts.base');
+    }
+
+
+    /**
+     * @return array
+     */
+    protected function getSortingCredentials(): array
+    {
+        return [
+            'sorting'  => $this->sorting,
+            'pageSize' => $this->pagesize
+        ];
     }
 }

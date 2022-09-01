@@ -68,7 +68,7 @@ class CategoryComponent extends Component
         $products = [];
 
         if ($category) {
-            $products = ProductManager::getProductsByCategory($category, $this->sorting, $this->pagesize);
+            $products = ProductManager::getProductsByCategory($this->getFilterProductsCredentials($category));
             $category_name = $category->name;
         }
 
@@ -79,5 +79,20 @@ class CategoryComponent extends Component
             'categories'    => $categories,
             'category_name' => $category_name
         ])->layout('layouts.base');
+    }
+
+
+
+    /**
+     * @param Category $category
+     * @return array
+    */
+    protected function getFilterProductsCredentials(Category $category): array
+    {
+        return [
+            'category' => $category,
+            'sorting'  => $this->sorting,
+            'pageSize' => $this->pagesize
+        ];
     }
 }
