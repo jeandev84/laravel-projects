@@ -26,7 +26,7 @@ class AdminEditProductComponent extends Component
     public $quantity;
     public $image;
     public $category_id;
-    public $new_image;
+    public $newimage;
     public $product_id;
 
 
@@ -44,8 +44,9 @@ class AdminEditProductComponent extends Component
             $this->stock_status = $product->stock_status;
             $this->featured = $product->featured;
             $this->quantity = $product->quantity;
-            $this->product_id = $product->id;
             $this->image = $product->image;
+            $this->category_id = $product->category_id;
+            $this->product_id = $product->id;
         }
     }
 
@@ -72,10 +73,10 @@ class AdminEditProductComponent extends Component
             $product->featured = $this->featured;
             $product->quantity = $this->quantity;
 
-            if ($this->new_image) {
+            if ($this->newimage) {
                 // Make New Image
-                $imageName = Carbon::now()->timestamp . '.' . $this->new_image->extension();
-                $this->new_image->storeAs('products', $imageName);
+                $imageName = Carbon::now()->timestamp . '.' . $this->newimage->extension();
+                $this->newimage->storeAs('products', $imageName);
                 $product->image = $imageName;
             }
 
