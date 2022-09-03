@@ -7,12 +7,16 @@
                           Sale Setting
                      </div>
                      <div class="panel-body">
-                         <form class="form-horizontal">
-
+                         @if(session()->has('message'))
+                             <div class="alert alert-success" role="alert">
+                                 {{ session()->get('message') }}
+                             </div>
+                         @endif
+                         <form class="form-horizontal" wire:submit.prevent="updateSale()">
                               <div class="form-group">
                                   <label class="col-md-4 control-label">Status</label>
                                   <div class="col-md-4">
-                                      <select name="" class="form-control">
+                                      <select class="form-control" wire:model="status">
                                           <option value="0">Inactive</option>
                                           <option value="1">Active</option>
                                       </select>
@@ -26,6 +30,7 @@
                                             id="sale-date"
                                             placeholder="YYYY/MM/DD H:M:S"
                                             class="form-control input-md"
+                                            wire:model="sale_date"
                                      >
                                  </div>
                              </div>
@@ -52,7 +57,8 @@
              $('#sale-date').datetimepicker({
                  format: 'Y-MM-DD h:m:s'
              }).on('dp.change', function (ev) {
-
+                 let data = $('#sale-date').val();
+                 @this.set('sale_date', data);
              })
          })
     </script>

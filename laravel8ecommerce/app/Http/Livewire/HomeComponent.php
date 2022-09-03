@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 use App\Models\Category;
 use App\Models\HomeCategory;
 use App\Models\HomeSlider;
+use App\Models\Sale;
 use Livewire\Component;
 use App\Models\Product;
 
@@ -32,12 +33,15 @@ class HomeComponent extends Component
                                 ->get()
                                 ->take(8);
 
+        $sale = Sale::find(1);
+
         return view('livewire.home-component', [
             'sliders'            => $sliders,
             'latestProducts'     => $latestProducts,
             'categories'         => $categories,
             'number_of_products' => $number_of_products,
-            'sale_products'       => $sale_products
+            'sale_products'       => $sale_products,
+            'sale'                => $sale
         ])->layout('layouts.base');
     }
 }
