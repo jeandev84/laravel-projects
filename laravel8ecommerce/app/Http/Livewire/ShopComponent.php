@@ -20,11 +20,17 @@ class ShopComponent extends Component
     public $pagesize;
 
 
+    public $min_price;
+    public $max_price;
+
 
     public function mount()
     {
         $this->sorting  = "default";
         $this->pagesize = 12;
+
+        $this->min_price = 1;
+        $this->max_price = 1000;
     }
 
 
@@ -76,12 +82,14 @@ class ShopComponent extends Component
 
     /**
      * @return array
-     */
+    */
     protected function getSortingCredentials(): array
     {
         return [
-            'sorting'  => $this->sorting,
-            'pageSize' => $this->pagesize
+            'sorting'   => $this->sorting,
+            'pageSize'  => $this->pagesize,
+            'min_price' => $this->min_price,
+            'max_price' => $this->max_price
         ];
     }
 }

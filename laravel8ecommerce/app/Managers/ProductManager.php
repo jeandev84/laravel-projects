@@ -17,18 +17,21 @@ class ProductManager
         $sorting  = $credentials['sorting'];
         $pageSize = $credentials['pageSize'];
 
+        // Price Filter with range min and max price
+        $rangePrice = [$credentials['min_price'], $credentials['max_price']];
+
         switch ($sorting) {
             case 'date':
-                return Product::orderBy('created_at', 'DESC')->paginate($pageSize);
+                return Product::whereBetween('regular_price', $rangePrice)->orderBy('created_at', 'DESC')->paginate($pageSize);
                 break;
             case 'price':
-                return Product::orderBy('regular_price', 'ASC')->paginate($pageSize);
+                return Product::whereBetween('regular_price', $rangePrice)->orderBy('regular_price', 'ASC')->paginate($pageSize);
                 break;
             case 'price-desc':
-                return Product::orderBy('regular_price', 'DESC')->paginate($pageSize);
+                return Product::whereBetween('regular_price', $rangePrice)->orderBy('regular_price', 'DESC')->paginate($pageSize);
                 break;
             default:
-                return Product::paginate($pageSize);
+                return Product::whereBetween('regular_price', $rangePrice)->paginate($pageSize);
         }
     }
 
