@@ -32,8 +32,24 @@ class AdminEditCategoryComponent extends Component
 
 
 
+    public function updated($fields)
+    {
+        $this->validateOnly($fields, [
+            'name' => 'required',
+            'slug' => 'required|unique:categories',
+        ], [
+            //'name.required' => 'Название категории обязательное'
+        ]);
+    }
+
+
     public function updateCategory()
     {
+         $this->validate([
+             'name' => 'required',
+             'slug' => 'required|unique:categories',
+         ]);
+
          $category = Category::find($this->category_id);
          $category->name = $this->name;
          $category->slug = $this->slug;

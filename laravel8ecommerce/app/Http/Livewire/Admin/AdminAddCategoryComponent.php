@@ -19,9 +19,25 @@ class AdminAddCategoryComponent extends Component
     }
 
 
+    public function updated($fields)
+    {
+        $this->validateOnly($fields, [
+            'name' => 'required',
+            'slug' => 'required|unique:categories',
+        ], [
+            //'name.required' => 'Название категории обязательное'
+        ]);
+    }
+
+
 
     public function storeCategory()
     {
+        $this->validate([
+            'name' => 'required',
+            'slug' => 'required|unique:categories',
+        ]);
+
         $category = new Category();
         $category->name = $this->name;
         $category->slug = $this->slug;
